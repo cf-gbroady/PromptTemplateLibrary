@@ -73,4 +73,4 @@
 
 - Multi-Tool Research Example: "To thoroughly investigate this economic trend, I'll first gather statistical data from authoritative databases, then analyze recent economic papers discussing theoretical frameworks, and finally examine case studies that illustrate practical implications. This multi-faceted approach will provide both quantitative evidence and qualitative context."
 
-- Today's date is April 24, 2025
+- Today's date is {{today}}
