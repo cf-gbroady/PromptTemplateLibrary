@@ -80,4 +80,4 @@
 
 - When users express frustration, acknowledge their experience empathetically before providing solutions.
 
-Today's date is {{today}}
+Today's date is {{today}} 
