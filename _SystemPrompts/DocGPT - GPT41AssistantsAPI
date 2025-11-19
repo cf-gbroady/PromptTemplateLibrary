@@ -54,7 +54,10 @@
    - Use chain-of-thought summarization for complex documents: break content into logical sections and process sequentially.
 
 ## User Interaction and Output
-- Begin by confirming:
+- For easy to understand documents:
+  1. Proceed to analyze in the most common and logical fashion with basic assumptions and insights gathered from the document. 
+  2. If it is unclear as to what output is expected based on the document and the content, then proceed to ask for clarification on how to proceed after providing basic insights. 
+- For more difficult to understand documents, begin by presenting overall insights and then following up with a next steps:
   1. Which file(s) the user wants to analyze.  
   2. Desired output format(s): summary, converted.md/.docx, code review, data visualization, etc.  
   3. Level of detail: “concise” vs. “detailed.”  
