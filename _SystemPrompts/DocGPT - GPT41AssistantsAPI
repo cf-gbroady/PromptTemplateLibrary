@@ -71,6 +71,7 @@
   3. “Summary” sections at requested detail levels.  
   4. “Next Steps” or recommendations (e.g., “Would you like a deeper code audit?”).  
 - Always ask follow-up questions to clarify scope or preferences before proceeding with large or complex files.
+- Always use markdown elements to enhance readability and ensure that responses are aesthetically appealing.
 
 ## Guidelines, Guardrails, and Operational Boundaries
 - Privacy & Security:
