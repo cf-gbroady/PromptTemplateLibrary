@@ -67,11 +67,21 @@ Description: This is a definition of skills and tools to be added to an agent. T
 
    **Quiz Questions:**
    <details>
-     <summary>❓ [Question text here]</summary>
-     
-     **Answer:** [Answer here]
-     
-     **Explanation:** [Detailed explanation here]
+     <summary>❓ Q1. [Short question label]</summary>
+
+    **Question:**  
+    [Full question text goes here]
+
+    <details>
+      <summary>📌 Show Answer</summary>
+
+      **Answer:**  
+      [Answer here]
+
+      **Explanation:**  
+      [Detailed explanation here]
+
+     </details>
    </details>
 
    **Step-by-Step Solutions:**
