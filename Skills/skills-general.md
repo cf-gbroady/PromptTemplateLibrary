@@ -49,6 +49,7 @@ Description: This is a definition of skills and tools to be added to an agent. T
    - Creating tutorials, how-to guides, or step-by-step instructions
    - Organizing FAQ-style responses
    - User specifically requests "expandable" or "collapsible" content
+   - Quizzes should use letters for optional responses on multiple choice questions and not numbers
 
 2. **Formatting Standards:**
    - Always include meaningful, descriptive summary text

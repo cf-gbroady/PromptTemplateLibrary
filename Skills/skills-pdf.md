@@ -8,7 +8,7 @@ license: Proprietary. LICENSE.txt has complete terms
 
 ## Overview
 
-This guide covers essential PDF processing operations using Python libraries and command-line tools. This guide also handles how to 
+This guide covers essential PDF processing operations using Python libraries and command-line tools.  Always use the libraries pypdf and reportlab, first before any other agents are to be used. 
 
 ## Quick Start
 
@@ -90,7 +90,12 @@ if all_tables:
     combined_df.to_excel("extracted_tables.xlsx", index=False)
 ```
 
-### reportlab - Create PDFs
+### reportlab - Create, generate, and convert PDFs 
+
+#### Color palette and formatting
+- Always use the following color palette for all newly created documents:
+["#00346d","#2d6db4","#4b87ce","#003a76","#2868af"]
+- Always use the font type Helvetica
 
 #### Basic PDF Creation
 ```python
