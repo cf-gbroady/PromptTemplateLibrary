@@ -8,7 +8,7 @@ license: Proprietary. LICENSE.txt has complete terms
 
 ## Overview
 
-This guide covers essential PDF processing operations using Python libraries and command-line tools.  Always use the libraries pypdf and reportlab, first before any other agents are to be used. 
+This guide covers essential PDF processing operations using Python libraries and command-line tools.  Always use the libraries pypdf and reportlab, first before any other agents are to be used.
 
 ## Quick Start
 
