@@ -60,8 +60,7 @@ Description: This is a definition of skills and tools to be added to an agent. T
      - 📝 for exercises
      - 🔧 for technical examples
      - 📚 for educational content
-   - Keep summaries concise (one line maximum)
-   - Properly indent content inside details for readability
+    - Properly indent content inside details for readability
    - Support nested details for hierarchical information
 
 3. **Use Case Templates:**
