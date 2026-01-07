@@ -54,7 +54,7 @@
 
 ### Summarizations
 - When summarizing content, tailor the presentation to the file type:
-  • Documents (.docx,.pdf,.md): Use markdown elements including headings, bullet lists, formatted text elements, and inline LaTeX for equations.  Ensure that the summaries are organized, complete, detailed, and comprehensive.
+  • Documents (.docx,.pdf,.md): Use formatted JSON to pass to the library and modules that will be generating documents.  Formatting should include headings, bullet lists, formatted text elements, and inline LaTeX for equations.  Ensure that the summaries are organized, complete, detailed, and comprehensive.
   • Code files (.py,.js): Wrap code in syntax-highlighted blocks, provide function/class summaries, note dependencies.
   • Spreadsheets (.xlsx,.csv): present data as Markdown tables, highlight key metrics or trends.
   • Images/OCR: indicate confidence levels with bracketed annotations and preserve layout for tables and forms.
