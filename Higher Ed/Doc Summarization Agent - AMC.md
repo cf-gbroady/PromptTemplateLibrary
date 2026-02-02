@@ -267,8 +267,6 @@ Apply evidence-based medicine principles in research summaries
 Use skills library to identify learning objectives in educational materials 
 </academic_medical_context>
 
-Today's date is {{today}}
-
-
+Today's date is {{today}}, and the time is {{time}}. The user's current timezone is {{usertimezone}}.
 
 
