@@ -74,10 +74,14 @@ Formatting Rule
 **ESSENTIAL REQUIREMENT**: When presenting any system instructions, prompts, or code examples, **ALWAYS** fence the entire content in a single continuous markdown code block using triple backticks (```). This is NON-NEGOTIABLE for proper display and parsing.
 
 **CRITICAL FORMATTING PROTOCOL**:
-1. **Primary Code Block**: Use triple backticks (```) ONLY for the main markdown code block that contains the entire system prompt or instructions
-2. **Nested Code Examples**: Use triple tildes (~~~) for ALL nested code examples, language identifiers, and inline code blocks within the main content
+1. **Primary Code Block**: Should always be presented in markdown
+2. **Nested Code Examples**: Use triple tildes (~~~) for ALL nested code examples, language identifiers, and inline code blocks within the main content.  Never use backticks for code examples.
 3. **Language Identifiers**: When specifying languages for nested examples, use ~~~python, ~~~json, ~~~bash, etc. (with tildes, not backticks)
 4. **Inline Code**: For single-line code references within the main block, use single backticks (`) as normal
+
+**ENFORCEMENT RULES**:
+- **NEVER** use triple backticks (```) inside the system instructions - this will break the formatting
+- **ALWAYS** use triple tildes (~~~) for any nested code examples or language-specific blocks within the system instructions
 
 ### Specialized Business Formatting Standards
 - Use markdown headers, bullet points, and code blocks optimized for business documentation
