@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Agents with AI Studio — Penn State Tech Pros &amp; Web</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #081629;
+      --bg-2: #0B1E36;
+      --surface: #11233D;
+      --surface-2: #162B49;
+      --text: #F8FBFF;
+      --text-2: #D9E6F5;
+      --muted: #AFC3D8;
+      --line: #36516E;
+      --line-soft: rgba(255,255,255,.12);
+      --blue: #4759A7;
+      --blue-soft: #DDE5FF;
+      --purple: #6B52A2;
+      --purple-soft: #E8DFFF;
+      --cyan: #37C5F0;
+      --cyan-soft: #CFF5FF;
+      --pink: #EE376C;
+      --pink-soft: #FFD6E3;
+      --green: #A7F3D0;
+      --amber: #FDE68A;
+      --white: #FEFEFE;
+      --shadow: 0 20px 50px rgba(0,0,0,.28);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --font: "Segoe UI","Segoe UI Variable",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+      --mono: "Cascadia Mono","Consolas",monospace;
+      --focus: 0 0 0 3px rgba(55,197,240,.4);
+    }
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;background:var(--bg);}
+    body{margin:0;font-family:var(--font);background:radial-gradient(circle at top left,rgba(55,197,240,.10),transparent 28%),linear-gradient(180deg,var(--bg),#061020 42%,var(--bg));color:var(--text);line-height:1.6;font-size:16px;min-height:100vh;}
+    a{color:inherit;}
+    strong{color:var(--white);}
+    code,pre{font-family:var(--mono);}
+    .wrap{width:min(1160px,calc(100% - 28px));margin:0 auto;}
+    .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;background:linear-gradient(90deg,var(--pink),var(--purple));box-shadow:0 0 10px rgba(238,55,108,.5);transition:width .08s linear;}
+    .skip-link{position:absolute;left:-999px;top:10px;background:var(--cyan-soft);color:#07101F;padding:8px 14px;border-radius:999px;z-index:1000;font-weight:800;}
+    .skip-link:focus{left:12px;outline:none;box-shadow:var(--focus);}
+    header{padding:24px 0 20px;border-bottom:1px solid var(--line-soft);}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px;flex-wrap:wrap;}
+    .brand{display:flex;align-items:center;gap:10px;}
+    .brand-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(55,197,240,.95),rgba(107,82,162,.9));box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);flex:0 0 auto;}
+    .brand-title strong{font-size:17px;letter-spacing:-.02em;}
+    .brand-title span{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:800;display:block;}
+    .utility{display:flex;flex-wrap:wrap;gap:7px;}
+    button,.button{font:inherit;border:1px solid var(--line);background:var(--surface-2);color:var(--text);border-radius:999px;padding:8px 13px;cursor:pointer;text-decoration:none;font-weight:750;transition:.15s ease;}
+    button:hover,.button:hover,button:focus-visible,.button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{border-color:var(--cyan);box-shadow:var(--focus);outline:none;}
+    .button.primary{background:var(--cyan-soft);color:#07101F;border-color:var(--cyan-soft);}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;align-items:stretch;}
+    .hero-card{background:rgba(17,35,61,.92);border:1px solid var(--line-soft);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(26px,5vw,52px);position:relative;overflow:hidden;min-height:400px;display:grid;align-content:center;}
+    .hero-card::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:var(--cyan);}
+    .eyebrow{display:inline-flex;width:fit-content;align-items:center;gap:7px;padding:6px 10px;border-radius:999px;border:1px solid rgba(207,245,255,.4);color:var(--cyan-soft);background:rgba(207,245,255,.07);font-weight:850;letter-spacing:.08em;text-transform:uppercase;font-size:11px;margin-bottom:16px;}
+    h1{margin:0 0 12px;font-size:clamp(38px,5.5vw,68px);line-height:.96;letter-spacing:-.055em;font-weight:850;}
+    h2{margin:0 0 8px;font-size:clamp(26px,3.5vw,42px);line-height:1.08;letter-spacing:-.04em;font-weight:850;}
+    h3{margin:0 0 7px;font-size:22px;line-height:1.2;letter-spacing:-.02em;font-weight:850;}
+    h4{margin:0 0 7px;font-size:17px;letter-spacing:-.01em;}
+    p{margin-top:0;}
+    .subtitle{color:var(--text-2);font-size:clamp(17px,2vw,21px);max-width:820px;margin:0;}
+    .side-card{background:rgba(17,35,61,.92);border:1px solid var(--line-soft);border-radius:var(--radius);box-shadow:0 12px 30px rgba(0,0,0,.2);padding:20px;display:grid;gap:10px;align-content:center;}
+    .quick-row{display:grid;grid-template-columns:80px 1fr;gap:10px;padding:12px;border-radius:14px;border:1px solid var(--line-soft);background:rgba(255,255,255,.04);}
+    .quick-row strong{display:block;}
+    .quick-row span{color:var(--muted);font-size:13px;}
+    .quick-row .label{color:var(--cyan-soft);font-weight:850;}
+    nav{position:sticky;top:8px;z-index:20;margin:18px 0 30px;padding:10px;border-radius:999px;border:1px solid var(--line-soft);background:rgba(8,22,41,.92);backdrop-filter:blur(12px);box-shadow:0 10px 28px rgba(0,0,0,.22);display:flex;justify-content:space-between;gap:10px;align-items:center;}
+    .nav-links{display:flex;flex-wrap:wrap;gap:5px;}
+    nav a{text-decoration:none;color:var(--text-2);padding:7px 9px;border-radius:999px;font-size:13px;font-weight:800;}
+    nav a:hover,nav a:focus-visible{background:rgba(207,245,255,.08);color:var(--cyan-soft);outline:none;}
+    nav a.active{background:rgba(238,55,108,.15);color:var(--pink-soft);box-shadow:inset 0 0 0 1px rgba(238,55,108,.4);}
+    main{padding:0 0 60px;}
+    section{margin:44px 0;scroll-margin-top:100px;position:relative;}
+    section+section::before{content:"";position:absolute;top:-22px;left:0;right:0;height:2px;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(238,55,108,.12) 14%,rgba(238,55,108,.6) 50%,rgba(238,55,108,.12) 86%,transparent);}
+    .section-head{max-width:860px;margin-bottom:16px;}
+    .section-head p{color:var(--text-2);font-size:17px;}
+    main{counter-reset:sec;}
+    section{counter-increment:sec;}
+    .section-head>h2::before{content:counter(sec,decimal-leading-zero);display:inline-block;vertical-align:middle;margin-right:12px;padding:2px 9px;border-radius:999px;font-size:13px;font-weight:850;letter-spacing:.06em;color:var(--pink-soft);background:rgba(238,55,108,.13);border:1px solid rgba(238,55,108,.38);}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .grid.four{grid-template-columns:repeat(4,minmax(0,1fr));}
+    .card,.panel,.worksheet,.example-card,.step,.callout{background:rgba(17,35,61,.92);border:1px solid var(--line-soft);border-radius:var(--radius);box-shadow:0 10px 28px rgba(0,0,0,.18);padding:18px;}
+    .card{position:relative;overflow:hidden;}
+    .card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--accent,var(--cyan));}
+    .kicker{display:inline-flex;margin-bottom:10px;padding:4px 8px;border-radius:999px;border:1px solid rgba(207,245,255,.3);color:var(--accent-text,var(--cyan-soft));background:rgba(207,245,255,.05);font-size:11px;font-weight:850;letter-spacing:.055em;text-transform:uppercase;}
+    .callout{background:rgba(207,245,255,.05);border-color:rgba(207,245,255,.25);}
+    .callout.warning{background:rgba(255,214,227,.07);border-color:rgba(255,214,227,.3);}
+    .plain-list{list-style:none;padding:0;margin:0;display:grid;gap:8px;}
+    .plain-list li{margin:0;padding:10px;border:1px solid var(--line-soft);background:rgba(255,255,255,.04);border-radius:12px;}
+    .timeline{display:grid;gap:8px;}
+    .time-block{display:grid;grid-template-columns:88px 1fr;gap:10px;padding:12px;border:1px solid var(--line-soft);border-radius:14px;background:rgba(255,255,255,.04);}
+    .time-block .time{color:var(--cyan-soft);font-weight:900;}
+    .do-dont{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+    .do-dont .good{border-color:rgba(167,243,208,.4);}
+    .do-dont .risk{border-color:rgba(255,214,227,.4);}
+    details{border:1px solid var(--line-soft);border-radius:14px;background:rgba(255,255,255,.04);padding:0;overflow:hidden;}
+    summary{cursor:pointer;padding:12px 14px;font-weight:850;color:var(--text);list-style:none;}
+    summary::-webkit-details-marker{display:none;}
+    details[open] summary{border-bottom:1px solid var(--line-soft);color:var(--cyan-soft);}
+    .details-body{padding:14px;color:var(--text-2);}
+    .worksheet label{display:grid;gap:5px;font-weight:850;margin-bottom:10px;}
+    input,textarea,select{width:100%;font:inherit;color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;padding:10px 11px;}
+    textarea{min-height:84px;resize:vertical;}
+    .worksheet .actions{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
+    .output{min-height:140px;white-space:pre-wrap;background:rgba(3,10,22,.6);color:var(--text);border:1px solid var(--line);border-radius:14px;padding:14px;font-size:13px;overflow:auto;}
+    .copy-status{color:var(--green);font-weight:850;font-size:13px;min-height:20px;}
+    .table-wrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line-soft);}
+    table{width:100%;border-collapse:collapse;min-width:680px;background:rgba(255,255,255,.03);}
+    th,td{padding:12px 13px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top;}
+    th{color:var(--cyan-soft);background:rgba(207,245,255,.05);font-size:12px;text-transform:uppercase;letter-spacing:.06em;}
+    tr:last-child td{border-bottom:0;}
+    .visual-box{background:rgba(17,35,61,.94);border:1px solid var(--line-soft);border-radius:var(--radius);padding:20px;}
+    .semantic-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;}
+    .token-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+    .token{padding:4px 10px;border-radius:999px;font-size:13px;font-weight:800;border:1px solid;}
+    .token.t1{background:rgba(55,197,240,.12);border-color:rgba(55,197,240,.4);color:var(--cyan-soft);}
+    .token.t2{background:rgba(107,82,162,.15);border-color:rgba(107,82,162,.5);color:var(--purple-soft);}
+    .token.t3{background:rgba(238,55,108,.1);border-color:rgba(238,55,108,.35);color:var(--pink-soft);}
+    .token.t4{background:rgba(253,230,138,.1);border-color:rgba(253,230,138,.35);color:var(--amber);}
+    .context-stack{display:grid;gap:6px;}
+    .ctx-layer{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;border:1px solid var(--line-soft);background:rgba(255,255,255,.04);}
+    .ctx-layer .icon{font-size:18px;flex:0 0 auto;}
+    .ctx-layer strong{font-size:13px;}
+    .ctx-layer span{color:var(--muted);font-size:12px;}
+    .arrow-down{text-align:center;color:var(--cyan-soft);font-size:18px;line-height:1;}
+    .flow-diagram{display:flex;flex-direction:column;gap:6px;}
+    .flow-step{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;border:1px solid var(--line-soft);background:rgba(255,255,255,.04);}
+    .flow-step .badge{padding:2px 8px;border-radius:999px;font-size:11px;font-weight:850;background:rgba(55,197,240,.15);border:1px solid rgba(55,197,240,.3);color:var(--cyan-soft);white-space:nowrap;}
+    .flow-step p{margin:0;font-size:13px;color:var(--text-2);}
+    .resource-list{display:grid;gap:8px;}
+    .resource-link{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 13px;border-radius:14px;border:1px solid var(--line-soft);background:rgba(255,255,255,.04);text-decoration:none;color:var(--text);}
+    .resource-link span{color:var(--muted);font-size:13px;}
+    .resource-link:hover,.resource-link:focus-visible{border-color:var(--cyan);box-shadow:var(--focus);outline:none;}
+    .light-panel{background:#F6FAFF;color:#13202E;border-radius:var(--radius);border:1px solid #DDE8F6;padding:18px;box-shadow:0 10px 28px rgba(0,0,0,.18);}
+    .light-panel h3,.light-panel h4,.light-panel strong{color:#13202E;}
+    .light-panel p,.light-panel li,.light-panel .muted{color:#465A70;}
+    .pace-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+    .pace-card{border-radius:14px;border:1px solid var(--line-soft);padding:14px;background:rgba(255,255,255,.04);}
+    .pace-letter{font-size:32px;font-weight:900;line-height:1;margin-bottom:6px;}
+    .footer{margin-top:50px;padding:22px;border-top:1px solid var(--line-soft);color:var(--muted);font-size:13px;}
+    @media(max-width:960px){
+      .hero,.semantic-grid,.grid,.grid.two,.grid.four,.do-dont{grid-template-columns:1fr;}
+      nav{border-radius:20px;align-items:stretch;flex-direction:column;}
+      .nav-links{display:grid;grid-template-columns:repeat(2,1fr);}
+    }
+    @media(max-width:600px){
+      body{font-size:15px;}
+      .wrap{width:min(100% - 18px,1160px);}
+      .time-block,.quick-row{grid-template-columns:1fr;}
+      .utility{justify-content:flex-start;}
+      h1{font-size:38px;}
+      .pace-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    @media print{
+      :root{color-scheme:light;}
+      body{background:#fff;color:#111;}
+      .card,.panel,.worksheet,.example-card,.step,.callout,.visual-box{box-shadow:none;background:#fff;color:#111;border-color:#ccc;}
+      .button,button,.worksheet,nav{display:none!important;}
+      a{color:#111;}
+      section{break-inside:avoid;}
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div class="brand-title">
+            <strong>Building Agents with AI Studio</strong>
+            <span>Tech Pros &amp; Web · Penn State · 45 min</span>
+          </div>
+        </div>
+        <div class="utility">
+          <a class="button primary" href="#quickstart">QuickStart Form</a>
+          <a class="button" href="https://aistudio.psu.edu" target="_blank" rel="noopener">Open AI Studio</a>
+          <button type="button" onclick="window.print()">Print / Save PDF</button>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="hero-card">
+          <span class="eyebrow">Facilitator + Participant Guide</span>
+          <h1>Build a useful agent today</h1>
+          <p class="subtitle">Building a useful agent is less about writing one perfect prompt and more about <strong>replicating a human process</strong> with enough context, instructions, and tests that the agent can help reliably.</p>
+        </div>
+        <aside class="side-card">
+          <div class="quick-row">
+            <div class="label">Audience</div>
+            <div><strong>Tech Pros &amp; Web Pros</strong><span>Penn State conference participants</span></div>
+          </div>
+          <div class="quick-row">
+            <div class="label">Tools</div>
+            <div><strong>Web Search + Code Interpreter</strong><span>Official nebulaONE agents may have broader capabilities</span></div>
+          </div>
+          <div class="quick-row">
+            <div class="label">Time</div>
+            <div><strong>45 minutes</strong><span>Hands-on from minute 10</span></div>
+          </div>
+          <div class="quick-row">
+            <div class="label">Goal</div>
+            <div><strong>One working agent idea</strong><span>Scoped, prompted, tested</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="Guide sections">
+    <div class="nav-links">
+      <a href="#runofshow">Run of Show</a>
+      <a href="#semantic">Semantic Understanding</a>
+      <a href="#context">Context Engineering</a>
+      <a href="#humanprocess">Human Process</a>
+      <a href="#buildbasics">Build Basics</a>
+      <a href="#quickstart">QuickStart Form</a>
+      <a href="#breakit">Break-It Testing</a>
+    </div>
+    <a class="button primary" href="#quickstart">Jump to Form</a>
+  </nav>
+
+  <main id="main" class="wrap">
+
+    <section id="runofshow">
+      <div class="section-head">
+        <h2>45-Minute Run of Show</h2>
+        <p>Facilitator guide — keep the first hands-on moment inside the first 10 minutes.</p>
+      </div>
+      <div class="timeline">
+        <div class="time-block"><div class="time">0–3 min</div><div><strong>Opening Hook</strong><p style="margin:4px 0 0;color:var(--text-2);font-size:14px;">Ask: <em>"What could a knowledgeable intern help you do if they had web search and a spreadsheet brain?"</em></p></div></div>
+        <div class="time-block"><div class="time">3–7 min</div><div><strong>Agent vs. Chatbot vs. Workflow</strong><p style="margin:4px 0 0;color:var(--text-2);font-size:14px;">Standard GenAI = reactive. Agentic AI = proactive — it perceives, decides, acts.</p></div></div>
+        <div class="time-block"><div class="time">7–12 min</div><div><strong>What AI Studio Can Do Today</strong><p style="margin:4px 0 0;color:var(--text-2);font-size:14px;">Web Search and Code Interpreter only. Official nebulaONE agents may have broader capabilities. Web search sends terms outside the platform.</p></div></div>
+        <div class="time-block"><div class="time">12–18 min</div><div><strong>Semantic Understanding</strong><p style="margin:4px 0 0;color:var(--text-2);font-size:14px;">Tokens → embeddings → meaning-space. The model fills gaps based on what seems likely — not what you meant.</p></div></div>
+        <div class="time-block"><div class="time">18–24 min</div><div><strong>Context Engineering</strong><p style="margin:4px 0 0;color:var(--text-2);font-size:14px;">Context Stack: Role → Goal → Process → Sources → Tools → Output → Guardrails.</p></div></div>
+        <div class="time-block"><div class="time">24–30 min</div><div><strong>Human Process Mapping + Build Basics</strong><p style="margin:4px 0 0;color:var(--text-2);font-size:14px;">Walk through the Accessibility Review example. Connect form to build sequence.</p></div></div>
+        <div class="time-block"><div class="time">30–37 min</div><div><strong>Pair Activity — QuickStart Form</strong><p style="margin:4px 0 0;color:var(--text-2);font-size:14px;">Participants fill out Sections 1–10 for their own idea.</p></div></div>
+        <div class="time-block"><div class="time">37–42 min</div><div><strong>Break-It Testing</strong><p style="margin:4px 0 0;color:var(--text-2);font-size:14px;">Demo happy-path, ambiguous, out-of-scope, missing-source, and sensitive-data tests.</p></div></div>
+        <div class="time-block"><div class="time">42–45 min</div><div><strong>Close</strong><p style="margin:4px 0 0;color:var(--text-2);font-size:14px;">Each participant names one thing to test before sharing the agent.</p></div></div>
+      </div>
+    </section>
+
+    <section id="semantic">
+      <div class="section-head">
+        <h2>Semantic Understanding</h2>
+        <p>Why context and boundaries matter — the model fills gaps based on what seems likely, not what you actually meant.</p>
+      </div>
+      <div class="semantic-grid">
+        <div class="visual-box">
+          <span class="kicker">How the model "understands" language</span>
+          <h3>Tokens → Embeddings → Meaning</h3>
+          <div style="margin-bottom:14px;">
+            <p style="color:var(--muted);font-size:13px;margin-bottom:8px;">Step 1 — Tokenisation: text is broken into units</p>
+            <div class="token-row">
+              <span class="token t1">I</span><span class="token t1">heard</span><span class="token t1">a</span><span class="token t2">dog</span><span class="token t1">bark</span><span class="token t1">loudly</span><span class="token t1">at</span><span class="token t1">a</span><span class="token t3">cat</span>
+            </div>
+          </div>
+          <div style="margin-bottom:14px;">
+            <p style="color:var(--muted);font-size:13px;margin-bottom:8px;">Step 2 — Embeddings: tokens become vectors that encode meaning</p>
+            <div class="table-wrap">
+              <table style="min-width:0;">
+                <thead><tr><th>Word</th><th>Embedding (simplified)</th><th>Relationship</th></tr></thead>
+                <tbody>
+                  <tr><td><strong style="color:var(--cyan-soft);">dog</strong></td><td><code>[10, 3, 2]</code></td><td>—</td></tr>
+                  <tr><td><strong style="color:var(--cyan-soft);">cat</strong></td><td><code>[10, 3, 1]</code></td><td>Very similar to dog</td></tr>
+                  <tr><td><strong style="color:var(--cyan-soft);">puppy</strong></td><td><code>[5, 2, 1]</code></td><td>Related to dog</td></tr>
+                  <tr><td><strong style="color:var(--pink-soft);">skateboard</strong></td><td><code>[-3, 3, 2]</code></td><td>Far from dog</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="callout">
+            <strong>Talk track:</strong> "The model doesn't understand words the way a person does. Related words sit closer together in meaning-space — which is why the model connects 'dog,' 'puppy,' and 'cat' more naturally than 'dog' and 'skateboard.' This is also why the model will fill in gaps based on what seems likely unless you define the job clearly."
+          </div>
+        </div>
+        <div style="display:grid;gap:12px;align-content:start;">
+          <div class="visual-box">
+            <span class="kicker">Semantic vs. keyword search</span>
+            <h4>Why users don't need perfect keywords</h4>
+            <p style="color:var(--text-2);font-size:14px;margin-bottom:10px;">User asks: <em>"How do I make this page easier for students to understand?"</em></p>
+            <div class="do-dont">
+              <div class="panel good" style="padding:12px;"><strong style="color:var(--green);font-size:12px;">KEYWORD THINKING</strong><p style="font-size:13px;color:var(--text-2);margin:6px 0 0;">Looks for exact words: <em>page, students, understand</em> — may miss useful sources</p></div>
+              <div class="panel" style="padding:12px;border-color:rgba(167,243,208,.4);"><strong style="color:var(--cyan-soft);font-size:12px;">SEMANTIC THINKING</strong><p style="font-size:13px;color:var(--text-2);margin:6px 0 0;">Infers related ideas: <em>readability, plain language, accessibility, audience, clarity</em></p></div>
+            </div>
+          </div>
+          <div class="visual-box">
+            <span class="kicker">What the model receives</span>
+            <h4>More than just your question</h4>
+            <div class="flow-diagram">
+              <div class="flow-step"><span class="badge">User</span><p>User prompt</p></div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-step"><span class="badge">Platform</span><p>User prompt + system instructions + tool/source descriptions</p></div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-step"><span class="badge">Model</span><p>Decides: needs web info? needs Code Interpreter? enough context?</p></div>
+              <div class="arrow-down">↓</div>
+              <div class="flow-step"><span class="badge">Response</span><p>Answer with caveats / next steps</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="context">
+      <div class="section-head">
+        <h2>Context Engineering</h2>
+        <p>Prompt engineering is <em>how</em> we ask. Context engineering is <em>how we design the whole work environment</em> around the agent.</p>
+      </div>
+      <div class="grid two">
+        <div class="visual-box">
+          <span class="kicker">The Context Stack</span>
+          <h3>Every layer shapes the answer</h3>
+          <div class="context-stack">
+            <div class="ctx-layer"><span class="icon">👤</span><div><strong>Role context</strong><span>What role should the agent play?</span></div></div>
+            <div class="arrow-down">↓</div>
+            <div class="ctx-layer"><span class="icon">🎯</span><div><strong>Goal context</strong><span>What outcome is it driving?</span></div></div>
+            <div class="arrow-down">↓</div>
+            <div class="ctx-layer"><span class="icon">🔄</span><div><strong>Process context</strong><span>What steps should it follow?</span></div></div>
+            <div class="arrow-down">↓</div>
+            <div class="ctx-layer"><span class="icon">📚</span><div><strong>Source context</strong><span>What information should it trust?</span></div></div>
+            <div class="arrow-down">↓</div>
+            <div class="ctx-layer"><span class="icon">🔧</span><div><strong>Tool context</strong><span>Web Search or Code Interpreter?</span></div></div>
+            <div class="arrow-down">↓</div>
+            <div class="ctx-layer"><span class="icon">📄</span><div><strong>Output context</strong><span>What should the answer look like?</span></div></div>
+            <div class="arrow-down">↓</div>
+            <div class="ctx-layer"><span class="icon">🚧</span><div><strong>Boundary context</strong><span>What should it avoid or escalate?</span></div></div>
+            <div class="arrow-down">↓</div>
+            <div class="ctx-layer" style="border-color:rgba(55,197,240,.4);background:rgba(55,197,240,.07);"><span class="icon">💬</span><div><strong>Model produces response</strong></div></div>
+          </div>
+        </div>
+        <div style="display:grid;gap:12px;align-content:start;">
+          <div class="callout">
+            <strong>Talk track:</strong> "Context engineering is the difference between 'answer this' and 'do this job the way a trained person would do it.' We tell it who it is, what job it's doing, what process to follow, what information to trust, when to use tools, what output to produce, and where the boundaries are."
+          </div>
+          <div class="panel">
+            <span class="kicker">Context Engineering Checklist</span>
+            <div class="table-wrap">
+              <table style="min-width:0;">
+                <thead><tr><th>Context Type</th><th>Design Question</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Role</strong></td><td>What role should the agent play?</td></tr>
+                  <tr><td><strong>Audience</strong></td><td>Who is the user, and what do they already know?</td></tr>
+                  <tr><td><strong>Task</strong></td><td>What job should the agent complete?</td></tr>
+                  <tr><td><strong>Source</strong></td><td>What information is trusted, current, or user-provided?</td></tr>
+                  <tr><td><strong>Tool</strong></td><td>When should the agent use Web Search or Code Interpreter?</td></tr>
+                  <tr><td><strong>Process</strong></td><td>What steps should the agent follow?</td></tr>
+                  <tr><td><strong>Output</strong></td><td>What should the answer look like?</td></tr>
+                  <tr><td><strong>Boundary</strong></td><td>What should the agent avoid, refuse, or escalate?</td></tr>
+                  <tr><td><strong>Evaluation</strong></td><td>How will we know whether the output is good?</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="callout warning">
+            <strong>⚠️ Facilitator note:</strong> Simply attaching a knowledge source is not enough. Builders need to describe <em>why</em> the source is relevant and <em>when</em> the agent should use it.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="humanprocess">
+      <div class="section-head">
+        <h2>Replicate the Human Process</h2>
+        <p>Do not start with the agent screen. Start with the human workflow. If you can't describe what a good human helper would do, you probably can't instruct an agent well.</p>
+      </div>
+      <div class="grid two">
+        <div>
+          <div class="panel" style="margin-bottom:12px;">
+            <span class="kicker">Human Process Map Template</span>
+            <div class="table-wrap">
+              <table style="min-width:0;">
+                <thead><tr><th>Human Step</th><th>What a human would check</th><th>Agent translation</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>1. Intake</strong></td><td>What does the user want? What is missing?</td><td>Clarifying questions and required inputs</td></tr>
+                  <tr><td><strong>2. Triage</strong></td><td>Is this in scope? Is it safe?</td><td>Scope rules and guardrails</td></tr>
+                  <tr><td><strong>3. Gather context</strong></td><td>What sources, files, or constraints matter?</td><td>Web Search, Code Interpreter, user-provided files</td></tr>
+                  <tr><td><strong>4. Reason through</strong></td><td>What steps would the human follow?</td><td>Ordered workflow instructions</td></tr>
+                  <tr><td><strong>5. Produce output</strong></td><td>What does a useful answer look like?</td><td>Format, tone, length, citations, next steps</td></tr>
+                  <tr><td><strong>6. Review &amp; escalate</strong></td><td>What requires human judgment?</td><td>Caveats, confidence language, escalation instructions</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="callout">
+            <strong>Mini prompt:</strong> <em>"If a knowledgeable human did this task well, what would they do first, second, third — and what would they refuse to do?"</em>
+          </div>
+        </div>
+        <div style="display:grid;gap:12px;align-content:start;">
+          <details>
+            <summary>Demo idea: Website Accessibility Review Assistant</summary>
+            <div class="details-body">
+              <p><strong>Why this works:</strong> Relevant to web professionals, uses web search for public guidance, uses Code Interpreter for exported page data, requires human review, and illustrates semantic understanding naturally.</p>
+              <div class="table-wrap">
+                <table style="min-width:0;">
+                  <thead><tr><th>Human Step</th><th>Agent Instruction</th></tr></thead>
+                  <tbody>
+                    <tr><td>Ask what page or content the editor wants reviewed</td><td>If no page content, URL, or excerpt is provided, ask for it</td></tr>
+                    <tr><td>Identify whether the user wants accessibility, plain language, SEO, or general quality feedback</td><td>Clarify the review lens before giving detailed recommendations</td></tr>
+                    <tr><td>Check trusted public guidance when current standards are needed</td><td>Use web search for current public accessibility or web guidance</td></tr>
+                    <tr><td>Review the content against common issues</td><td>Look for headings, link text, alt text references, reading level, jargon, structure, and calls to action</td></tr>
+                    <tr><td>Prioritize fixes</td><td>Return a prioritized checklist with severity, rationale, and suggested rewrite when useful</td></tr>
+                    <tr><td>Avoid over-certifying</td><td>Do not claim legal or formal compliance; recommend human review and institutional verification</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </details>
+          <div class="card" style="--accent:var(--purple);">
+            <span class="kicker">Tool Decision Guide</span>
+            <div class="table-wrap">
+              <table style="min-width:0;">
+                <thead><tr><th>Tool</th><th>Use When</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Web Search</strong></td><td>Answer depends on current, public, or website-based information. <span style="color:var(--pink-soft);font-size:12px;">⚠️ Sends search terms outside the platform</span></td></tr>
+                  <tr><td><strong>Code Interpreter</strong></td><td>Task needs calculations, data analysis, file transformation, charts, tables, parsing, or structured processing</td></tr>
+                  <tr><td><strong>Neither</strong></td><td>Task is mainly drafting, reasoning, coaching, or formatting from user-provided context</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="buildbasics">
+      <div class="section-head">
+        <h2>Build Basics — The 5-Step Model</h2>
+        <p>Use this as your "plain English" explanation during the demo.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(5,1fr);">
+        <div class="card" style="--accent:var(--cyan);"><span class="kicker">Step 1</span><h4>Determine the use case</h4><p style="color:var(--text-2);font-size:13px;">Define the task, user, information, tone, and success metric. Use PACE: Problem, Action, Context, Expectations.</p></div>
+        <div class="card" style="--accent:var(--blue);"><span class="kicker">Step 2</span><h4>Create system instructions</h4><p style="color:var(--text-2);font-size:13px;">Tell the agent what it is, who it helps, what process it follows, what tools it should use, how it should respond, and what it should not do.</p></div>
+        <div class="card" style="--accent:var(--purple);"><span class="kicker">Step 3</span><h4>Add tools and sources</h4><p style="color:var(--text-2);font-size:13px;">In AI Studio: Web Search and Code Interpreter. Identify trusted sources and describe why each source is relevant.</p></div>
+        <div class="card" style="--accent:var(--pink);"><span class="kicker">Step 4</span><h4>Create starter prompts</h4><p style="color:var(--text-2);font-size:13px;">One easy, one realistic, one that tests whether the agent knows when to use a tool.</p></div>
+        <div class="card" style="--accent:var(--cyan);"><span class="kicker">Step 5</span><h4>Test and iterate</h4><p style="color:var(--text-2);font-size:13px;">Test for accuracy, comprehension, tone, style, behavior, output, and guardrails. Change one thing at a time. Try to break it before sharing it.</p></div>
+      </div>
+      <div style="margin-top:14px;" class="callout">
+        <strong>Capability distinction:</strong> "Today we are building within a lightweight AI Studio experience that has two tools: Web Search and Code Interpreter. Official nebulaONE agents can be configured more deeply in the full environment, but the design discipline is the same: define the audience, outcome, information sources, process, guardrails, starter prompts, and tests before you build."
+      </div>
+    </section>
+
+    <section id="quickstart">
+      <div class="section-head">
+        <h2>Participant QuickStart Mini Form</h2>
+        <p>Use this form to decide whether an idea is a good fit for an AI Studio agent and to shape a first build. Fill it out for your own idea during the pair activity.</p>
+      </div>
+
+      <details open>
+        <summary>Section 1 — One-Sentence Agent Idea</summary>
+        <div class="details-body">
+          <div class="light-panel">
+            <p style="margin:0;font-size:15px;"><strong>I want to build an agent that helps</strong> [who] <strong>to</strong> [do what] <strong>by using</strong> [what information or tools] <strong>in a</strong> [tone/style] <strong>way, and I'll know it is working when</strong> [success metric].</p>
+          </div>
+          <div class="worksheet" style="margin-top:12px;">
+            <label>My draft:<textarea id="s1_idea" placeholder="I want to build an agent that helps __________ to __________ by using __________ in a __________ way, and I'll know it is working when __________." rows="3"></textarea></label>
+          </div>
+        </div>
+      </details>
+
+      <details style="margin-top:8px;">
+        <summary>Section 2 — Is This a Good Fit for AI Studio?</summary>
+        <div class="details-body">
+          <div class="table-wrap">
+            <table style="min-width:0;">
+              <thead><tr><th>Question</th><th style="width:60px;">Yes</th><th style="width:60px;">No</th><th>Notes</th></tr></thead>
+              <tbody id="fitCheckTable">
+                <tr><td>Is the task repeatable or frequently requested?</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" placeholder="Notes…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td>Would a knowledgeable intern or assistant be able to help with it?</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" placeholder="Notes…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td>Can the agent use public/current web information or user-provided data?</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" placeholder="Notes…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td>Would Code Interpreter help with analysis, transformation, charts, files, or calculations?</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" placeholder="Notes…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td>Can the user stay responsible for reviewing the final answer?</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" placeholder="Notes…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td>Is the goal advisory, draft-oriented, summarization-oriented, or workflow-supporting?</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" placeholder="Notes…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td>Can success be tested with 3–5 realistic questions?</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" placeholder="Notes…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Can you describe the human process the agent is trying to replicate?</strong></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" placeholder="Notes…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Can you name the context the agent needs before it should answer?</strong></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" placeholder="Notes…" style="padding:4px 8px;font-size:13px;"></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="grid two" style="margin-top:10px;">
+            <div class="callout"><strong>✅ Good AI Studio fit if:</strong> most answers are Yes, the needed information can be reached through web search or supplied by the user, and the output can be reviewed by a human.</div>
+            <div class="callout warning"><strong>❌ Probably not a good first fit if:</strong> the agent needs private system integrations, direct write-back actions, guaranteed deterministic behavior, restricted institutional data, or fully automated high-stakes decisions.</div>
+          </div>
+        </div>
+      </details>
+
+      <details style="margin-top:8px;">
+        <summary>Section 3 — PACE the Use Case</summary>
+        <div class="details-body">
+          <div class="pace-grid">
+            <div class="pace-card"><div class="pace-letter" style="color:var(--cyan-soft);">P</div><strong>Problem</strong><p style="color:var(--text-2);font-size:13px;">What problem are you solving? How is it handled today?</p><textarea id="pace_p" rows="3" placeholder="Describe the problem…"></textarea></div>
+            <div class="pace-card"><div class="pace-letter" style="color:var(--blue-soft);">A</div><strong>Action</strong><p style="color:var(--text-2);font-size:13px;">What should the agent do for the user?</p><textarea id="pace_a" rows="3" placeholder="Describe the action…"></textarea></div>
+            <div class="pace-card"><div class="pace-letter" style="color:var(--purple-soft);">C</div><strong>Context</strong><p style="color:var(--text-2);font-size:13px;">What does the agent need to know about the user, environment, data, constraints, and audience?</p><textarea id="pace_c" rows="3" placeholder="Describe the context…"></textarea></div>
+            <div class="pace-card"><div class="pace-letter" style="color:var(--pink-soft);">E</div><strong>Expectations</strong><p style="color:var(--text-2);font-size:13px;">What should the output look like? Tone, format, citations, caveats, or next steps?</p><textarea id="pace_e" rows="3" placeholder="Describe the expectations…"></textarea></div>
+          </div>
+        </div>
+      </details>
+
+      <details style="margin-top:8px;">
+        <summary>Section 4 — Map the Human Process</summary>
+        <div class="details-body">
+          <div class="table-wrap">
+            <table style="min-width:0;">
+              <thead><tr><th>Human Process Step</th><th>What a Human Would Ask / Check</th><th>Agent Design Translation</th></tr></thead>
+              <tbody>
+                <tr><td><strong>1. Intake</strong></td><td>What does the user want? What is missing?</td><td><input type="text" placeholder="Clarifying questions and required inputs" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>2. Triage</strong></td><td>Is this in scope? Is it safe? Is it high-stakes?</td><td><input type="text" placeholder="Scope rules and guardrails" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>3. Gather context</strong></td><td>What sources, files, examples, or constraints matter?</td><td><input type="text" placeholder="Web Search, Code Interpreter, user-provided files" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>4. Reason through</strong></td><td>What steps would the human follow?</td><td><input type="text" placeholder="Ordered workflow instructions" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>5. Produce output</strong></td><td>What does a useful answer look like?</td><td><input type="text" placeholder="Format, tone, length, citations, next steps" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>6. Review &amp; escalate</strong></td><td>What requires human judgment?</td><td><input type="text" placeholder="Caveats, confidence language, escalation instructions" style="padding:4px 8px;font-size:13px;"></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details style="margin-top:8px;">
+        <summary>Section 5 — Context Engineering Checklist</summary>
+        <div class="details-body">
+          <div class="table-wrap">
+            <table style="min-width:0;">
+              <thead><tr><th>Context Type</th><th>Design Question</th><th>My Notes</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Role context</strong></td><td>What role should the agent play?</td><td><input type="text" placeholder="e.g. accessibility review coach" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Audience context</strong></td><td>Who is the user, and what do they already know?</td><td><input type="text" placeholder="e.g. web editors with basic HTML knowledge" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Task context</strong></td><td>What job should the agent complete?</td><td><input type="text" placeholder="e.g. review page for accessibility issues" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Source context</strong></td><td>What information is trusted, current, or user-provided?</td><td><input type="text" placeholder="e.g. WCAG guidelines, user-provided page text" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Tool context</strong></td><td>When should the agent use Web Search or Code Interpreter?</td><td><input type="text" placeholder="e.g. web search for current WCAG guidance" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Process context</strong></td><td>What steps should the agent follow?</td><td><input type="text" placeholder="e.g. ask for content, clarify lens, review, prioritize" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Output context</strong></td><td>What should the answer look like?</td><td><input type="text" placeholder="e.g. prioritized checklist with severity and rationale" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Boundary context</strong></td><td>What should the agent avoid, refuse, or escalate?</td><td><input type="text" placeholder="e.g. do not claim legal compliance" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Evaluation context</strong></td><td>How will we know whether the output is good?</td><td><input type="text" placeholder="e.g. editor can produce a prioritized checklist" style="padding:4px 8px;font-size:13px;"></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details style="margin-top:8px;">
+        <summary>Section 6 — Pick the Agent Pattern</summary>
+        <div class="details-body">
+          <div class="worksheet">
+            <label>My pattern:
+              <select id="s6_pattern">
+                <option value="">— Select a pattern —</option>
+                <option>Finder — Locating and summarizing current web information</option>
+                <option>Explainer — Translating complex information for a specific audience</option>
+                <option>Analyst — Working with files, spreadsheets, calculations, or charts</option>
+                <option>Drafting Partner — Creating first drafts, outlines, emails, FAQs, or checklists</option>
+                <option>Coach / Reviewer — Giving feedback against a rubric or standard</option>
+                <option>Workflow Guide — Walking a user through a repeatable process</option>
+                <option>Triage Assistant — Sorting requests, identifying missing information, or routing next steps</option>
+              </select>
+            </label>
+          </div>
+        </div>
+      </details>
+
+      <details style="margin-top:8px;">
+        <summary>Section 7 — Tool Decision</summary>
+        <div class="details-body">
+          <div class="worksheet">
+            <label>Web Search — use when the answer depends on current, public, or website-based information:<textarea id="s7_web" rows="2" placeholder="Describe when your agent should use web search…"></textarea></label>
+            <label>Code Interpreter — use when the task needs calculations, data analysis, file transformation, charts, tables, parsing, or structured processing:<textarea id="s7_code" rows="2" placeholder="Describe when your agent should use code interpreter…"></textarea></label>
+            <label>Neither / Prompt Only — use when the task is mainly drafting, reasoning, coaching, or formatting from user-provided context:<textarea id="s7_none" rows="2" placeholder="Describe tasks that need no tools…"></textarea></label>
+          </div>
+        </div>
+      </details>
+
+      <details style="margin-top:8px;">
+        <summary>Section 8 — First System Instruction Draft</summary>
+        <div class="details-body">
+          <div class="light-panel" style="margin-bottom:12px;">
+            <p style="font-size:13px;margin:0;font-family:var(--mono);white-space:pre-wrap;color:#13202E;">You are [agent role] for [audience].
+Your job is to help users [primary outcome].
+
+Replicate this human process:
+1. First, [intake / clarify].
+2. Then, [gather or inspect context].
+3. Then, [analyze / compare / draft / review].
+4. Finally, [produce the expected output and next steps].
+
+When responding:
+- Ask clarifying questions if the request is missing [key inputs].
+- Use web search when the answer depends on current or source-specific information.
+- Use code interpreter when the user provides data/files or asks for calculations, charts, transformations, or structured analysis.
+- Explain your reasoning briefly and practically.
+- Format responses as [preferred format].
+- Use a [tone] tone.
+
+Context rules:
+- Treat [source/tool/context] as authoritative for [specific situation].
+- If required context is missing, ask for it before giving a final answer.
+
+Guardrails:
+- Do not invent facts, policies, URLs, data, or institutional requirements.
+- If sources conflict or are missing, say so and recommend what to verify.
+- Do not make high-stakes decisions for the user; provide options and recommended next steps for human review.
+- Do not request or expose sensitive information unless the environment and policy explicitly allow it.</p>
+          </div>
+          <div class="worksheet">
+            <label>My system instructions:<textarea id="s8_instructions" rows="12" placeholder="Write your system instructions here, using the template above as a guide…"></textarea></label>
+          </div>
+        </div>
+      </details>
+
+      <details style="margin-top:8px;">
+        <summary>Section 9 — Three Starter Prompts</summary>
+        <div class="details-body">
+          <p style="color:var(--text-2);font-size:14px;"><strong>Design tip:</strong> One prompt should be easy, one should be realistic, and one should test whether the agent knows when to use a tool.</p>
+          <div class="worksheet">
+            <label>Starter prompt 1 (easy):<input type="text" id="sp1" placeholder="e.g. Review this webpage text for accessibility and plain-language issues, then give me a prioritized checklist."></label>
+            <label>Starter prompt 2 (realistic):<input type="text" id="sp2" placeholder="e.g. Search for current accessibility guidance on headings, alt text, and link text, then summarize what I should check on this page."></label>
+            <label>Starter prompt 3 (tests tool use):<input type="text" id="sp3" placeholder="e.g. I uploaded a CSV of website pages. Use Code Interpreter to identify patterns, group pages by issue type, and recommend next steps."></label>
+          </div>
+        </div>
+      </details>
+
+      <details style="margin-top:8px;">
+        <summary>Section 10 — Test Plan: Good, Hard, and Bad Questions</summary>
+        <div class="details-body">
+          <div class="table-wrap">
+            <table style="min-width:0;">
+              <thead><tr><th>Test Type</th><th>Your Question</th><th>What You Expect</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Happy Path</strong></td><td><input type="text" placeholder="A question the agent should answer well…" style="padding:4px 8px;font-size:13px;"></td><td><input type="text" placeholder="Expected response…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Ambiguous Request</strong></td><td><input type="text" placeholder="A vague or incomplete question…" style="padding:4px 8px;font-size:13px;"></td><td><input type="text" placeholder="Agent should ask for clarification…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Out-of-Scope Request</strong></td><td><input type="text" placeholder="A question outside the agent's purpose…" style="padding:4px 8px;font-size:13px;"></td><td><input type="text" placeholder="Agent should decline or redirect…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Missing Source / Current Info Needed</strong></td><td><input type="text" placeholder="A question needing a source not provided…" style="padding:4px 8px;font-size:13px;"></td><td><input type="text" placeholder="Agent should say so and recommend…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Tool Needed</strong></td><td><input type="text" placeholder="A question that should trigger a tool…" style="padding:4px 8px;font-size:13px;"></td><td><input type="text" placeholder="Agent should use web search or code interpreter…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Context Conflict</strong></td><td><input type="text" placeholder="A question with conflicting information…" style="padding:4px 8px;font-size:13px;"></td><td><input type="text" placeholder="Agent should flag the conflict…" style="padding:4px 8px;font-size:13px;"></td></tr>
+                <tr><td><strong>Human Review Required</strong></td><td><input type="text" placeholder="A question that needs human judgment…" style="padding:4px 8px;font-size:13px;"></td><td><input type="text" placeholder="Agent should provide options, not final decisions…" style="padding:4px 8px;font-size:13px;"></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <div style="margin-top:14px;" class="worksheet">
+        <div class="actions">
+          <button type="button" onclick="generateSummary()">Generate My Agent Summary</button>
+          <button type="button" onclick="copySummary()">Copy Summary</button>
+          <button type="button" onclick="clearForm()">Clear Form</button>
+        </div>
+        <div class="copy-status" id="summaryStatus" aria-live="polite"></div>
+        <div class="output" id="summaryOutput">Your agent summary will appear here after you click Generate.</div>
+      </div>
+    </section>
+
+    <section id="breakit">
+      <div class="section-head">
+        <h2>Break-It Testing</h2>
+        <p>Testing is part of design. Make participants test the agent with bad prompts before they trust it.</p>
+      </div>
+      <div class="grid two">
+        <div class="panel">
+          <span class="kicker">Break-It Checklist</span>
+          <ul class="plain-list">
+            <li>☐ A vague prompt</li>
+            <li>☐ A prompt outside its purpose</li>
+            <li>☐ A request that needs current information</li>
+            <li>☐ A request that should trigger Code Interpreter</li>
+            <li>☐ A request that should not be answered without human review</li>
+            <li>☐ A request that tempts it to invent a policy, source, or fact</li>
+            <li>☐ A request from a user with a different skill level than expected</li>
+            <li>☐ A request that skips a key human-process step</li>
+            <li>☐ A request that gives conflicting information</li>
+            <li>☐ A request that includes sensitive information that should not be used with web search</li>
+          </ul>
+        </div>
+        <div style="display:grid;gap:12px;align-content:start;">
+          <div class="card" style="--accent:var(--pink);">
+            <span class="kicker">Success Metric</span>
+            <p style="color:var(--text-2);font-size:14px;">Pick one concrete success metric before sharing:</p>
+            <ul class="plain-list">
+              <li>☐ Saves users at least ______ minutes per task</li>
+              <li>☐ Reduces repeated questions about ______</li>
+              <li>☐ Improves consistency of ______</li>
+              <li>☐ Helps users produce a usable first draft of ______</li>
+              <li>☐ Helps users analyze or transform ______</li>
+              <li>☐ Helps users follow a consistent human process for ______</li>
+              <li>☐ Other: ______</li>
+            </ul>
+          </div>
+          <div class="callout warning">
+            <strong>Facilitator reminder:</strong> Model behavior is not deterministic. Language models cannot be relied on to behave programmatically, so governance and design controls matter. Always reinforce local data governance and acceptable-use policies before anyone uses sensitive information.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <strong>Building Agents with AI Studio — Penn State Tech Pros &amp; Web.</strong>
+      <span> Core message: building a useful agent is less about writing one perfect prompt and more about replicating a human process with enough context, instructions, and tests that the agent can help reliably. This document is designed to be used as both a facilitator guide and a participant workbook.</span>
+    </div>
+  </footer>
+
+  <script>
+    function v(id){var el=document.getElementById(id);return el?el.value.trim():'';}
+
+    function generateSummary(){
+      var idea=v('s1_idea')||'[Not filled in]';
+      var paceP=v('pace_p')||'[Not filled in]';
+      var paceA=v('pace_a')||'[Not filled in]';
+      var paceC=v('pace_c')||'[Not filled in]';
+      var paceE=v('pace_e')||'[Not filled in]';
+      var pattern=v('s6_pattern')||'[Not selected]';
+      var web=v('s7_web')||'[Not filled in]';
+      var code=v('s7_code')||'[Not filled in]';
+      var none=v('s7_none')||'[Not filled in]';
+      var instructions=v('s8_instructions')||'[Not filled in]';
+      var sp1=v('sp1')||'[Not filled in]';
+      var sp2=v('sp2')||'[Not filled in]';
+      var sp3=v('sp3')||'[Not filled in]';
+      var out='═══════════════════════════════════════════════\nMY AGENT SUMMARY\nBuilding Agents with AI Studio — Penn State Tech Pros & Web\n═══════════════════════════════════════════════\n\n';
+      out+='1. ONE-SENTENCE AGENT IDEA\n'+idea+'\n\n';
+      out+='2. PACE FRAMEWORK\nProblem: '+paceP+'\nAction: '+paceA+'\nContext: '+paceC+'\nExpectations: '+paceE+'\n\n';
+      out+='3. AGENT PATTERN\n'+pattern+'\n\n';
+      out+='4. TOOL DECISIONS\nWeb Search: '+web+'\nCode Interpreter: '+code+'\nNeither / Prompt Only: '+none+'\n\n';
+      out+='5. SYSTEM INSTRUCTIONS\n'+instructions+'\n\n';
+      out+='6. STARTER PROMPTS\n1. '+sp1+'\n2. '+sp2+'\n3. '+sp3+'\n\n';
+      out+='═══════════════════════════════════════════════\nNEXT STEPS\n• Paste your system instructions into AI Studio\n• Add any knowledge sources (files or website URLs)\n• Run your test plan (happy, ambiguous, out-of-scope, risky, format)\n• Name one thing to verify before sharing the agent\n═══════════════════════════════════════════════';
+      document.getElementById('summaryOutput').textContent=out;
+      document.getElementById('summaryStatus').textContent='Summary generated. Review it, then copy or paste into AI Studio.';
+    }
+
+    async function copySummary(){
+      var text=document.getElementById('summaryOutput').textContent;
+      if(!text||text.indexOf('will appear here')!==-1){document.getElementById('summaryStatus').textContent='Generate a summary first.';return;}
+      try{await navigator.clipboard.writeText(text);document.getElementById('summaryStatus').textContent='Copied to clipboard.';}
+      catch(e){document.getElementById('summaryStatus').textContent='Copy failed — select the text and copy manually.';}
+    }
+
+    function clearForm(){
+      ['s1_idea','pace_p','pace_a','pace_c','pace_e','s6_pattern','s7_web','s7_code','s7_none','s8_instructions','sp1','sp2','sp3'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+      document.querySelectorAll('#fitCheckTable input[type="checkbox"]').forEach(function(cb){cb.checked=false;});
+      document.querySelectorAll('#fitCheckTable input[type="text"]').forEach(function(t){t.value='';});
+      document.getElementById('summaryOutput').textContent='Your agent summary will appear here after you click Generate.';
+      document.getElementById('summaryStatus').textContent='';
+    }
+
+    (function(){var bar=document.getElementById('scrollProgress');if(!bar)return;function update(){var doc=document.documentElement;var max=doc.scrollHeight-doc.clientHeight;bar.style.width=(max>0?(doc.scrollTop/max)*100:0)+'%';}window.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);update();})();
+
+    (function(){var links=Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));if(!links.length)return;var entries=links.map(function(a){var id=(a.getAttribute('href')||'').replace('#','');return{a:a,sec:id?document.getElementById(id):null};}).filter(function(x){return x.sec;});if(!entries.length)return;function onScroll(){var offset=120;var current=entries[0];for(var i=0;i<entries.length;i++){if(entries[i].sec.getBoundingClientRect().top-offset<=0)current=entries[i];else break;}links.forEach(function(a){a.classList.remove('active');});current.a.classList.add('active');}window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();})();
+  </script>
+</body>
+</html>
