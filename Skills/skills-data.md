@@ -1,13 +1,28 @@
 ---
-name: data-visualization-skill
+name: data-visualization
 description: >
-  Provides workflows and best practices for generating, customizing, and recommending data visualizations from user-uploaded documents. Trigger this skill when a user uploads a document (e.g., spreadsheet, PDF, or dataset) and requests, or would benefit from, insightful visualizations. Default color palette is purples and blues, but users can request other schemes.
+  Generates, customizes, and recommends data visualizations from user-uploaded documents. Trigger when a user uploads a spreadsheet, CSV, PDF, or dataset and asks for charts, graphs, dashboards, trends, comparisons, or summary insights — or when tabular/time-series data would clearly benefit from visual exploration. Default palette is the nebulaONE brand (navy/cyan/indigo); users can request other schemes.
 license: See LICENSE.txt
 ---
 
 # Data Visualization Skill
 
-This skill guides the creation and recommendation of data visualizations when users upload documents containing structured or semi-structured data.
+This skill guides the creation and recommendation of data visualizations when users upload documents containing structured or semi-structured data. It is model-agnostic and runs in the nebulaONE Python code interpreter.
+
+> 🔒 **Privacy first (ed/healthcare default):** Before charting, scan for PII/PHI (names, MRNs, student IDs, emails, DOBs). Do not render identifiable individuals in a public-looking chart — aggregate, bin, or pseudonymize first, and never label more than is needed. If the data appears regulated (FERPA/HIPAA), keep all processing in-session and flag it to the user. See [skills-compliance-privacy.md](skills-compliance-privacy.md).
+
+## nebulaONE Brand Palette (default)
+
+Use these brand colors by default instead of a generic purple/blue ramp:
+
+```python
+# nebulaONE sequential/categorical palette (navy → cyan → indigo)
+NEBULA_PALETTE = ['#0f2557', '#1a3a6b', '#0099cc', '#00d4ff', '#9381ff', '#beb6cf']
+# Single-hue sequential ramp (light → dark) for heatmaps/choropleths
+NEBULA_SEQUENTIAL = ['#bef0ff', '#7fd9f2', '#00d4ff', '#0099cc', '#1a3a6b', '#0f2557']
+```
+
+If a user requests another scheme, honor it. Otherwise apply `NEBULA_PALETTE`.
 
 ## When to Use This Skill
 
@@ -40,10 +55,10 @@ This skill guides the creation and recommendation of data visualizations when us
 2. **Perform Pre Visualizations**
    - Suggest 3–8 chart types tailored to the data (see above).
    - Briefly explain why each chart is useful for the user's goals.
-   - Always use purples and blues unless the user requests otherwise.
+   - Always apply the nebulaONE brand palette (`NEBULA_PALETTE`) unless the user requests otherwise.
 
 3. **Generate Visualizations**
-   - Use Matplotlib/pyplot as the primary choice, with Seaborn as the secondary option (default: purples/blues).
+   - Use Matplotlib/pyplot as the primary choice, with Seaborn as the secondary option (default: nebulaONE navy/cyan/indigo brand palette).
    - Annotate key values, trends, or outliers where appropriate.
    - Render charts in the chat when possible; offer downloadable pngs with each output by default.
 
@@ -83,7 +98,7 @@ This skill guides the creation and recommendation of data visualizations when us
 
 - **User uploads an Excel file with sales data.**
   - Automatically extract key metrics (e.g., sales by region, time, product).
-  - Suggest and generate bar charts, line charts, and heatmaps using purples and blues.
+  - Suggest and generate bar charts, line charts, and heatmaps using the nebulaONE brand palette.
   - Display charts in chat and offer code/downloads.
 
 - **User uploads a PDF with financial tables.**
@@ -96,6 +111,6 @@ This skill guides the creation and recommendation of data visualizations when us
 - Keep visualizations clear, interpretable, and visually consistent.
 - Use annotations, titles, and axis labels for context.
 - When in doubt, start with summary charts and invite the user to request deeper or alternative views.
-- Never put more than 10 names on a single
+- Never put more than ~10 category labels on a single axis or legend; group the long tail into an "Other" bucket for readability.
 
 ---

@@ -1,7 +1,11 @@
 ---
-Name: General Skills and Capabilities
-Description: This is a definition of skills and tools to be added to an agent. These skills are default skills that can be pulled in simply and easily by an agent.
+name: general-output-formatting
+description: Core presentation and output-formatting toolkit for everyday responses. Use whenever a response would benefit from structured Markdown — comparison tables, alert/callout boxes, collapsible details (quizzes, FAQs, step-by-step answers), colored pill/badge labels, blockquotes, KaTeX/LaTeX math, or a quick supporting web search. This is a default skill that applies to most general-purpose nebulaONE conversations.
 ---
+
+# General Output & Formatting
+
+> ℹ️ **nebulaONE note:** This skill is model-agnostic — it applies to whichever model the agent is running. For any branded HTML output, use the nebulaONE palette in [README.md](README.md) (Primary navy `#0f2557`, accent cyan `#00d4ff`). For accessibility expectations referenced below, see [skills-accessibility.md](skills-accessibility.md).
 
 # Internet Search Tool
 - This tool should be used often to provide current context and current targeted specifics when answering even simple questions by the user. A quick search should be the default. 
@@ -313,6 +317,11 @@ Description: This is a definition of skills and tools to be added to an agent. T
    
    **Version Template:**
    `<span style="background-color: #9C27B0; color: white; padding: 4px 12px; border-radius: 16px; font-size: 14px;">v2.0</span>`
+
+   **nebulaONE Brand Template** (use for product/branded labels rather than the generic colors above):
+   `<span style="background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%); color: white; padding: 4px 12px; border-radius: 16px; font-size: 14px;">nebulaONE</span>`
+
+   > 💡 Keep semantic status colors (green = success, red = error) for status. Use the brand navy/cyan only for product, category, or neutral labels so meaning stays clear.
 
 8. **Implementation Notes:**
    - Always wrap HTML in backticks when showing code examples

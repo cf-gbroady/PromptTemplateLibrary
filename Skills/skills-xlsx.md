@@ -1,8 +1,10 @@
 ---
 name: xlsx
-description: "Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheets with formulas and formatting, (2) Reading or analyzing data, (3) Modify existing spreadsheets while preserving formulas, (4) Data analysis and visualization in spreadsheets, or (5) Recalculating formulas"
+description: "Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. Trigger when the agent needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc.) for: (1) creating new spreadsheets with formulas and formatting, (2) reading or analyzing data, (3) modifying existing spreadsheets while preserving formulas, (4) data analysis and visualization in spreadsheets, or (5) recalculating formulas."
 license: Proprietary. LICENSE.txt has complete terms
 ---
+
+> ℹ️ **nebulaONE note:** Model-agnostic; runs in the platform code interpreter. The **financial color-coding** below (blue inputs, black formulas, green links, red external) is a deliberate industry convention — keep it as-is and do **not** replace it with brand colors. The brand palette applies only to **embedded charts** (`#0f2557`, `#1a3a6b`, `#0099cc`, `#00d4ff`, `#9381ff`; see [README.md](README.md)). For regulated data (FERPA/HIPAA), keep processing in-session — see [skills-compliance-privacy.md](skills-compliance-privacy.md).
 
 # Requirements for Outputs
 

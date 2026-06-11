@@ -1,6 +1,6 @@
 ---
 name: docx
-description: Comprehensive DOCX manipulation toolkit for extracting text and tables, creating new documents, merging/splitting content, and handling formatting. When the agent needs to generate or analyze Word documents at scale.
+description: Comprehensive DOCX toolkit for creating, editing, and analyzing Microsoft Word documents — extract text and tables, build new branded documents, merge/split, add forms/watermarks/charts, and convert to PDF. Trigger when a user asks to create, generate, fill, summarize, reformat, or analyze a .docx / Word document.
 license: Proprietary. LICENSE.txt has complete terms
 ---
 
@@ -8,7 +8,7 @@ license: Proprietary. LICENSE.txt has complete terms
 
 ## Overview
 
-This guide covers essential DOCX processing operations using Python libraries and command-line tools. Always use the libraries python-docx, docxtpl, and docx2pdf first before any other agents are to be used.
+This guide covers essential DOCX processing operations in the nebulaONE Python code interpreter. It is model-agnostic. Prefer the libraries `python-docx`, `docxtpl`, and `docx2pdf` before reaching for anything else. All newly created documents use the **nebulaONE brand palette** (see below and [README.md](README.md)).
 
 ## Quick Start
 
@@ -25,11 +25,13 @@ This guide covers essential DOCX processing operations using Python libraries an
 
 ## Professional Document Formatting Standards
 
-### Color Palette
-Always use the following professional color palette for all newly created documents:
-- Primary Blue: #003d7a (RGB: 0, 61, 122)
-- Secondary Blue: #0066cc (RGB: 0, 102, 204)
-- Accent Blue: #4d94ff (RGB: 77, 148, 255)
+### Color Palette (nebulaONE brand)
+Always use the following brand palette for all newly created documents:
+- Primary — Deep Navy: #0f2557 (RGB: 15, 37, 87)
+- Secondary — Navy Blue: #1a3a6b (RGB: 26, 58, 107)
+- Accent — Deep Cyan: #0099cc (RGB: 0, 153, 204)
+- Accent — Bright Cyan: #00d4ff (RGB: 0, 212, 255) — fills/rules only, not body text
+- Supporting — Indigo: #9381ff (RGB: 147, 129, 255)
 - Dark Gray: #333333 (RGB: 51, 51, 51)
 - Light Gray: #666666 (RGB: 102, 102, 102)
 
@@ -66,7 +68,7 @@ Always use the following professional color palette for all newly created docume
         title_style = styles.add_style('CustomTitle', WD_STYLE_TYPE.PARAGRAPH)
         title_style.font.name = 'Calibri Light'
         title_style.font.size = Pt(28)
-        title_style.font.color.rgb = RGBColor(0, 61, 122)
+        title_style.font.color.rgb = RGBColor(15, 37, 87)
         title_style.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
         title_style.paragraph_format.space_after = Pt(12)
         
@@ -162,7 +164,7 @@ Always use the following professional color palette for all newly created docume
             cell.text = header
             
             # Format header cell
-            shading_elm = parse_xml(r'<w:shd {} w:fill="003d7a"/>'.format(nsdecls('w')))
+            shading_elm = parse_xml(r'<w:shd {} w:fill="0f2557"/>'.format(nsdecls('w')))
             cell._element.get_or_add_tcPr().append(shading_elm)
             
             # Format header text
@@ -208,9 +210,9 @@ Always use the following professional color palette for all newly created docume
         
         # Define color scheme
         colors = {
-            'primary': RGBColor(0, 61, 122),
-            'secondary': RGBColor(0, 102, 204),
-            'accent': RGBColor(77, 148, 255),
+            'primary': RGBColor(15, 37, 87),
+            'secondary': RGBColor(0, 153, 204),
+            'accent': RGBColor(0, 212, 255),
             'text': RGBColor(51, 51, 51),
             'muted': RGBColor(102, 102, 102)
         }
@@ -341,7 +343,7 @@ Always use the following professional color palette for all newly created docume
                 'TitleStyle',
                 parent=styles['Title'],
                 fontSize=24,
-                textColor=HexColor('#003d7a'),
+                textColor=HexColor('#0f2557'),
                 alignment=TA_CENTER,  # Use proper constant
                 spaceAfter=20
             )
@@ -356,7 +358,7 @@ Always use the following professional color palette for all newly created docume
             
             # Enhanced table style
             table_style = TableStyle([
-                ('BACKGROUND', (0, 0), (-1, 0), HexColor('#003d7a')),
+                ('BACKGROUND', (0, 0), (-1, 0), HexColor('#0f2557')),
                 ('TEXTCOLOR', (0, 0), (-1, 0), HexColor('#FFFFFF')),
                 ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
                 ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
@@ -684,7 +686,7 @@ Always use the following professional color palette for all newly created docume
         # Revenue chart
         quarters = ['Q1', 'Q2', 'Q3', 'Q4']
         revenue = [250, 300, 280, 350]
-        ax1.bar(quarters, revenue, color='#003d7a')
+        ax1.bar(quarters, revenue, color='#0f2557')
         ax1.set_title('Quarterly Revenue (in thousands)', fontweight='bold')
         ax1.set_ylabel('Revenue ($k)')
         ax1.grid(axis='y', alpha=0.3)
@@ -692,7 +694,7 @@ Always use the following professional color palette for all newly created docume
         # Pie chart for market share
         segments = ['Product A', 'Product B', 'Product C', 'Other']
         sizes = [35, 30, 25, 10]
-        colors = ['#003d7a', '#0066cc', '#4d94ff', '#cccccc']
+        colors = ['#0f2557', '#0099cc', '#00d4ff', '#9381ff']
         ax2.pie(sizes, labels=segments, colors=colors, autopct='%1.1f%%')
         ax2.set_title('Market Share by Product', fontweight='bold')
         
@@ -897,14 +899,14 @@ Always use the following professional color palette for all newly created docume
                 'CustomTitle',
                 parent=styles['Title'],
                 fontSize=28,
-                textColor=colors.HexColor('#003d7a'),
+                textColor=colors.HexColor('#0f2557'),
                 alignment=1  # Center
             ),
             'CustomHeading1': ParagraphStyle(
                 'CustomHeading1',
                 parent=styles['Heading1'],
                 fontSize=18,
-                textColor=colors.HexColor('#003d7a'),
+                textColor=colors.HexColor('#0f2557'),
                 spaceBefore=12,
                 spaceAfter=6
             ),
@@ -948,7 +950,7 @@ Always use the following professional color palette for all newly created docume
                     # Create PDF table
                     t = Table(table_data)
                     t.setStyle(TableStyle([
-                        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#003d7a')),
+                        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0f2557')),
                         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
                         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
                         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),

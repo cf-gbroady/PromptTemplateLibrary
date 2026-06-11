@@ -1,6 +1,6 @@
 ---
 name: pdf
-description: Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs using reportlab and platypus, merging/splitting documents, and handling forms. When the agent needs to generate or analyze PDF documents at scale.
+description: Comprehensive PDF toolkit for extracting text and tables, creating branded PDFs with ReportLab/Platypus, merging/splitting, OCR of scanned files, watermarks, and forms. Trigger when a user asks to create, generate, extract from, merge, split, fill, or analyze a .pdf document.
 license: Proprietary.
 ---
 
@@ -8,7 +8,9 @@ license: Proprietary.
 
 ## Overview
 
-This guide covers essential PDF processing operations using Python libraries and command-line tools. Always use the libraries pypdf and reportlab with platypus first before any other agents are to be used.
+This guide covers essential PDF processing operations in the nebulaONE Python code interpreter. It is model-agnostic. Prefer `pypdf` and `reportlab` (with Platypus) before anything else. All newly created PDFs use the **nebulaONE brand palette** (see below and [README.md](README.md)).
+
+> ⚠️ **Library note:** the import is `from pypdf import PdfReader, PdfWriter` (the modern `pypdf` package). Do not use `pypdf` / `pypdf` — that legacy name will fail to import in this environment.
 ## General PDF Rules
 - When creating PDFs, do not use page breaks for small sections.  Only use page breaks for sections that extend over multiple pages.
 - When generating PDFs from output, ensure that the entirety of the previous output is included in the output file.  Do not summarize the output further to create a document.  
@@ -18,7 +20,7 @@ This guide covers essential PDF processing operations using Python libraries and
 ## Quick Start
 
 ```python
-from pypdf2 import PdfReader, PdfWriter
+from pypdf import PdfReader, PdfWriter
 
 # Read a PDF
 reader = PdfReader("document.pdf")
@@ -35,10 +37,10 @@ for page in reader.pages:
 ### pypdf - Basic Operations
 
 #### Merge PDFs
-Use PdfMerger from the PyPDF2 library
+Use PdfMerger from the pypdf library
 
 #### Split PDF
-Use PdfReader, PdfWriter from the PyPDF2 library
+Use PdfReader, PdfWriter from the pypdf library
 
 #### Extract Metadata
 ```python
@@ -51,7 +53,7 @@ print(f"Creator: {meta.creator}")
 ```
 
 #### Rotate Pages
-Use PdfReader, PdfWriter from the PyPDF2 library
+Use PdfReader, PdfWriter from the pypdf library
 
 ### pdfplumber - Text and Table Extraction
 
@@ -98,9 +100,10 @@ if all_tables:
 ### reportlab - Create, generate, and convert PDFs using Platypus
 
 #### Color palette and formatting
-- Always use the following color palette for all newly created documents:
-["#00346d","#2d6db4","#4b87ce","#003a76","#2868af"]
-- Always use the font type Helvetica
+- Always use the nebulaONE brand palette for all newly created documents:
+["#0f2557","#1a3a6b","#0099cc","#00d4ff","#9381ff"]  # navy, navy-blue, deep-cyan, bright-cyan, indigo
+- Use bright cyan `#00d4ff` for fills/rules/accents only — for text on white use `#0f2557` or `#0099cc`.
+- Always use the font type Helvetica (built-in; no embedding required)
 
 #### Basic PDF Creation with Platypus
 ```python
@@ -112,11 +115,11 @@ from reportlab.lib.colors import HexColor
 
 # Define color palette
 COLORS = {
-    'primary': HexColor('#00346d'),
-    'secondary': HexColor('#2d6db4'),
-    'accent': HexColor('#4b87ce'),
-    'dark': HexColor('#003a76'),
-    'light': HexColor('#2868af')
+    'primary': HexColor('#0f2557'),
+    'secondary': HexColor('#1a3a6b'),
+    'accent': HexColor('#0099cc'),
+    'dark': HexColor('#0f2557'),
+    'light': HexColor('#9381ff')
 }
 
 # Create document
@@ -184,7 +187,7 @@ table = Table(data)
 # Apply table style with color palette
 table.setStyle(TableStyle([
     # Header row
-    ('BACKGROUND', (0, 0), (-1, 0), HexColor('#00346d')),
+    ('BACKGROUND', (0, 0), (-1, 0), HexColor('#0f2557')),
     ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
     ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
     ('FONTSIZE', (0, 0), (-1, 0), 12),
@@ -194,10 +197,10 @@ table.setStyle(TableStyle([
     ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
     ('FONTSIZE', (0, 1), (-1, -1), 10),
     ('ALIGN', (1, 1), (-1, -1), 'RIGHT'),
-    ('GRID', (0, 0), (-1, -1), 1, HexColor('#2d6db4')),
+    ('GRID', (0, 0), (-1, -1), 1, HexColor('#1a3a6b')),
     
     # Alternating row colors
-    ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, HexColor('#e8f2ff')]),
+    ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, HexColor('#bef0ff')]),
 ]))
 
 story.append(table)
@@ -221,7 +224,7 @@ def create_letterhead(canvas, doc):
     canvas.saveState()
     
     # Add header with color
-    canvas.setFillColor(HexColor('#00346d'))
+    canvas.setFillColor(HexColor('#0f2557'))
     canvas.rect(0, letter[1] - inch, letter[0], inch, fill=1)
     
     # Add company name
@@ -230,7 +233,7 @@ def create_letterhead(canvas, doc):
     canvas.drawCentredString(letter[0]/2, letter[1] - 0.5*inch, "Company Name")
     
     # Add footer
-    canvas.setFillColor(HexColor('#2d6db4'))
+    canvas.setFillColor(HexColor('#1a3a6b'))
     canvas.setFont('Helvetica', 9)
     canvas.drawString(inch, 0.5*inch, f"Page {doc.page}")
     
@@ -261,7 +264,7 @@ styles.add(ParagraphStyle(
     parent=styles['Heading1'],
     fontName='Helvetica-Bold',
     fontSize=14,
-    textColor=HexColor('#003a76'),
+    textColor=HexColor('#0f2557'),
     spaceAfter=6
 ))
 
@@ -290,7 +293,7 @@ data = [
 table = Table(data, colWidths=[2*inch, 1.2*inch, 1.2*inch, 1.2*inch, 1.2*inch])
 table.setStyle(TableStyle([
     # Header styling
-    ('BACKGROUND', (0, 0), (-1, 0), HexColor('#00346d')),
+    ('BACKGROUND', (0, 0), (-1, 0), HexColor('#0f2557')),
     ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
     ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
     ('FONTSIZE', (0, 0), (-1, 0), 11),
@@ -300,7 +303,7 @@ table.setStyle(TableStyle([
     # Data styling
     ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
     ('FONTSIZE', (0, 1), (-1, -1), 10),
-    ('GRID', (0, 0), (-1, -1), 0.5, HexColor('#4b87ce')),
+    ('GRID', (0, 0), (-1, -1), 0.5, HexColor('#0099cc')),
     
     # Conditional formatting for status
     ('BACKGROUND', (4, 1), (4, 1), colors.lightgreen),
@@ -333,7 +336,7 @@ c = canvas.Canvas("form.pdf", pagesize=letter)
 c.setFont("Helvetica", 12)
 
 # Add form title with color
-c.setFillColor(HexColor('#00346d'))
+c.setFillColor(HexColor('#0f2557'))
 c.setFont("Helvetica-Bold", 16)
 c.drawString(100, 750, "Application Form")
 
@@ -351,7 +354,7 @@ c.acroForm.textfield(
     width=200,
     textColor=colors.black,
     fillColor=colors.white,
-    borderColor=HexColor('#2d6db4')
+    borderColor=HexColor('#1a3a6b')
 )
 
 # Add checkbox
@@ -361,7 +364,7 @@ c.acroForm.checkbox(
     tooltip='Check to agree',
     x=250, y=645,
     buttonStyle='check',
-    borderColor=HexColor('#2d6db4'),
+    borderColor=HexColor('#1a3a6b'),
     fillColor=colors.white,
     textColor=colors.black,
     forceBorder=True
@@ -395,8 +398,8 @@ bc.data = [[10, 20, 30, 40], [15, 25, 35, 45]]
 bc.categoryAxis.categoryNames = ['Q1', 'Q2', 'Q3', 'Q4']
 bc.valueAxis.valueMin = 0
 bc.valueAxis.valueMax = 50
-bc.bars[0].fillColor = HexColor('#00346d')
-bc.bars[1].fillColor = HexColor('#4b87ce')
+bc.bars[0].fillColor = HexColor('#0f2557')
+bc.bars[1].fillColor = HexColor('#0099cc')
 drawing.add(bc)
 story.append(drawing)
 
@@ -411,7 +414,7 @@ pie.data = [30, 25, 20, 15, 10]
 pie.labels = ['Product A', 'Product B', 'Product C', 'Product D', 'Other']
 pie.slices.strokeWidth = 0.5
 # Apply color palette to slices
-for i, color in enumerate([HexColor(c) for c in ["#00346d","#2d6db4","#4b87ce","#003a76","#2868af"]]):
+for i, color in enumerate([HexColor(c) for c in ["#0f2557","#1a3a6b","#0099cc","#00d4ff","#9381ff"]]):
     pie.slices[i].fillColor = color
 drawing2.add(pie)
 story.append(drawing2)
@@ -519,7 +522,7 @@ custom_style = ParagraphStyle(
     parent=styles['Normal'],
     fontName='Helvetica',
     fontSize=11,
-    textColor=HexColor('#00346d')
+    textColor=HexColor('#0f2557')
 )
 
 story = []
@@ -529,7 +532,7 @@ title_style = ParagraphStyle(
     parent=styles['Title'],
     fontName='Helvetica-Bold',
     fontSize=18,
-    textColor=HexColor('#003a76')
+    textColor=HexColor('#0f2557')
 )
 story.append(Paragraph("Extracted Text Output", title_style))
 story.append(Spacer(1, 0.5*inch))
@@ -552,7 +555,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.colors import HexColor
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
-from pypdf2 import PdfReader, PdfWriter
+from pypdf import PdfReader, PdfWriter
 import io
 
 # First create a watermark PDF using Platypus
@@ -562,7 +565,7 @@ def create_watermark():
     
     # Set watermark properties
     c.setFont("Helvetica-Bold", 50)
-    c.setFillColor(HexColor('#2d6db4'))
+    c.setFillColor(HexColor('#1a3a6b'))
     c.setFillAlpha(0.3)  # Semi-transparent
     
     # Rotate and center the watermark
@@ -638,7 +641,7 @@ def extract_images_from_pdf(pdf_path, output_folder="extracted_images"):
 
 ### Password Protection
 ```python
-from pypdf2 import PdfReader, PdfWriter
+from pypdf import PdfReader, PdfWriter
 
 reader = PdfReader("input.pdf")
 writer = PdfWriter()
@@ -673,7 +676,7 @@ invoice_title = ParagraphStyle(
     'InvoiceTitle',
     parent=styles['Title'],
     fontSize=24,
-    textColor=HexColor('#00346d'),
+    textColor=HexColor('#0f2557'),
     spaceAfter=30
 )
 
@@ -711,7 +714,7 @@ items = [
 items_table = Table(items, colWidths=[3*inch, 1*inch, 1.5*inch, 1.5*inch])
 items_table.setStyle(TableStyle([
     # Header
-    ('BACKGROUND', (0, 0), (-1, 0), HexColor('#00346d')),
+    ('BACKGROUND', (0, 0), (-1, 0), HexColor('#0f2557')),
     ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
     ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
     ('FONTSIZE', (0, 0), (-1, 0), 12),
@@ -721,7 +724,7 @@ items_table.setStyle(TableStyle([
     ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
     ('FONTSIZE', (0, 1), (-1, -1), 10),
     ('ALIGN', (1, 1), (-1, -1), 'RIGHT'),
-    ('GRID', (0, 0), (-1, 3), 1, HexColor('#2d6db4')),
+    ('GRID', (0, 0), (-1, 3), 1, HexColor('#1a3a6b')),
     
     # Total rows
     ('FONTNAME', (2, 4), (-1, -1), 'Helvetica-Bold'),
