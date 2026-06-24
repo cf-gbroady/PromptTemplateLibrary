@@ -1,16 +1,18 @@
 ---
 name: nebulaONE-SkillGen
-summary: Create a reusable nebulaONE skill.md file from the current conversation.
-description: Use when asked to turn the current conversation into a reusable nebulaONE skill.md file. Produces only the skill file; does not create helpers, folders, or GitHub commits.
+summary: Create a researched, reusable nebulaONE SKILL.md file from the current conversation.
+description: Use when asked to turn the current conversation into a reusable nebulaONE SKILL.md file. Produces only the skill file, grounded by targeted research when tools are available.
 ---
 
 # nebulaONE-SkillGen
 
 ## Purpose
 
-Use this skill to convert the current conversation into a clean, reusable `skill.md` file that any nebulaONE user can manually copy into a nebulaONE skill.
+Use this skill to convert the current conversation into a clean, reusable `SKILL.md` file that any nebulaONE user can manually copy into a nebulaONE skill.
 
 This skill creates **only one Markdown file**: `SKILL.md`. Do not create helper code, folders, docs, GitHub commits, pull requests, images, spreadsheets, or additional artifacts unless the user explicitly asks outside this skill's scope.
+
+The generated skill should be grounded in the current conversation **and** targeted research from reputable AI-skill resources when research tools are available.
 
 ## nebulaONE Skill Constraints
 
@@ -22,7 +24,7 @@ Every generated skill must respect these nebulaONE limits:
 - Body: **maximum 30,000 characters**.
 - Body purpose: operational instructions added to the prompt/conversation when the skill triggers.
 
-If a skill would exceed 30,000 body characters, compress it while preserving mandatory behavior, safety rules, inputs, outputs, and examples.
+If a skill would exceed 30,000 body characters, compress it while preserving mandatory behavior, safety rules, inputs, outputs, tool requirements, examples, and failure behavior.
 
 ## Required Inputs
 
@@ -39,6 +41,43 @@ Before creating the file, inspect the entire conversation up to this point and d
 9. Quality checks before responding.
 
 If any required information is missing or materially ambiguous, ask **one concise consolidated clarifying question** before creating the file.
+
+## Research Requirement
+
+Before finalizing the skill, perform targeted research when search or browsing tools are available.
+
+Minimum research pattern:
+
+1. Search Anthropic's public skills repository for relevant examples, naming conventions, structure, or helper patterns:
+   - `https://github.com/anthropics/skills`
+2. Search the user's available PromptTemplateLibrary or other provided skill library for related or duplicate skills.
+3. Search reputable AI-skills, prompt-engineering, tool-use, or public documentation sources relevant to the requested skill topic.
+4. Prefer primary sources: official docs, well-maintained public repositories, vendor docs, and source code over blogs or summaries.
+5. Summarize only the research findings that materially affected the generated skill.
+
+If research tools are unavailable, say so briefly and proceed using the conversation and model knowledge. Do not fabricate research results, repository contents, or external claims.
+
+## Token Conservation and Body Sizing
+
+Generate a body that is appropriately sized for the task. Favor precision over length.
+
+Use these size targets unless the user requests otherwise:
+
+| Skill complexity | Target body length |
+|---|---:|
+| Simple formatting, routing, or tone skill | 1,000–3,000 characters |
+| Standard workflow skill | 3,000–8,000 characters |
+| Tool-using or compliance-sensitive skill | 8,000–15,000 characters |
+| Complex multi-tool operating procedure | 15,000–25,000 characters |
+| Exceptional maximum-detail skill | Up to 30,000 characters |
+
+Avoid token bloat:
+
+- Do not include long background explanations unless needed at runtime.
+- Do not duplicate the same rule in multiple sections.
+- Do not include examples that do not change behavior.
+- Do not paste large external references into the skill body; summarize the operational rule.
+- Include all mandatory runtime behavior directly in `SKILL.md`.
 
 ## Output Rule
 
@@ -80,12 +119,23 @@ description: [trigger description under 300 characters]
 
 - [Conversation content, uploaded files, URLs, tool outputs, user-provided context, etc.]
 
+## Research and Grounding
+
+- [What was searched or what sources should be checked.]
+- [Which findings influenced the skill.]
+- [Any limitations if research was unavailable.]
+
 ## Workflow
 
 1. [Step-by-step operating process.]
 2. [Clarify only when required.]
 3. [Use tools only when needed.]
 4. [Produce the required output.]
+
+## Tool Use
+
+- [Which tools to use and when.]
+- [Which tools not to use.]
 
 ## Output Requirements
 
@@ -108,15 +158,16 @@ Before responding, confirm:
 ## Writing Standards
 
 - Make the generated skill self-contained.
-- Put all mandatory instructions in the body; do not rely on external documents unless the user explicitly wants references.
+- Put all mandatory runtime instructions in the body.
 - Keep triggers specific enough to avoid accidental loading.
 - Keep the description under 300 characters and optimized for retrieval.
 - Use direct imperative instructions.
 - Avoid hidden assumptions.
-- Avoid product or capability claims not supported by the conversation.
+- Avoid product or capability claims not supported by the conversation or reputable sources.
 - If the skill uses tools, specify when to use them and when not to.
 - If the skill may create or modify files, specify file-naming, versioning, and validation rules.
 - If the skill may perform destructive or external actions, require confirmation unless the conversation explicitly authorizes that action.
+- Make body length task-appropriate; avoid token bloat while preserving all mandatory behavior.
 
 ## Final Response After File Creation
 
@@ -125,4 +176,5 @@ After creating `SKILL.md`, respond briefly with:
 1. The skill name.
 2. The description character count.
 3. A link or attachment to the generated Markdown file.
-4. Any assumptions or open items requiring future iteration.
+4. Research sources checked or a note that research tools were unavailable.
+5. Any assumptions or open items requiring future iteration.

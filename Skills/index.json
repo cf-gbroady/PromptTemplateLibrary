@@ -40,12 +40,12 @@
     "id": "nebulaONE-SkillGen",
     "name": "nebulaONE-SkillGen",
     "title": "nebulaONE-SkillGen",
-    "summary": "Create a reusable nebulaONE skill.md file from the current conversation.",
+    "summary": "Create a researched, reusable nebulaONE SKILL.md file from the current conversation.",
     "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "path": "Skills/nebulaONE-SkillGen/SKILL.md",
     "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaONE-SkillGen/SKILL.md",
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaONE-SkillGen/SKILL.md",
-    "description": "Use when asked to turn the current conversation into a reusable nebulaONE skill.md file. Produces only the skill file; does not create helpers, folders, or GitHub commits.",
+    "description": "Use when asked to turn the current conversation into a reusable nebulaONE SKILL.md file. Produces only the skill file, grounded by targeted research when tools are available.",
     "triggers": [
       "create skill from conversation",
       "turn conversation into skill",
@@ -58,7 +58,34 @@
       "skill-generation",
       "prompt-library",
       "markdown",
-      "SKILL.md"
+      "SKILL.md",
+      "research"
+    ]
+  },
+  {
+    "id": "nebulaONE-SkillGen-Broady",
+    "name": "nebulaONE-SkillGen-Broady",
+    "title": "nebulaONE-SkillGen-Broady",
+    "summary": "Create, research, package, and commit nebulaONE skills to PromptTemplateLibrary.",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/nebulaONE-SkillGen-Broady/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaONE-SkillGen-Broady/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaONE-SkillGen-Broady/SKILL.md",
+    "description": "Use when Broady asks to turn the current conversation into a reusable nebulaONE skill package and commit it to PromptTemplateLibrary with researched files/helpers.",
+    "triggers": [
+      "create skill package",
+      "commit skill to PromptTemplateLibrary",
+      "nebulaONE-SkillGen-Broady",
+      "package this as a skill",
+      "publish skill to GitHub"
+    ],
+    "tags": [
+      "nebulaONE",
+      "skill-generation",
+      "prompt-library",
+      "github",
+      "helpers",
+      "research"
     ]
   }
 ]
