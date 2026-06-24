@@ -1,0 +1,39 @@
+[
+  {
+    "id": "xlsx",
+    "name": "Spreadsheet Processing",
+    "title": "xlsx",
+    "summary": "Create, inspect, clean, edit, validate, and deliver spreadsheet files.",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/xlsx/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/xlsx/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/xlsx/SKILL.md",
+    "executableHelperPath": "Skills/xlsx/scripts/xlsx_tools.py",
+    "executableHelperUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/xlsx/scripts/xlsx_tools.py",
+    "hardcodedSourceDocumentationPath": "Skills/xlsx/docs/hardcoded_source_documentation.md",
+    "hardcodedSourceDocumentationUrl": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/xlsx/docs/hardcoded_source_documentation.md",
+    "description": "Use when the user's primary input or output is a spreadsheet file, including .xlsx, .xlsm, .csv, or .tsv. Creates, edits, cleans, formats, validates, and converts spreadsheet files. Final deliverable should be a spreadsheet unless the user explicitly asks only for explanation or planning.",
+    "triggers": [
+      "xlsx",
+      "xlsm",
+      "csv",
+      "tsv",
+      "spreadsheet",
+      "Excel",
+      "workbook",
+      "pivot",
+      "worksheet",
+      "formula"
+    ],
+    "tags": [
+      "spreadsheet",
+      "xlsx",
+      "excel",
+      "csv",
+      "tsv",
+      "workbook",
+      "formula",
+      "data-cleaning"
+    ]
+  }
+]
