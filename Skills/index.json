@@ -8,32 +8,21 @@
     "path": "Skills/xlsx/SKILL.md",
     "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/xlsx/SKILL.md",
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/xlsx/SKILL.md",
-    "executableHelperPath": "Skills/xlsx/scripts/xlsx_tools.py",
-    "executableHelperUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/xlsx/scripts/xlsx_tools.py",
-    "hardcodedSourceDocumentationPath": "Skills/xlsx/docs/hardcoded_source_documentation.md",
-    "hardcodedSourceDocumentationUrl": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/xlsx/docs/hardcoded_source_documentation.md",
-    "description": "Use when the user's primary input or output is a spreadsheet file, including .xlsx, .xlsm, .csv, or .tsv. Creates, edits, cleans, formats, validates, and converts spreadsheet files. Final deliverable should be a spreadsheet unless the user explicitly asks only for explanation or planning.",
+    "description": "Use this skill when the user's primary input or output is a spreadsheet file or spreadsheet-like tabular file. Trigger for requests to open, read, export, create, generate, analyze, clean, normalize, transform, edit, format, chart, repair, validate, or convert spreadsheet files.",
     "triggers": [
-      "xlsx",
-      "xlsm",
-      "csv",
-      "tsv",
-      "spreadsheet",
-      "Excel",
-      "workbook",
-      "pivot",
-      "worksheet",
-      "formula"
-    ],
-    "tags": [
       "spreadsheet",
       "xlsx",
       "excel",
       "csv",
-      "tsv",
-      "workbook",
-      "formula",
-      "data-cleaning"
+      "tabular data",
+      "pivot table",
+      "workbook"
+    ],
+    "tags": [
+      "spreadsheet",
+      "data",
+      "excel",
+      "csv"
     ]
   },
   {
@@ -49,9 +38,9 @@
     "triggers": [
       "create skill from conversation",
       "turn conversation into skill",
-      "generate SKILL.md",
-      "nebulaONE skill",
-      "skill definition"
+      "generate nebulaONE skill",
+      "make a skill.md",
+      "skill from this chat"
     ],
     "tags": [
       "nebulaONE",
@@ -86,6 +75,46 @@
       "github",
       "helpers",
       "research"
+    ]
+  },
+  {
+    "id": "lucid-mcp-diagrammer",
+    "name": "Lucid MCP Diagrammer",
+    "title": "lucid-mcp-diagrammer",
+    "summary": "Drive the official Lucid MCP server to search, fetch, create, export, and share Lucid diagrams using the right tool for the job.",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/lucid-mcp-diagrammer/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/lucid-mcp-diagrammer/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/lucid-mcp-diagrammer/SKILL.md",
+    "description": "Use when the user asks to create, find, summarize, export, or share a Lucid document, Lucidchart diagram, Lucidspark board, org chart, mind map, UML sequence diagram, flowchart, BPMN, swim lane, or process map via the Lucid MCP server.",
+    "triggers": [
+      "lucid",
+      "lucidchart",
+      "lucidspark",
+      "create diagram in lucid",
+      "org chart in lucid",
+      "mind map in lucid",
+      "uml sequence diagram",
+      "flowchart in lucid",
+      "bpmn",
+      "swim lane",
+      "export lucid as image",
+      "share lucid document"
+    ],
+    "tags": [
+      "lucid",
+      "mcp",
+      "diagram",
+      "flowchart",
+      "org-chart",
+      "mind-map",
+      "uml",
+      "plantuml",
+      "bpmn"
+    ],
+    "helperUrls": [
+      "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/lucid-mcp-diagrammer/scripts/standard_import_scaffold.py",
+      "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/lucid-mcp-diagrammer/scripts/plantuml_sequence_builder.py"
     ]
   }
 ]
