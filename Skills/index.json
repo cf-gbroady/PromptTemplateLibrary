@@ -1,120 +1,82 @@
 [
   {
-    "id": "xlsx",
-    "name": "Spreadsheet Processing",
-    "title": "xlsx",
-    "summary": "Create, inspect, clean, edit, validate, and deliver spreadsheet files.",
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "path": "Skills/xlsx/SKILL.md",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/xlsx/SKILL.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/xlsx/SKILL.md",
-    "description": "Use this skill when the user's primary input or output is a spreadsheet file or spreadsheet-like tabular file. Trigger for requests to open, read, export, create, generate, analyze, clean, normalize, transform, edit, format, chart, repair, validate, or convert spreadsheet files.",
-    "triggers": [
-      "spreadsheet",
+    "name": "skill_onedrive_file_intelligence",
+    "title": "OneDrive File Intelligence",
+    "description": "This skill helps users search for, retrieve, summarize, and answer questions about files in OneDrive. Use it when users ask to find documents, summarize a file, or reason over content stored in OneDrive.",
+    "path": "Skills/skill_onedrive_file_intelligence.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_onedrive_file_intelligence.md",
+    "summary": "Search, retrieve, summarize, and answer questions about files stored in OneDrive."
+  },
+  {
+    "name": "skill_outlook_productivity",
+    "title": "Outlook Productivity Assistant",
+    "description": "Use this skill when a user asks to summarize inbox messages, draft or improve email replies, identify action items from email threads, or help manage calendar-related Outlook workflows.",
+    "path": "Skills/skill_outlook_productivity.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_outlook_productivity.md",
+    "summary": "Summarize emails, draft replies, extract action items, and support calendar workflows in Outlook."
+  },
+  {
+    "name": "skill_sharepoint_knowledge_collaboration",
+    "title": "SharePoint Knowledge & Collaboration Assistant",
+    "description": "Use this skill when a user asks to locate, summarize, compare, or synthesize information from SharePoint pages, document libraries, folders, or team sites.",
+    "path": "Skills/skill_sharepoint_knowledge_collaboration.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_sharepoint_knowledge_collaboration.md",
+    "summary": "Retrieve and reason over SharePoint knowledge, documents, pages, and collaboration content."
+  },
+  {
+    "name": "skill_teams_productivity",
+    "title": "Teams Productivity Assistant",
+    "description": "Use this skill when a user asks to summarize chats or channels, draft replies, extract decisions and action items, or support meeting follow-up and Microsoft Teams collaboration workflows.",
+    "path": "Skills/skill_teams_productivity.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_teams_productivity.md",
+    "summary": "Summarize Teams chats, draft replies, extract decisions, and support collaboration workflows."
+  },
+  {
+    "name": "nebulaone-usage-analytics-workbook-builder",
+    "title": "nebulaONE Usage Analytics Workbook Builder",
+    "description": "Use when a nebulaONE admin uploads a standard usage export .xlsx and asks for n1 analytics, cleanup, pivots, source-only cost review, or an enhanced workbook. Never estimate pricing or generate synthetic facts.",
+    "summary": "Build a source-only, auditable nebulaONE usage analytics workbook from the standard usage export.",
+    "path": "Skills/nebulaone-usage-analytics-workbook-builder/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaone-usage-analytics-workbook-builder/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaone-usage-analytics-workbook-builder/SKILL.md",
+    "tags": [
+      "nebulaONE",
+      "analytics",
       "xlsx",
-      "excel",
-      "csv",
-      "tabular data",
-      "pivot table",
-      "workbook"
+      "cost-audit",
+      "dashboard-ready"
     ],
-    "tags": [
-      "spreadsheet",
-      "data",
-      "excel",
-      "csv"
+    "triggers": [
+      "n1 analytics",
+      "nebulaONE analytics",
+      "usage analytics workbook",
+      "enhance usage export",
+      "build pivots",
+      "create a dashboard-ready workbook"
     ]
   },
   {
-    "id": "nebulaONE-SkillGen",
-    "name": "nebulaONE-SkillGen",
-    "title": "nebulaONE-SkillGen",
-    "summary": "Create a researched, reusable nebulaONE SKILL.md file from the current conversation.",
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "path": "Skills/nebulaONE-SkillGen/SKILL.md",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaONE-SkillGen/SKILL.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaONE-SkillGen/SKILL.md",
-    "description": "Use when asked to turn the current conversation into a reusable nebulaONE SKILL.md file. Produces only the skill file, grounded by targeted research when tools are available.",
-    "triggers": [
-      "create skill from conversation",
-      "turn conversation into skill",
-      "generate nebulaONE skill",
-      "make a skill.md",
-      "skill from this chat"
-    ],
+    "name": "nebulaone-analytics-html-dashboard-builder",
+    "title": "nebulaONE Analytics Interactive HTML Dashboard Builder",
+    "description": "Use when a nebulaONE admin asks for an n1 dashboard, nebulaONE dashboard, HTML visualization, shareable report, or dashboard artifact from an enhanced usage analytics workbook.",
+    "summary": "Build a source-only, Cloudforce-branded interactive HTML dashboard from an enhanced nebulaONE analytics workbook.",
+    "path": "Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md",
     "tags": [
       "nebulaONE",
-      "skill-generation",
-      "prompt-library",
-      "markdown",
-      "SKILL.md",
-      "research"
-    ]
-  },
-  {
-    "id": "nebulaONE-SkillGen-Broady",
-    "name": "nebulaONE-SkillGen-Broady",
-    "title": "nebulaONE-SkillGen-Broady",
-    "summary": "Create, research, package, and commit nebulaONE skills to PromptTemplateLibrary.",
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "path": "Skills/nebulaONE-SkillGen-Broady/SKILL.md",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaONE-SkillGen-Broady/SKILL.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaONE-SkillGen-Broady/SKILL.md",
-    "description": "Use when Broady asks to turn the current conversation into a reusable nebulaONE skill package and commit it to PromptTemplateLibrary with researched files/helpers.",
+      "dashboard",
+      "html",
+      "artifact",
+      "accessibility"
+    ],
     "triggers": [
-      "create skill package",
-      "commit skill to PromptTemplateLibrary",
-      "nebulaONE-SkillGen-Broady",
-      "package this as a skill",
-      "publish skill to GitHub"
-    ],
-    "tags": [
-      "nebulaONE",
-      "skill-generation",
-      "prompt-library",
-      "github",
-      "helpers",
-      "research"
-    ]
-  },
-  {
-    "id": "lucid-mcp-diagrammer",
-    "name": "Lucid MCP Diagrammer",
-    "title": "lucid-mcp-diagrammer",
-    "summary": "Drive the official Lucid MCP server to search, fetch, create, export, and share Lucid diagrams using the right tool for the job.",
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "path": "Skills/lucid-mcp-diagrammer/SKILL.md",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/lucid-mcp-diagrammer/SKILL.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/lucid-mcp-diagrammer/SKILL.md",
-    "description": "Use when the user asks to create, find, summarize, export, or share a Lucid document, Lucidchart diagram, Lucidspark board, org chart, mind map, UML sequence diagram, flowchart, BPMN, swim lane, or process map via the Lucid MCP server.",
-    "triggers": [
-      "lucid",
-      "lucidchart",
-      "lucidspark",
-      "create diagram in lucid",
-      "org chart in lucid",
-      "mind map in lucid",
-      "uml sequence diagram",
-      "flowchart in lucid",
-      "bpmn",
-      "swim lane",
-      "export lucid as image",
-      "share lucid document"
-    ],
-    "tags": [
-      "lucid",
-      "mcp",
-      "diagram",
-      "flowchart",
-      "org-chart",
-      "mind-map",
-      "uml",
-      "plantuml",
-      "bpmn"
-    ],
-    "helperUrls": [
-      "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/lucid-mcp-diagrammer/scripts/standard_import_scaffold.py",
-      "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/lucid-mcp-diagrammer/scripts/plantuml_sequence_builder.py"
+      "n1 dashboard",
+      "nebulaONE dashboard",
+      "interactive HTML dashboard",
+      "visualize this workbook",
+      "shareable report",
+      "dashboard artifact"
     ]
   }
 ]
