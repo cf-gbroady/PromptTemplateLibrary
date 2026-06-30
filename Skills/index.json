@@ -1,338 +1,437 @@
 [
   {
-    "name": "skill_onedrive_file_intelligence",
-    "title": "OneDrive File Intelligence",
-    "description": "Use when users ask to find, retrieve, summarize, compare, or answer questions about files stored in OneDrive.",
-    "path": "Skills/skill_onedrive_file_intelligence.md",
-    "tags": [
-      "microsoft-365",
-      "onedrive",
-      "file-search",
-      "legacy"
-    ],
+    "id": "accessibility",
+    "name": "Accessibility",
+    "title": "Accessibility",
+    "summary": "Accessibility review guidance",
     "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_onedrive_file_intelligence.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_onedrive_file_intelligence.md"
-  },
-  {
-    "name": "skill_outlook_productivity",
-    "title": "Outlook Productivity Assistant",
-    "description": "Use when users ask to summarize inbox messages, draft replies, extract email action items, or manage Outlook calendar workflows.",
-    "path": "Skills/skill_outlook_productivity.md",
-    "tags": [
-      "microsoft-365",
-      "outlook",
-      "email",
-      "calendar",
-      "legacy"
-    ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_outlook_productivity.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_outlook_productivity.md"
-  },
-  {
-    "name": "skill_sharepoint_knowledge_collaboration",
-    "title": "SharePoint Knowledge Collaboration",
-    "description": "Use when users ask to find, summarize, organize, or reason over SharePoint content, sites, lists, pages, or collaboration spaces.",
-    "path": "Skills/skill_sharepoint_knowledge_collaboration.md",
-    "tags": [
-      "microsoft-365",
-      "sharepoint",
-      "knowledge-management",
-      "legacy"
-    ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_sharepoint_knowledge_collaboration.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_sharepoint_knowledge_collaboration.md"
-  },
-  {
-    "name": "skill_teams_productivity",
-    "title": "Teams Productivity Assistant",
-    "description": "Use when users ask to summarize Teams discussions, extract decisions and action items, draft updates, or improve meeting/channel workflows.",
-    "path": "Skills/skill_teams_productivity.md",
-    "tags": [
-      "microsoft-365",
-      "teams",
-      "meetings",
-      "collaboration",
-      "legacy"
-    ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_teams_productivity.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_teams_productivity.md"
-  },
-  {
-    "name": "skills-accessibility",
-    "title": "Accessibility Review",
-    "description": "Use when users ask to review, improve, or create accessible content, documents, interfaces, alt text, or inclusive communications.",
     "path": "Skills/skills-accessibility.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-accessibility.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-accessibility.md",
+    "description": "Use for accessibility checks, inclusive formatting, alt text, document structure, and accessibility review of generated content.",
+    "triggers": [],
     "tags": [
       "accessibility",
-      "inclusive-design",
-      "legacy"
+      "quality"
     ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-accessibility.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-accessibility.md"
+    "status": "standalone"
   },
   {
-    "name": "skills-citations-grounding",
+    "id": "citations-grounding",
+    "name": "Citations and Grounding",
     "title": "Citations and Grounding",
-    "description": "Use when users need sourced answers, citation checks, claim grounding, evidence quality review, or uncertainty handling.",
+    "summary": "Citation and source-grounding guidance",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "path": "Skills/skills-citations-grounding.md",
-    "tags": [
-      "research",
-      "citations",
-      "grounding",
-      "legacy"
-    ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-citations-grounding.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-citations-grounding.md"
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-citations-grounding.md",
+    "description": "Use when responses require citations, source grounding, quote handling, evidence checks, or clear distinction between sourced facts and analysis.",
+    "triggers": [],
+    "tags": [
+      "citations",
+      "research"
+    ],
+    "status": "standalone"
   },
   {
-    "name": "skills-communications",
-    "title": "Communications Crafting",
-    "description": "Use when users ask to draft, rewrite, summarize, tailor, or improve professional communications for a specific audience or channel.",
+    "id": "communications",
+    "name": "Communications",
+    "title": "Communications",
+    "summary": "Professional communication drafting",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "path": "Skills/skills-communications.md",
-    "tags": [
-      "writing",
-      "communications",
-      "legacy"
-    ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-communications.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-communications.md"
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-communications.md",
+    "description": "Use for emails, memos, announcements, tone adaptation, concise summaries, and professional communication drafts.",
+    "triggers": [],
+    "tags": [
+      "communications",
+      "writing"
+    ],
+    "status": "standalone"
   },
   {
-    "name": "skills-compliance-privacy",
-    "title": "Compliance and Privacy Review",
-    "description": "Use when users ask to identify privacy, compliance, confidentiality, data-handling, or policy risks in content or workflows.",
+    "id": "compliance-privacy",
+    "name": "Compliance and Privacy",
+    "title": "Compliance and Privacy",
+    "summary": "Privacy and compliance guardrails",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "path": "Skills/skills-compliance-privacy.md",
-    "tags": [
-      "compliance",
-      "privacy",
-      "risk",
-      "legacy"
-    ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-compliance-privacy.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-compliance-privacy.md"
-  },
-  {
-    "name": "skills-data",
-    "title": "Data Analysis and Reporting",
-    "description": "Use when users ask to inspect, clean, summarize, transform, analyze, visualize, or report on structured or semi-structured data.",
-    "path": "Skills/skills-data.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-compliance-privacy.md",
+    "description": "Use for privacy-aware handling, compliance-safe summaries, sensitive data caution, and regulated-content guardrails.",
+    "triggers": [],
     "tags": [
-      "data-analysis",
-      "reporting",
-      "legacy"
+      "privacy",
+      "compliance"
     ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-data.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-data.md"
+    "status": "standalone"
   },
   {
-    "name": "skills-docx-v2",
-    "title": "DOCX Document Builder",
-    "description": "Use when users ask to create, edit, format, repair, inspect, or convert Microsoft Word DOCX documents.",
-    "path": "Skills/skills-docx-v2.md",
+    "id": "data",
+    "name": "Data",
+    "title": "Data",
+    "summary": "Data analysis and visualization guidance",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/skills-data.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-data.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-data.md",
+    "description": "Use for analyzing data, building charts, explaining trends, producing dashboards, or turning tabular data into insights.",
+    "triggers": [],
+    "tags": [
+      "data",
+      "analytics"
+    ],
+    "status": "standalone"
+  },
+  {
+    "id": "docx",
+    "name": "DOCX",
+    "title": "DOCX",
+    "summary": "Word DOCX document workflows",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/docx/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/docx/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/docx/SKILL.md",
+    "description": "Use when creating, editing, inspecting, extracting, or quality-checking Microsoft Word .docx files, including reports, tables, images, metadata, and accessibility.",
+    "triggers": [],
     "tags": [
       "docx",
       "documents",
-      "microsoft-word",
-      "legacy",
-      "progressive-disclosure-needed"
+      "preferred"
     ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-docx-v2.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-docx-v2.md"
+    "status": "preferred"
   },
   {
-    "name": "skills-feedback-form",
-    "title": "Feedback Form Builder",
-    "description": "Use when users ask to create, revise, analyze, or operationalize feedback forms, surveys, questionnaires, or intake forms.",
+    "id": "docx-legacy",
+    "name": "DOCX Legacy",
+    "title": "DOCX Legacy",
+    "summary": "Legacy standalone DOCX skill retained for compatibility",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/skills-docx-v2.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-docx-v2.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-docx-v2.md",
+    "description": "Legacy DOCX skill retained for compatibility. Prefer Skills/docx/SKILL.md for new Word document creation, editing, inspection, and quality checks.",
+    "triggers": [],
+    "tags": [
+      "docx",
+      "legacy",
+      "compatibility"
+    ],
+    "status": "legacy"
+  },
+  {
+    "id": "feedback-form",
+    "name": "Feedback Form",
+    "title": "Feedback Form",
+    "summary": "Feedback form design and analysis",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "path": "Skills/skills-feedback-form.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-feedback-form.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-feedback-form.md",
+    "description": "Use when creating, improving, analyzing, or summarizing feedback forms, surveys, intake forms, or response collection workflows.",
+    "triggers": [],
     "tags": [
       "forms",
-      "feedback",
-      "surveys",
-      "legacy"
+      "feedback"
     ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-feedback-form.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-feedback-form.md"
+    "status": "standalone"
   },
   {
-    "name": "skills-general",
-    "title": "General Task Execution",
-    "description": "Use for general-purpose reasoning, planning, drafting, and task execution when no more specific skill applies.",
+    "id": "general",
+    "name": "General",
+    "title": "General",
+    "summary": "General output and formatting standards",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "path": "Skills/skills-general.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-general.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-general.md",
+    "description": "Use for general response formatting, tables, callouts, math, collapsibles, pills, quizzes, and reusable output conventions.",
+    "triggers": [],
     "tags": [
       "general",
-      "productivity",
-      "legacy"
+      "formatting"
     ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-general.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-general.md"
+    "status": "standalone"
   },
   {
-    "name": "skills-image-generation",
-    "title": "Image Generation Prompting",
-    "description": "Use when users ask to create, refine, critique, or structure prompts for image generation or visual concept development.",
+    "id": "image-generation",
+    "name": "Image Generation",
+    "title": "Image Generation",
+    "summary": "Image generation prompt guidance",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "path": "Skills/skills-image-generation.md",
-    "tags": [
-      "image-generation",
-      "prompting",
-      "legacy"
-    ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-image-generation.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-image-generation.md"
-  },
-  {
-    "name": "skills-pdf-v2",
-    "title": "PDF Document Processing",
-    "description": "Use when users ask to inspect, extract, summarize, repair, generate, annotate, split, merge, or convert PDF documents.",
-    "path": "Skills/skills-pdf-v2.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-image-generation.md",
+    "description": "Use when generating or refining image prompts, visual concepts, alt text, or image handoff guidance for documents and decks.",
+    "triggers": [],
     "tags": [
-      "pdf",
-      "documents",
-      "legacy"
+      "images",
+      "creative"
     ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-pdf-v2.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-pdf-v2.md"
+    "status": "standalone"
   },
   {
-    "name": "skills-pptx",
-    "title": "PowerPoint Presentation Builder",
-    "description": "Use when users ask to create, edit, structure, format, analyze, or improve PowerPoint presentations or slide decks.",
-    "path": "Skills/skills-pptx.md",
-    "tags": [
-      "pptx",
-      "presentations",
-      "legacy"
-    ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-pptx.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-pptx.md"
-  },
-  {
-    "name": "skills-web-research",
-    "title": "Web Research",
-    "description": "Use when users ask for current web research, source discovery, fact checking, competitive scans, or cited internet-based summaries.",
-    "path": "Skills/skills-web-research.md",
-    "tags": [
-      "web-research",
-      "citations",
-      "legacy"
-    ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-web-research.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-web-research.md"
-  },
-  {
-    "name": "skills-xlsx",
-    "title": "Spreadsheet Workbook Builder Legacy",
-    "description": "Legacy spreadsheet skill. Use only when the folder-based xlsx skill is unavailable or explicit legacy behavior is needed.",
-    "path": "Skills/skills-xlsx.md",
-    "tags": [
-      "xlsx",
-      "spreadsheets",
-      "legacy",
-      "duplicate-review"
-    ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-xlsx.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-xlsx.md"
-  },
-  {
-    "name": "lucid-mcp-diagrammer",
+    "id": "lucid-mcp-diagrammer",
+    "name": "Lucid MCP Diagrammer",
     "title": "Lucid MCP Diagrammer",
-    "description": "Use when users ask to create, update, inspect, or troubleshoot Lucid diagrams through MCP tools or diagramming workflows.",
+    "summary": "Lucid diagram generation with MCP",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "path": "Skills/lucid-mcp-diagrammer/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/lucid-mcp-diagrammer/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/lucid-mcp-diagrammer/SKILL.md",
+    "description": "Use when creating, updating, or troubleshooting Lucid diagrams through MCP-backed diagram workflows.",
+    "triggers": [],
     "tags": [
       "lucid",
-      "diagramming",
+      "diagrams",
       "mcp"
     ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/lucid-mcp-diagrammer/SKILL.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/lucid-mcp-diagrammer/SKILL.md"
+    "status": "packaged"
   },
   {
-    "name": "nebulaONE-SkillGen-Broady",
-    "title": "nebulaONE SkillGen Broady",
-    "description": "Use when Broady asks to create, research, package, validate, or commit nebulaONE skills to PromptTemplateLibrary.",
-    "path": "Skills/nebulaONE-SkillGen-Broady/SKILL.md",
-    "tags": [
-      "nebulaone",
-      "skill-generation",
-      "github",
-      "admin"
-    ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaONE-SkillGen-Broady/SKILL.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaONE-SkillGen-Broady/SKILL.md"
-  },
-  {
-    "name": "nebulaONE-SkillGen",
+    "id": "nebulaONE-SkillGen",
+    "name": "nebulaONE SkillGen",
     "title": "nebulaONE SkillGen",
-    "description": "Use when asked to turn the current conversation into a reusable nebulaONE SKILL.md file for manual copy into nebulaONE.",
-    "path": "Skills/nebulaONE-SkillGen/SKILL.md",
-    "tags": [
-      "nebulaone",
-      "skill-generation"
-    ],
+    "summary": "Create nebulaONE skill packages",
     "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/nebulaONE-SkillGen/SKILL.md",
     "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaONE-SkillGen/SKILL.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaONE-SkillGen/SKILL.md"
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaONE-SkillGen/SKILL.md",
+    "description": "Use when creating or updating reusable nebulaONE skill packages, SKILL.md files, helper assets, and skill metadata.",
+    "triggers": [],
+    "tags": [
+      "skills",
+      "nebulaone"
+    ],
+    "status": "packaged"
   },
   {
-    "name": "nebulaone-analytics-html-dashboard-builder",
+    "id": "nebulaONE-SkillGen-Broady",
+    "name": "nebulaONE SkillGen Broady",
+    "title": "nebulaONE SkillGen Broady",
+    "summary": "Create and commit Broady nebulaONE skills",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/nebulaONE-SkillGen-Broady/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaONE-SkillGen-Broady/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaONE-SkillGen-Broady/SKILL.md",
+    "description": "Use when Broady asks to create, research, package, validate, or commit nebulaONE skills to PromptTemplateLibrary.",
+    "triggers": [],
+    "tags": [
+      "skills",
+      "nebulaone",
+      "github"
+    ],
+    "status": "packaged"
+  },
+  {
+    "id": "nebulaone-analytics-html-dashboard-builder",
+    "name": "nebulaONE Analytics HTML Dashboard Builder",
     "title": "nebulaONE Analytics HTML Dashboard Builder",
-    "description": "Use when a nebulaONE admin asks for an interactive HTML dashboard from an enriched nebulaONE usage analytics workbook.",
+    "summary": "Build nebulaONE analytics dashboards",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "path": "Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md",
+    "description": "Use when a nebulaONE admin asks for an interactive HTML dashboard from an enriched nebulaONE analytics workbook.",
+    "triggers": [],
     "tags": [
       "nebulaone",
-      "analytics",
       "dashboard",
       "html"
     ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md"
+    "status": "packaged"
   },
   {
-    "name": "nebulaone-usage-analytics-workbook-builder",
+    "id": "nebulaone-usage-analytics-workbook-builder",
+    "name": "nebulaONE Usage Analytics Workbook Builder",
     "title": "nebulaONE Usage Analytics Workbook Builder",
-    "description": "Use when a nebulaONE admin uploads a usage export workbook and asks to clean, analyze, pivot, or enrich it with usage/cost metrics.",
+    "summary": "Build nebulaONE analytics workbooks",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "path": "Skills/nebulaone-usage-analytics-workbook-builder/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaone-usage-analytics-workbook-builder/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaone-usage-analytics-workbook-builder/SKILL.md",
+    "description": "Use when a nebulaONE admin uploads usage exports and asks to clean, analyze, enrich, or produce a comprehensive analytics workbook.",
+    "triggers": [],
     "tags": [
       "nebulaone",
-      "analytics",
       "xlsx",
-      "workbook"
+      "analytics"
     ],
-    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/nebulaone-usage-analytics-workbook-builder/SKILL.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaone-usage-analytics-workbook-builder/SKILL.md"
+    "status": "packaged"
   },
   {
-    "name": "xlsx",
-    "title": "XLSX Spreadsheet Specialist",
-    "description": "Use when the primary input or output is a spreadsheet-like file and the user asks to read, create, clean, analyze, chart, repair, or convert it.",
+    "id": "onedrive-file-intelligence",
+    "name": "OneDrive File Intelligence",
+    "title": "OneDrive File Intelligence",
+    "summary": "OneDrive file search and synthesis",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/skill_onedrive_file_intelligence.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_onedrive_file_intelligence.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_onedrive_file_intelligence.md",
+    "description": "Use for OneDrive file discovery, document intelligence, file summaries, organization, and retrieval-oriented workflows.",
+    "triggers": [],
+    "tags": [
+      "onedrive",
+      "files"
+    ],
+    "status": "standalone"
+  },
+  {
+    "id": "outlook-productivity",
+    "name": "Outlook Productivity",
+    "title": "Outlook Productivity",
+    "summary": "Outlook email and calendar productivity",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/skill_outlook_productivity.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_outlook_productivity.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_outlook_productivity.md",
+    "description": "Use for Outlook email, calendar, inbox triage, meeting prep, follow-ups, and productivity workflows.",
+    "triggers": [],
+    "tags": [
+      "outlook",
+      "productivity"
+    ],
+    "status": "standalone"
+  },
+  {
+    "id": "pdf",
+    "name": "PDF",
+    "title": "PDF",
+    "summary": "PDF inspection, extraction, and operations",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/pdf/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/pdf/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/pdf/SKILL.md",
+    "description": "Use when creating, inspecting, extracting, splitting, merging, summarizing, or quality-checking PDF files, including tables, forms, metadata, and accessibility.",
+    "triggers": [],
+    "tags": [
+      "pdf",
+      "documents",
+      "preferred"
+    ],
+    "status": "preferred"
+  },
+  {
+    "id": "pdf-legacy",
+    "name": "PDF Legacy",
+    "title": "PDF Legacy",
+    "summary": "Legacy standalone PDF skill retained for compatibility",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/skills-pdf-v2.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-pdf-v2.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-pdf-v2.md",
+    "description": "Legacy PDF skill retained for compatibility. Prefer Skills/pdf/SKILL.md for new PDF inspection, extraction, operations, and quality checks.",
+    "triggers": [],
+    "tags": [
+      "pdf",
+      "legacy",
+      "compatibility"
+    ],
+    "status": "legacy"
+  },
+  {
+    "id": "pptx",
+    "name": "PowerPoint",
+    "title": "PowerPoint",
+    "summary": "PowerPoint deck creation and editing",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/skills-pptx.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-pptx.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-pptx.md",
+    "description": "Use when creating, editing, analyzing, or formatting PowerPoint .pptx decks, slides, layouts, speaker notes, and visuals.",
+    "triggers": [],
+    "tags": [
+      "pptx",
+      "presentations"
+    ],
+    "status": "standalone"
+  },
+  {
+    "id": "sharepoint-knowledge-collaboration",
+    "name": "SharePoint Knowledge Collaboration",
+    "title": "SharePoint Knowledge Collaboration",
+    "summary": "SharePoint knowledge and collaboration workflows",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/skill_sharepoint_knowledge_collaboration.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_sharepoint_knowledge_collaboration.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_sharepoint_knowledge_collaboration.md",
+    "description": "Use for SharePoint knowledge management, collaboration spaces, page/library guidance, and content organization workflows.",
+    "triggers": [],
+    "tags": [
+      "sharepoint",
+      "knowledge"
+    ],
+    "status": "standalone"
+  },
+  {
+    "id": "teams-productivity",
+    "name": "Teams Productivity",
+    "title": "Teams Productivity",
+    "summary": "Microsoft Teams productivity workflows",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/skill_teams_productivity.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_teams_productivity.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_teams_productivity.md",
+    "description": "Use for Microsoft Teams meetings, chat summaries, channel organization, collaboration follow-ups, and productivity workflows.",
+    "triggers": [],
+    "tags": [
+      "teams",
+      "productivity"
+    ],
+    "status": "standalone"
+  },
+  {
+    "id": "web-research",
+    "name": "Web Research",
+    "title": "Web Research",
+    "summary": "Web research and synthesis guidance",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/skills-web-research.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-web-research.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-web-research.md",
+    "description": "Use for web research, source comparison, citation planning, factual verification, and research synthesis workflows.",
+    "triggers": [],
+    "tags": [
+      "research",
+      "web"
+    ],
+    "status": "standalone"
+  },
+  {
+    "id": "xlsx",
+    "name": "XLSX",
+    "title": "XLSX",
+    "summary": "Spreadsheet analysis and workbook generation",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
     "path": "Skills/xlsx/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/xlsx/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/xlsx/SKILL.md",
+    "description": "Use when working with spreadsheet files or spreadsheet-like data: read, clean, analyze, transform, chart, validate, or create workbooks.",
+    "triggers": [],
     "tags": [
       "xlsx",
       "spreadsheets",
-      "analysis"
+      "preferred"
     ],
+    "status": "preferred"
+  },
+  {
+    "id": "xlsx-legacy",
+    "name": "XLSX Legacy",
+    "title": "XLSX Legacy",
+    "summary": "Legacy standalone spreadsheet skill retained for compatibility",
     "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
-    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/xlsx/SKILL.md",
-    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/xlsx/SKILL.md"
+    "path": "Skills/skills-xlsx.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skills-xlsx.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-xlsx.md",
+    "description": "Legacy spreadsheet skill retained for compatibility. Prefer Skills/xlsx/SKILL.md for new spreadsheet analysis and workbook generation.",
+    "triggers": [],
+    "tags": [
+      "xlsx",
+      "legacy",
+      "compatibility"
+    ],
+    "status": "legacy"
   }
 ]
