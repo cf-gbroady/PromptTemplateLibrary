@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "repository": "cf-gbroady/PromptTemplateLibrary",
+  "created_for": "second-pass skill remediation prioritization",
+  "principles": [
+    "preserve existing paths unless migration is explicitly approved",
+    "prioritize retrieval clarity, runtime reliability, safety, and maintainability",
+    "add helper files only when they reduce deterministic repeated work",
+    "validate descriptions, body length, JSON, helper syntax, tests, and secret risk before PR"
+  ],
+  "recommended_prs": [
+    {
+      "id": "PR-3",
+      "title": "Index and retrieval hygiene",
+      "priority": "P0",
+      "scope": [
+        "Run skill_package_audit.py against Skills/",
+        "Reconcile Skills/index.json coverage for folder-based packages",
+        "Document retained standalone skills that are intentionally legacy or unindexed",
+        "Keep file paths stable"
+      ],
+      "acceptance_criteria": [
+        "Skills/index.json is valid JSON",
+        "Every folder-based Skills/*/SKILL.md package has an index entry or documented exception",
+        "Descriptions follow the repo's under-300-character nebulaONE trigger target where applicable",
+        "No skill files are moved or deleted"
+      ]
+    },
+    {
+      "id": "PR-4",
+      "title": "DOCX and PDF progressive-disclosure remediation",
+      "priority": "P0",
+      "scope": [
+        "Review large DOCX and PDF legacy skills",
+        "Identify content that can move to docs/references without weakening runtime behavior",
+        "Clarify validation, file naming, and failure handling",
+        "Preserve public paths unless migration is approved"
+      ],
+      "acceptance_criteria": [
+        "Mandatory runtime behavior remains loaded in the skill body",
+        "Body size is reduced or explicitly justified",
+        "File-generation validation and versioning rules are explicit",
+        "No destructive actions are allowed without confirmation"
+      ]
+    },
+    {
+      "id": "PR-5",
+      "title": "Spreadsheet skill consolidation decision",
+      "priority": "P1",
+      "scope": [
+        "Compare legacy Skills/skills-xlsx.md with folder package Skills/xlsx/SKILL.md",
+        "Clarify trigger boundaries",
+        "Choose cross-link, deprecation note, or merge plan",
+        "Update Skills/index.json to match the active strategy"
+      ],
+      "acceptance_criteria": [
+        "No ambiguous duplicate trigger behavior remains undocumented",
+        "Index reflects active spreadsheet skill routing",
+        "No deletion occurs without explicit approval"
+      ]
+    }
+  ],
+  "priority_targets": [
+    {
+      "priority": "P0",
+      "path": "Skills/index.json",
+      "action": "audit and reconcile coverage"
+    },
+    {
+      "priority": "P0",
+      "path": "Skills/skills-docx-v2.md",
+      "action": "progressive-disclosure assessment"
+    },
+    {
+      "priority": "P0",
+      "path": "Skills/skills-pdf-v2.md",
+      "action": "runtime validation and grounding review"
+    },
+    {
+      "priority": "P1",
+      "path": "Skills/skills-xlsx.md",
+      "action": "compare with folder-based xlsx package"
+    },
+    {
+      "priority": "P1",
+      "path": "Skills/xlsx/SKILL.md",
+      "action": "compare with legacy xlsx skill"
+    },
+    {
+      "priority": "P1",
+      "path": "Skills/skill_onedrive_file_intelligence.md",
+      "action": "privacy and permission guardrail review"
+    },
+    {
+      "priority": "P1",
+      "path": "Skills/skill_outlook_productivity.md",
+      "action": "privacy and permission guardrail review"
+    },
+    {
+      "priority": "P1",
+      "path": "Skills/skill_sharepoint_knowledge_collaboration.md",
+      "action": "privacy and permission guardrail review"
+    },
+    {
+      "priority": "P1",
+      "path": "Skills/skill_teams_productivity.md",
+      "action": "privacy and permission guardrail review"
+    }
+  ]
+}
