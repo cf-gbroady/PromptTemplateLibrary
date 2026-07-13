@@ -1,0 +1,57 @@
+{
+  "repair_area": "safety_meta_description_hygiene",
+  "skills": [
+    {
+      "path": "Skills/skills-citations-grounding.md",
+      "name": "citations-grounding",
+      "proposed_description": "Use when responses require citations, source grounding, quote handling, evidence checks, or clear separation between sourced facts and analysis.",
+      "description_characters": 144,
+      "should_trigger": [
+        "Answer questions from these uploaded PDFs and cite the source for each claim.",
+        "Use the knowledge base to summarize the refund policy with citations.",
+        "Quote the exact paragraph that supports this conclusion."
+      ],
+      "should_not_trigger": [
+        "Brainstorm five tagline ideas without sources.",
+        "Rewrite this paragraph for tone only."
+      ]
+    },
+    {
+      "path": "Skills/skills-compliance-privacy.md",
+      "name": "compliance-privacy",
+      "proposed_description": "Use when content may include PII, PHI, student, financial, or regulated data; supports minimization, redaction, safe exports, and privacy review.",
+      "description_characters": 145,
+      "should_trigger": [
+        "Redact patient names and MRNs from this report before sharing.",
+        "Review this student data export for FERPA/privacy issues.",
+        "Summarize this HR file without exposing personal details."
+      ],
+      "should_not_trigger": [
+        "Summarize this public company press release.",
+        "Create a generic privacy policy outline with no user data."
+      ]
+    },
+    {
+      "path": "Skills/skills-web-research.md",
+      "name": "web-research",
+      "proposed_description": "Use when current or externally verifiable facts are needed, including latest events, prices, products, people, policies, or source-backed research.",
+      "description_characters": 147,
+      "should_trigger": [
+        "Look up the latest pricing for this product and cite sources.",
+        "Find recent policy changes affecting this topic.",
+        "Verify this factual claim against current public sources."
+      ],
+      "should_not_trigger": [
+        "Summarize only the uploaded file without using the internet.",
+        "Write a fictional story about a researcher."
+      ]
+    }
+  ],
+  "acceptance_criteria": [
+    "Descriptions remain under 300 characters.",
+    "Skill names and file paths are preserved.",
+    "Frontmatter remains valid.",
+    "Index entries are reviewed before direct metadata edits.",
+    "No secrets or private regulated data are introduced."
+  ]
+}
