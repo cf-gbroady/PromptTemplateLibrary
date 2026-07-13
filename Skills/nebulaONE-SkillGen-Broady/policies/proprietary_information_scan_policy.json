@@ -1,0 +1,121 @@
+{
+  "policy_version": 1,
+  "scope_note": "Detect likely secrets and organization-specific defaults while preserving explicitly reviewed platform-specific references.",
+  "include_globs": [
+    "Skills/**/*",
+    "Skills/*"
+  ],
+  "exclude_globs": [
+    "**/.git/**",
+    "**/__pycache__/**",
+    "Skills/nebulaONE-SkillGen-Broady/docs/*audit*",
+    "Skills/nebulaONE-SkillGen-Broady/docs/proprietary_information_scan_policy.md",
+    "Skills/nebulaONE-SkillGen-Broady/policies/proprietary_information_scan_policy.json",
+    "Skills/nebulaONE-SkillGen-Broady/tests/**",
+    "Skills/nebulaONE-SkillGen-Broady/scripts/skills_proprietary_scan.py"
+  ],
+  "extensions": [
+    ".md",
+    ".txt",
+    ".json",
+    ".yaml",
+    ".yml",
+    ".py",
+    ".js",
+    ".ts",
+    ".tsx",
+    ".jsx",
+    ".html",
+    ".css",
+    ".toml"
+  ],
+  "max_file_bytes": 1000000,
+  "patterns": [
+    {
+      "id": "private-key-block",
+      "category": "credential",
+      "severity": "critical",
+      "regex": "-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----",
+      "message": "Private-key material must not be committed."
+    },
+    {
+      "id": "aws-access-key",
+      "category": "credential",
+      "severity": "critical",
+      "regex": "\\bAKIA[0-9A-Z]{16}\\b",
+      "message": "Possible AWS access key."
+    },
+    {
+      "id": "generic-secret-assignment",
+      "category": "credential",
+      "severity": "high",
+      "regex": "(?im)\\b(?:api[_-]?key|access[_-]?token|client[_-]?secret|password)\\b\\s*[:=]\\s*[\"'][^\"'\\s]{12,}[\"']",
+      "message": "Possible hard-coded credential or secret."
+    },
+    {
+      "id": "cloudforce-name",
+      "category": "organization_brand",
+      "severity": "medium",
+      "regex": "\\bCloudforce\\b",
+      "message": "Organization-specific branding requires an intentional scope or neutral wording."
+    },
+    {
+      "id": "cloudforce-domain",
+      "category": "organization_identifier",
+      "severity": "high",
+      "regex": "\\b(?:[A-Z0-9._%+-]+@)?gocloudforce\\.com\\b",
+      "message": "Organization email/domain reference requires review."
+    },
+    {
+      "id": "nebulaone-private-architecture",
+      "category": "platform_architecture_claim",
+      "severity": "medium",
+      "regex": "\\bnebulaONE\\b.{0,180}\\b(?:Azure tenant|SSO|RBAC|HIPAA|FERPA|SOC 2|GDPR|proprietary data)\\b",
+      "message": "Platform architecture/compliance claim requires an intentionally platform-specific scope and current verification."
+    },
+    {
+      "id": "fixed-nebulaone-brand-default",
+      "category": "fixed_brand_default",
+      "severity": "low",
+      "regex": "\\bcanonical nebulaONE brand palette\\b|#0f2557|#00d4ff",
+      "message": "Fixed product-brand defaults should not leak into general-purpose skills."
+    }
+  ],
+  "allowlist": [
+    {
+      "path_glob": "Skills/README.md",
+      "pattern_id": "cloudforce-name",
+      "reason": "Temporary baseline from audit PR #20; scheduled for public-library neutralization."
+    },
+    {
+      "path_glob": "Skills/README.md",
+      "pattern_id": "nebulaone-private-architecture",
+      "reason": "Reviewed platform overview; preserve until platform/public scope is split."
+    },
+    {
+      "path_glob": "Skills/README.md",
+      "pattern_id": "fixed-nebulaone-brand-default",
+      "reason": "Reviewed platform authoring standard; not a general-purpose skill body."
+    },
+    {
+      "path_glob": "Skills/skills-compliance-privacy.md",
+      "pattern_id": "nebulaone-private-architecture",
+      "reason": "Reviewed platform-specific privacy skill; claims still require periodic verification."
+    },
+    {
+      "path_glob": "Skills/skills-citations-grounding.md",
+      "pattern_id": "nebulaone-private-architecture",
+      "reason": "Reviewed platform-specific grounding context."
+    },
+    {
+      "path_glob": "Skills/nebulaone-analytics-html-dashboard-builder/**",
+      "pattern_id": "cloudforce-name",
+      "reason": "Existing audited branding baseline; neutralization tracked as a separate remediation."
+    },
+    {
+      "path_glob": "Skills/nebulaone-analytics-html-dashboard-builder/**",
+      "pattern_id": "fixed-nebulaone-brand-default",
+      "reason": "Intentionally platform-specific dashboard package."
+    }
+  ]
+}
