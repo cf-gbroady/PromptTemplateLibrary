@@ -1,32 +1,37 @@
 ---
-name: docx-legacy
-summary: Compatibility pointer for the preferred DOCX skill package.
-description: Legacy DOCX skill path retained for compatibility. Prefer Skills/docx/SKILL.md for Microsoft Word .docx creation, editing, inspection, extraction, and quality checks.
+name: docx-legacy-compatibility-shim
+summary: Compatibility pointer for the canonical DOCX Word document skill.
+description: Use only when an old prompt or index references Skills/skills-docx-v2.md; route Word document work to Skills/docx/SKILL.md instead.
 ---
 
-# DOCX Legacy Compatibility Pointer
+# DOCX Legacy Compatibility Shim
 
-This legacy standalone skill path is retained so existing bookmarks, imports, and index entries continue to work.
+## Purpose
 
-For all new DOCX work, use the preferred folder-based skill package:
+This file is retained for backward compatibility with older references to `Skills/skills-docx-v2.md`.
 
-- Preferred runtime skill: `Skills/docx/SKILL.md`
-- DOCX workflows reference: `Skills/docx/references/docx_workflows.md`
-- Accessibility and quality checklist: `Skills/docx/references/accessibility_quality.md`
-- Read-only inspection helper: `Skills/docx/scripts/docx_inspect.py`
+The canonical Word document skill is now:
 
-## When to Use
+- `Skills/docx/SKILL.md`
+- Raw URL: `https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/docx/SKILL.md`
 
-Use this compatibility file only when a consumer still references `Skills/skills-docx-v2.md` directly. Otherwise, load `Skills/docx/SKILL.md`.
+## Runtime Instruction
 
-## Required Routing Behavior
+When this legacy file is encountered, do **not** treat it as a separate DOCX skill. Instead:
 
-1. Treat `Skills/docx/SKILL.md` as the source of truth for DOCX runtime instructions.
-2. Preserve originals and never overwrite user-uploaded or repository source documents.
-3. Inspect existing `.docx` files before editing them.
-4. Use the folder package references for detailed workflows rather than expanding this legacy file.
-5. Report any dependency or accessibility limitations clearly.
+1. Load and apply `Skills/docx/SKILL.md` as the canonical DOCX/Word document skill.
+2. Use the canonical skill for Word document creation, editing, inspection, cleanup, style preservation, accessibility checks, and export guidance.
+3. Preserve this file only as a compatibility pointer for older links, indexes, or saved prompts.
 
-## Migration Note
+## Do Not Use This File For
 
-This file intentionally replaces the former oversized standalone DOCX body with a compact pointer to reduce runtime context load and align with progressive-disclosure skill packaging.
+- Defining new Word document behavior.
+- Adding DOCX-processing instructions.
+- Registering a separate DOCX retrieval target.
+- Duplicating guidance that belongs in `Skills/docx/SKILL.md`.
+
+## Maintainer Notes
+
+- Keep this file short so it does not compete with the canonical DOCX package during retrieval.
+- Future Word document changes should be made in `Skills/docx/SKILL.md` and supporting files under `Skills/docx/`.
+- Do not delete this file without first checking for external links or stored prompts that reference `Skills/skills-docx-v2.md`.

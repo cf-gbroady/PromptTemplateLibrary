@@ -1,32 +1,37 @@
 ---
-name: pdf-legacy
-summary: Compatibility pointer for the preferred PDF skill package.
-description: Legacy PDF skill path retained for compatibility. Prefer Skills/pdf/SKILL.md for PDF creation, inspection, extraction, splitting, merging, summarization, and quality checks.
+name: pdf-legacy-compatibility-shim
+summary: Compatibility pointer for the canonical PDF document skill.
+description: Use only when an old prompt or index references Skills/skills-pdf-v2.md; route PDF document work to Skills/pdf/SKILL.md instead.
 ---
 
-# PDF Legacy Compatibility Pointer
+# PDF Legacy Compatibility Shim
 
-This legacy standalone skill path is retained so existing bookmarks, imports, and index entries continue to work.
+## Purpose
 
-For all new PDF work, use the preferred folder-based skill package:
+This file is retained for backward compatibility with older references to `Skills/skills-pdf-v2.md`.
 
-- Preferred runtime skill: `Skills/pdf/SKILL.md`
-- PDF workflows reference: `Skills/pdf/references/pdf_workflows.md`
-- PDF accessibility checklist: `Skills/pdf/references/pdf_accessibility.md`
-- Read-only inspection helper: `Skills/pdf/scripts/pdf_inspect.py`
+The canonical PDF document skill is now:
 
-## When to Use
+- `Skills/pdf/SKILL.md`
+- Raw URL: `https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/pdf/SKILL.md`
 
-Use this compatibility file only when a consumer still references `Skills/skills-pdf-v2.md` directly. Otherwise, load `Skills/pdf/SKILL.md`.
+## Runtime Instruction
 
-## Required Routing Behavior
+When this legacy file is encountered, do **not** treat it as a separate PDF skill. Instead:
 
-1. Treat `Skills/pdf/SKILL.md` as the source of truth for PDF runtime instructions.
-2. Preserve originals and never overwrite source PDFs.
-3. Inspect PDFs before extraction, summarization, splitting, merging, or remediation.
-4. Use the folder package references for detailed workflows rather than expanding this legacy file.
-5. Report extraction, OCR, encryption, accessibility, and reading-order limitations clearly.
+1. Load and apply `Skills/pdf/SKILL.md` as the canonical PDF document skill.
+2. Use the canonical skill for PDF creation, inspection, extraction, splitting, merging, repair, page-aware review, and export guidance.
+3. Preserve this file only as a compatibility pointer for older links, indexes, or saved prompts.
 
-## Migration Note
+## Do Not Use This File For
 
-This file intentionally replaces the former standalone PDF body with a compact pointer to reduce runtime context load and align with progressive-disclosure skill packaging.
+- Defining new PDF behavior.
+- Adding PDF-processing instructions.
+- Registering a separate PDF retrieval target.
+- Duplicating guidance that belongs in `Skills/pdf/SKILL.md`.
+
+## Maintainer Notes
+
+- Keep this file short so it does not compete with the canonical PDF package during retrieval.
+- Future PDF document changes should be made in `Skills/pdf/SKILL.md` and supporting files under `Skills/pdf/`.
+- Do not delete this file without first checking for external links or stored prompts that reference `Skills/skills-pdf-v2.md`.
