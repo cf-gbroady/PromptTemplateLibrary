@@ -1,0 +1,123 @@
+{
+  "generated_at": "2026-07-13",
+  "repository": "cf-gbroady/PromptTemplateLibrary",
+  "purpose": "Recommended Skills/index.json and README routing hygiene for repaired Microsoft 365 skills.",
+  "canonical_skills": [
+    {
+      "id": "m365-outlook-productivity",
+      "name": "Outlook Productivity",
+      "title": "Outlook Productivity",
+      "summary": "Permission-aware Outlook email, calendar, and productivity workflow support.",
+      "path": "Skills/skill_outlook_productivity.md",
+      "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_outlook_productivity.md",
+      "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_outlook_productivity.md",
+      "description": "Use for Outlook email, calendar, inbox triage, meeting prep, follow-ups, and productivity workflows with permission-aware Microsoft 365 guardrails.",
+      "description_char_count": 143,
+      "triggers": [
+        "outlook productivity",
+        "email triage",
+        "inbox cleanup",
+        "calendar planning",
+        "meeting follow ups",
+        "draft email",
+        "schedule meeting"
+      ],
+      "tags": [
+        "microsoft-365",
+        "m365",
+        "enterprise-collaboration",
+        "guardrails",
+        "outlook",
+        "email",
+        "calendar"
+      ]
+    },
+    {
+      "id": "m365-onedrive-file-intelligence",
+      "name": "OneDrive File Intelligence",
+      "title": "OneDrive File Intelligence",
+      "summary": "Permission-aware OneDrive file triage, organization, sharing review, and workflow planning.",
+      "path": "Skills/skill_onedrive_file_intelligence.md",
+      "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_onedrive_file_intelligence.md",
+      "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_onedrive_file_intelligence.md",
+      "description": "Use for OneDrive file triage, organization, sharing-risk review, version analysis, and file workflow planning with permission-aware M365 guardrails.",
+      "description_char_count": 142,
+      "triggers": [
+        "onedrive file intelligence",
+        "organize files",
+        "file sharing review",
+        "duplicate file review",
+        "version analysis",
+        "folder structure",
+        "permission risk review"
+      ],
+      "tags": [
+        "microsoft-365",
+        "m365",
+        "enterprise-collaboration",
+        "guardrails",
+        "onedrive",
+        "files",
+        "sharing"
+      ]
+    },
+    {
+      "id": "m365-sharepoint-knowledge-collaboration",
+      "name": "SharePoint Knowledge Collaboration",
+      "title": "SharePoint Knowledge Collaboration",
+      "summary": "Permission-aware SharePoint knowledge organization, governance, and collaboration planning.",
+      "path": "Skills/skill_sharepoint_knowledge_collaboration.md",
+      "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_sharepoint_knowledge_collaboration.md",
+      "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_sharepoint_knowledge_collaboration.md",
+      "description": "Use for SharePoint knowledge organization, site/library planning, sharing review, page/list guidance, and governance with M365 guardrails.",
+      "description_char_count": 133,
+      "triggers": [
+        "sharepoint knowledge collaboration",
+        "sharepoint site planning",
+        "document library governance",
+        "page planning",
+        "list planning",
+        "sharing risk review",
+        "knowledge base organization"
+      ],
+      "tags": [
+        "microsoft-365",
+        "m365",
+        "enterprise-collaboration",
+        "guardrails",
+        "sharepoint",
+        "knowledge-management",
+        "governance"
+      ]
+    },
+    {
+      "id": "m365-teams-productivity",
+      "name": "Teams Productivity",
+      "title": "Teams Productivity",
+      "summary": "Permission-aware Microsoft Teams meetings, channels, chats, governance, and productivity support.",
+      "path": "Skills/skill_teams_productivity.md",
+      "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/skill_teams_productivity.md",
+      "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_teams_productivity.md",
+      "description": "Use for Teams meetings, chats, channels, collaboration hygiene, guest/app governance, and productivity workflows with M365 guardrails.",
+      "description_char_count": 128,
+      "triggers": [
+        "teams productivity",
+        "meeting hygiene",
+        "channel architecture",
+        "chat summary",
+        "guest access review",
+        "teams governance",
+        "app and tab planning"
+      ],
+      "tags": [
+        "microsoft-365",
+        "m365",
+        "enterprise-collaboration",
+        "guardrails",
+        "teams",
+        "meetings",
+        "channels"
+      ]
+    }
+  ]
+}
