@@ -1,0 +1,79 @@
+{
+  "skill": "xlsx",
+  "purpose": "Trigger and routing checks for canonical spreadsheet skill selection.",
+  "canonical_path": "Skills/xlsx/SKILL.md",
+  "legacy_path": "Skills/skills-xlsx.md",
+  "created": "2026-07-13",
+  "evals": [
+    {
+      "id": "xlsx-create-budget-workbook",
+      "query": "Can you build me an Excel budget workbook with assumptions, formulas, and a summary chart from this CSV?",
+      "should_trigger": true,
+      "expected_skill": "xlsx",
+      "reason": "Spreadsheet input and Excel workbook deliverable with formulas and charts."
+    },
+    {
+      "id": "xlsx-repair-broken-formulas",
+      "query": "This .xlsx has broken formulas after someone moved sheets around. Please inspect and repair it, then give me the fixed workbook.",
+      "should_trigger": true,
+      "expected_skill": "xlsx",
+      "reason": "Explicit XLSX repair and workbook output."
+    },
+    {
+      "id": "xlsx-clean-tabular-export",
+      "query": "I uploaded a TSV export with messy headers and duplicate rows. Clean it up and return a formatted spreadsheet.",
+      "should_trigger": true,
+      "expected_skill": "xlsx",
+      "reason": "Spreadsheet-like tabular input and spreadsheet output."
+    },
+    {
+      "id": "xlsx-nebulaone-usage-near-miss",
+      "query": "Here is the standard nebulaONE usage export workbook. Build the n1 analytics workbook with pivots and cost metrics.",
+      "should_trigger": false,
+      "expected_skill": "nebulaone-usage-analytics-workbook-builder",
+      "reason": "Domain-specific nebulaONE export should route to the nebulaONE analytics workbook skill."
+    },
+    {
+      "id": "xlsx-nebulaone-dashboard-near-miss",
+      "query": "Visualize this enriched nebulaONE analytics workbook as an interactive HTML dashboard.",
+      "should_trigger": false,
+      "expected_skill": "nebulaone-analytics-html-dashboard-builder",
+      "reason": "Dashboard deliverable should route to the nebulaONE dashboard skill."
+    },
+    {
+      "id": "xlsx-general-table-explanation",
+      "query": "Here is a small table pasted in chat. Tell me what it means; no file needed.",
+      "should_trigger": false,
+      "expected_skill": "none",
+      "reason": "No spreadsheet file or spreadsheet deliverable requested."
+    },
+    {
+      "id": "xlsx-pivot-chart",
+      "query": "Please create a pivot table and chart from this sales workbook and save the result as a new .xlsx file.",
+      "should_trigger": true,
+      "expected_skill": "xlsx",
+      "reason": "Spreadsheet workbook input and modified XLSX deliverable."
+    },
+    {
+      "id": "xlsx-convert-csv-to-workbook",
+      "query": "Convert these CSV files into a multi-sheet Excel workbook and add validation checks.",
+      "should_trigger": true,
+      "expected_skill": "xlsx",
+      "reason": "CSV to workbook conversion and validation."
+    },
+    {
+      "id": "xlsx-pdf-table-near-miss",
+      "query": "Extract the tables from this PDF and cite the page numbers for each table.",
+      "should_trigger": false,
+      "expected_skill": "pdf",
+      "reason": "PDF extraction and page citation should start with the PDF skill."
+    },
+    {
+      "id": "xlsx-powerpoint-near-miss",
+      "query": "Turn this spreadsheet summary into a PowerPoint deck for leadership.",
+      "should_trigger": false,
+      "expected_skill": "pptx",
+      "reason": "Spreadsheet may be an input, but the requested primary output is PPTX."
+    }
+  ]
+}
