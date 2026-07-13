@@ -1,0 +1,104 @@
+{
+  "audit_name": "skills_proprietary_information_audit",
+  "date": "2026-07-13",
+  "scope": "Skills/",
+  "mode": "non_destructive",
+  "prerequisite": {
+    "pr_19": {
+      "state": "merged",
+      "url": "https://github.com/cf-gbroady/PromptTemplateLibrary/pull/19"
+    }
+  },
+  "confirmed_findings": [
+    {
+      "priority": "P0",
+      "category": "cloudforce_reference",
+      "paths": [
+        "Skills/README.md",
+        "Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md"
+      ],
+      "recommendation": "Neutralize Cloudforce-specific wording unless the file is intentionally private/platform-specific."
+    },
+    {
+      "priority": "P0",
+      "category": "nebulaone_branding",
+      "paths": [
+        "Skills/README.md",
+        "Skills/index.json",
+        "Skills/nebulaONE-SkillGen/SKILL.md",
+        "Skills/nebulaONE-SkillGen-Broady/SKILL.md",
+        "Skills/nebulaone-usage-analytics-workbook-builder/SKILL.md",
+        "Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md",
+        "Skills/skills-data.md",
+        "Skills/skills-general.md",
+        "Skills/skills-feedback-form.md",
+        "Skills/skills-image-generation.md",
+        "Skills/skills-compliance-privacy.md",
+        "Skills/skills-citations-grounding.md"
+      ],
+      "recommendation": "Decide whether all nebulaONE references should be removed, or isolate approved platform-specific skills."
+    },
+    {
+      "priority": "P0",
+      "category": "proprietary_license_metadata",
+      "paths": [
+        "Skills/skills-web-research.md",
+        "Skills/skills-pptx.md",
+        "Skills/skills-compliance-privacy.md",
+        "Skills/skills-communications.md",
+        "Skills/skills-citations-grounding.md",
+        "Skills/skills-accessibility.md",
+        "Skills/skills-feedback-form.md",
+        "Skills/skills-image-generation.md"
+      ],
+      "recommendation": "Normalize license metadata according to repository policy."
+    },
+    {
+      "priority": "P1",
+      "category": "platform_architecture_assumptions",
+      "paths": [
+        "Skills/README.md",
+        "Skills/skills-compliance-privacy.md",
+        "Skills/skills-citations-grounding.md"
+      ],
+      "recommendation": "Remove detailed platform architecture claims from general-purpose skills unless explicitly approved."
+    },
+    {
+      "priority": "P1",
+      "category": "brand_palette_and_output_defaults",
+      "paths": [
+        "Skills/README.md",
+        "Skills/skills-data.md",
+        "Skills/skills-general.md",
+        "Skills/skills-image-generation.md",
+        "Skills/skills-pptx.md",
+        "Skills/skills-feedback-form.md",
+        "Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md"
+      ],
+      "recommendation": "Use neutral accessible defaults or user-provided brand guidelines."
+    }
+  ],
+  "search_terms_checked": [
+    "Cloudforce",
+    "cloudforce",
+    "nebulaONE",
+    "nebulaone",
+    "proprietary",
+    "confidential",
+    "internal",
+    "tenant",
+    "password",
+    "Azure"
+  ],
+  "limitations": [
+    "Some GitHub code search calls were rate-limited.",
+    "GitHub Advanced Security secret scanning is not enabled for this repository."
+  ],
+  "recommended_next_prs": [
+    "Debrand public/general skills",
+    "Isolate platform-specific nebulaONE analytics and SkillGen skills",
+    "Normalize license metadata",
+    "Add a reusable proprietary-info scan script/eval",
+    "Create higher-ed citation/style skills after debranding baseline"
+  ]
+}
