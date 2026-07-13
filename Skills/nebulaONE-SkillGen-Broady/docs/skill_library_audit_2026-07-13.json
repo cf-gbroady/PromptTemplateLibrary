@@ -1,0 +1,57 @@
+{
+  "auditDate": "2026-07-13",
+  "repository": "cf-gbroady/PromptTemplateLibrary",
+  "scope": "Skills library structural and standards audit",
+  "mutationScope": "audit documentation only",
+  "summary": {
+    "folderBasedSkillPackages": 8,
+    "legacyRootMarkdownSkills": 17,
+    "centralRegistryPresent": true,
+    "skillsReadmePresent": true,
+    "pullRequestTemplateFound": false
+  },
+  "standards": {
+    "preferredPathPattern": "Skills/<skill-slug>/SKILL.md",
+    "requiredFrontmatter": [
+      "name",
+      "summary",
+      "description"
+    ],
+    "descriptionCharacterTarget": 300,
+    "bodyCharacterLimit": 30000,
+    "migrationPolicy": "preserve legacy paths as compatibility pointers unless deletion is explicitly approved"
+  },
+  "priorities": [
+    {
+      "priority": "P0",
+      "theme": "Canonical paths and duplicate retrieval surfaces",
+      "items": [
+        "xlsx package vs legacy skills-xlsx.md",
+        "docx/pdf package priority over compatibility pointers"
+      ]
+    },
+    {
+      "priority": "P1",
+      "theme": "Safety and permission guardrails",
+      "items": [
+        "OneDrive",
+        "Outlook",
+        "SharePoint",
+        "Teams",
+        "compliance/privacy",
+        "citations/grounding",
+        "web research"
+      ]
+    },
+    {
+      "priority": "P2",
+      "theme": "Packaging migration and routing clarity",
+      "items": [
+        "pptx packaging",
+        "data visualization routing",
+        "general skill trigger scope",
+        "feedback/image/accessibility description hygiene"
+      ]
+    }
+  ]
+}
