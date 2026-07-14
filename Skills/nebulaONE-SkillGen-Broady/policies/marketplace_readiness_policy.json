@@ -1,0 +1,36 @@
+{
+  "policy_version": 1,
+  "marketplace_adapter": "portable-agent-skills",
+  "scope_note": "Repository portability profile for future marketplace adapters. This is not a claim about any marketplace's final schema.",
+  "repository": "cf-gbroady/PromptTemplateLibrary",
+  "index_path": "Skills/index.json",
+  "required_index_fields": [
+    "id",
+    "name",
+    "path",
+    "description"
+  ],
+  "recommended_index_fields": [
+    "title",
+    "summary",
+    "fullyQualifiedLink",
+    "rawSkillUrl",
+    "triggers",
+    "tags"
+  ],
+  "limits": {
+    "name_characters": 64,
+    "description_characters": 300,
+    "body_characters": 30000
+  },
+  "canonical_package_path": "Skills/<skill-name>/SKILL.md",
+  "exclude_globs": [
+    "Skills/nebulaONE-SkillGen-Broady/**"
+  ],
+  "fail_at_severity": "high",
+  "readiness_levels": {
+    "ready": "Folder package with matching SKILL.md metadata and an indexed canonical path.",
+    "migration_needed": "Legacy standalone Markdown remains usable but should not be the future marketplace export source.",
+    "not_ready": "Missing, invalid, or conflicting required metadata or paths."
+  }
+}
