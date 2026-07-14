@@ -1,5 +1,5 @@
 {
-  "policy_version": 1,
+  "policy_version": 2,
   "scope_note": "Detect likely secrets and organization-specific defaults while preserving explicitly reviewed platform-specific references.",
   "include_globs": [
     "Skills/**/*",
@@ -10,6 +10,7 @@
     "**/__pycache__/**",
     "Skills/nebulaONE-SkillGen-Broady/docs/*audit*",
     "Skills/nebulaONE-SkillGen-Broady/docs/proprietary_information_scan_policy.md",
+    "Skills/nebulaONE-SkillGen-Broady/docs/remediation_step_public_defaults.md",
     "Skills/nebulaONE-SkillGen-Broady/policies/proprietary_information_scan_policy.json",
     "Skills/nebulaONE-SkillGen-Broady/tests/**",
     "Skills/nebulaONE-SkillGen-Broady/scripts/skills_proprietary_scan.py"
@@ -83,21 +84,6 @@
   ],
   "allowlist": [
     {
-      "path_glob": "Skills/README.md",
-      "pattern_id": "cloudforce-name",
-      "reason": "Temporary baseline from audit PR #20; scheduled for public-library neutralization."
-    },
-    {
-      "path_glob": "Skills/README.md",
-      "pattern_id": "nebulaone-private-architecture",
-      "reason": "Reviewed platform overview; preserve until platform/public scope is split."
-    },
-    {
-      "path_glob": "Skills/README.md",
-      "pattern_id": "fixed-nebulaone-brand-default",
-      "reason": "Reviewed platform authoring standard; not a general-purpose skill body."
-    },
-    {
       "path_glob": "Skills/skills-compliance-privacy.md",
       "pattern_id": "nebulaone-private-architecture",
       "reason": "Reviewed platform-specific privacy skill; claims still require periodic verification."
@@ -110,7 +96,7 @@
     {
       "path_glob": "Skills/nebulaone-analytics-html-dashboard-builder/**",
       "pattern_id": "cloudforce-name",
-      "reason": "Existing audited branding baseline; neutralization tracked as a separate remediation."
+      "reason": "Existing audited branding baseline; neutralization tracked separately from public-library defaults."
     },
     {
       "path_glob": "Skills/nebulaone-analytics-html-dashboard-builder/**",

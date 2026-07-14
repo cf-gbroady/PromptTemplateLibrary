@@ -1,84 +1,110 @@
 ---
 name: skills-library-readme
-description: Index and authoring standard for the nebulaONE Skills library. Read this first when adding, editing, or reviewing a skill. Defines the Agent Skills frontmatter contract, the nebulaONE brand palette, and platform conventions every skill must follow.
+description: Index and authoring standard for the Skills library. Read this first when adding, editing, or reviewing a skill. Defines packaging, metadata, safety, accessibility, validation, and optional product-profile conventions.
 ---
 
-# nebulaONE Skills Library
+# Skills Library
 
-This folder contains **Agent Skills** for the [nebulaONE](https://nebulaone.ai/) platform — Cloudforce's multi-model, Azure-based enterprise GenAI gateway. A skill is a self-contained Markdown file that an agent loads on demand when its `description` matches the user's request. Skills extend any model the platform runs (OpenAI, Anthropic, Meta, Mistral, and others), so **skills must stay model-agnostic** — never assume a specific model is executing.
+This folder contains reusable Agent Skills. A skill is loaded on demand when its description matches the user's request. Skills must remain model-agnostic unless a package is intentionally scoped to a named product or runtime.
 
-## Platform context every skill should assume
+## Default scope
 
-nebulaONE agents typically have access to:
+General-purpose skills must not assume:
 
-- **Knowledge sources / RAG** over the customer's own proprietary data (private to their Azure tenant).
-- **Web/internet search** for current information.
-- **Image generation** (multimodal output).
-- A **Python code interpreter** (the document/data skills rely on this).
-- **MCP integrations** (e.g., Microsoft Learn for authoritative Azure docs).
-- **SSO + role-based access control**, with a **compliance posture** spanning HIPAA, FERPA, SOC 2, and GDPR.
+- a specific company, customer, tenant, deployment architecture, or identity provider;
+- access to private knowledge sources, web search, image generation, Code Interpreter, or MCP tools unless the runtime confirms them;
+- a particular industry, compliance certification, brand palette, font, or hosting environment;
+- that uploaded or connected content is safe to disclose, publish, or send to external tools.
 
-Primary verticals are **higher education and healthcare**, so privacy (PII/PHI), accessibility (WCAG 2.1 AA), and source-grounded answers are first-class concerns, not afterthoughts.
+State required capabilities in the skill and provide graceful fallback behavior when they are unavailable.
 
-## Authoring contract (every skill file)
+## Authoring contract
 
-1. **YAML frontmatter is required** and must use exactly these keys:
+1. Use YAML frontmatter with these required fields:
+
    ```yaml
    ---
    name: kebab-case-skill-name
-   description: One or two sentences, third person, that say WHAT the skill does and WHEN to trigger it. Pack it with the words a user would actually use, because this text is the only thing the agent sees when deciding to load the skill.
+   description: A compact statement of what the skill does and when it should trigger.
    ---
    ```
-   - `name` is lowercase, hyphenated, and unique within the folder.
-   - `description` is the single most important line in the file. Lead with the trigger ("When a user uploads a spreadsheet and asks for charts…"), not with marketing.
-   - Do **not** name a specific model ("When Claude needs to…", "GPT Agent"). Use "the agent" or "the assistant".
 
-2. **Body** holds the procedure: when to use, step-by-step workflow, code/templates, and guardrails. Keep code runnable and imports correct.
+   Repository packages may also include `summary` when supported by `Skills/index.json`.
 
-3. **Stay platform-agnostic in tone** but **nebulaONE-specific in defaults** (brand palette, compliance notes, citation discipline).
+2. Keep `name` concise, unique, and stable. Use lowercase kebab-case for new package folders and skill identifiers.
 
-## Canonical nebulaONE brand palette
+3. Treat `description` as retrieval metadata. Name the user's likely intent, files, products, and trigger phrases. Keep nebulaONE descriptions below 300 characters.
 
-Use this everywhere a skill produces branded output (documents, decks, charts, HTML). It is derived from the nebulaONE product UI.
+4. Keep mandatory runtime behavior in `SKILL.md`. Use `scripts/` for deterministic repeated operations and `docs/`, `examples/`, or `tests/` for supporting material.
 
-| Role | Name | Hex | RGB |
-|------|------|-----|-----|
-| Primary | Deep Navy | `#0f2557` | 15, 37, 87 |
-| Secondary | Navy Blue | `#1a3a6b` | 26, 58, 107 |
-| Accent (text-safe) | Deep Cyan | `#0099cc` | 0, 153, 204 |
-| Accent (bright) | Cyan | `#00d4ff` | 0, 212, 255 |
-| Supporting | Indigo | `#9381ff` | 147, 129, 255 |
-| Muted | Violet | `#beb6cf` | 190, 182, 207 |
-| Subtle fill | Light Cyan | `#bef0ff` | 190, 240, 255 |
-| Alert | Magenta | `#b62850` | 182, 40, 80 |
-| Body text | Dark Gray | `#333333` | 51, 51, 51 |
-| Caption / muted | Light Gray | `#666666` | 102, 102, 102 |
+5. Preserve model neutrality. Say `the agent` or `the assistant`, not a specific model, unless the skill only works with that model.
 
-> ⚠️ **Contrast rule:** bright cyan `#00d4ff` is low-contrast on white. Use it for fills, rules, borders, and accents — never for small body text. For text on white, use `#0f2557` or `#0099cc`. Always verify WCAG AA (4.5:1) for text.
+6. State tool and access requirements explicitly. Never imply access to a file, tenant, inbox, website, API, or connected service that the runtime has not confirmed.
 
-**Typography:** `Segoe UI` is the nebulaONE/Microsoft brand font — use it for HTML and PowerPoint. For `.docx` use Calibri / Calibri Light (Office-native and always available). For ReportLab PDFs use Helvetica (a built-in font that needs no embedding).
+7. Include task-appropriate safety rules for privacy, regulated data, permissions, external communications, destructive actions, and human review.
+
+8. Validate code, JSON, links, metadata limits, and generated artifacts before committing.
+
+## General output defaults
+
+Unless the user or an intentionally scoped skill provides a profile:
+
+- use neutral, accessible styling rather than a product palette;
+- follow WCAG 2.1 AA contrast and structural guidance;
+- minimize personal or regulated data and avoid unnecessary reproduction;
+- cite only sources actually used and never fabricate links or locators;
+- label assumptions, incomplete coverage, and unsupported claims;
+- ask before external publication, sending messages, changing permissions, or destructive actions.
+
+## Optional product profiles
+
+Product-specific packages may define a named profile for branding, architecture, privacy, or tool behavior. The package must:
+
+1. identify the profile in its title, purpose, or `When to Use` section;
+2. keep product-specific defaults inside that package rather than imposing them on unrelated skills;
+3. distinguish verified capabilities from deployment-specific assumptions;
+4. avoid unverified security, compliance, residency, or architecture claims;
+5. provide neutral behavior when the user requests unbranded output.
+
+The nebulaONE analytics packages are intentionally product-specific. Their palette and admin terminology may remain within those packages, but they are not defaults for the rest of the library.
+
+## Styling profiles
+
+For general-purpose documents, decks, charts, and HTML:
+
+- prefer the user's supplied brand guide or template;
+- otherwise use an accessible neutral theme;
+- do not infer a company palette from repository ownership or unrelated skills;
+- keep semantic colors meaningful and verify contrast.
+
+A product palette may be used only when the user requests it or the active skill is explicitly product-specific.
 
 ## Skill index
 
 | Skill | File | Triggers on |
-|-------|------|-------------|
-| Library standard (this file) | `README.md` | Authoring or reviewing skills |
-| General output & formatting | `skills-general.md` | Tables, callouts, math, collapsibles, pills, quizzes |
-| Data visualization | `skills-data.md` | Uploaded data → charts, dashboards, trends |
-| Word documents | `skills-docx-v2.md` | Create/analyze `.docx` |
-| PDF documents | `skills-pdf-v2.md` | Create/analyze/merge `.pdf` |
-| PowerPoint | `skills-pptx.md` | Build/edit `.pptx` decks |
-| Spreadsheets | `skills-xlsx.md` | Create/analyze `.xlsx`, models, formulas |
-| Feedback bar | `skills-feedback-form.md` | Append feedback widget to responses |
-| Citations & RAG grounding | `skills-citations-grounding.md` | Answering from knowledge sources; citing sources |
-| Accessibility (WCAG 2.1 AA) | `skills-accessibility.md` | Any user-facing document/output |
-| Image generation | `skills-image-generation.md` | "Make an image / illustration / diagram" |
-| Privacy & compliance | `skills-compliance-privacy.md` | PII/PHI, FERPA/HIPAA-sensitive content |
-| Communications & writing | `skills-communications.md` | Emails, announcements, memos, summaries |
-| Web research | `skills-web-research.md` | Current events, "look up / latest / cite sources" |
+|---|---|---|
+| Library standard | `README.md` | Authoring or reviewing skills |
+| General output and formatting | `skills-general.md` | Tables, callouts, math, collapsibles, pills, quizzes |
+| Data visualization | `skills-data.md` | Uploaded data, charts, dashboards, trends |
+| Word documents | `docx/SKILL.md` | Create or analyze `.docx` |
+| PDF documents | `pdf/SKILL.md` | Create or analyze `.pdf` |
+| PowerPoint | `skills-pptx.md` | Build or edit `.pptx` decks |
+| Spreadsheets | `xlsx/SKILL.md` | Create or analyze spreadsheet files |
+| Feedback bar | `skills-feedback-form.md` | Append a configured feedback widget |
+| Citations and grounding | `skills-citations-grounding.md` | Answer from supplied or connected sources |
+| Accessibility | `skills-accessibility.md` | User-facing documents and output |
+| Image generation | `skills-image-generation.md` | Images, illustrations, or graphic concepts |
+| Privacy and compliance | `skills-compliance-privacy.md` | Personal or regulated data |
+| Communications | `skills-communications.md` | Emails, announcements, memos, summaries |
+| Web research | `skills-web-research.md` | Current or externally verified information |
+
+Use `Skills/index.json` as the machine-readable registry. Preserve its live schema when adding or updating entries.
 
 ## Maintenance
 
-- One concern per skill. If a skill grows two unrelated triggers, split it.
-- When you add a skill, add a row to the index above.
-- Test any code block before committing — the document skills run in the live code interpreter.
+- Keep one primary concern per skill.
+- Prefer folder packages with `SKILL.md` for new or substantially migrated skills.
+- Preserve compatibility shims when legacy paths are still referenced.
+- Update `Skills/index.json` when names, descriptions, paths, links, helpers, triggers, or tags change.
+- Run package tests and the proprietary-information scanner before publishing.
+- Do not commit customer data, credentials, generated customer analytics, or private deployment details.
