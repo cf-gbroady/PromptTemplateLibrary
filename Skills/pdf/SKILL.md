@@ -35,17 +35,24 @@ Do not use this skill for Word, PowerPoint, or Excel files unless the PDF is the
 
 ## Quick Start
 
-For a compact PDF profile, run:
+For a compact PDF profile, use the bundled inspection helper.
+
+- Repository path: `Skills/pdf/scripts/pdf_inspect.py`
+- Raw GitHub URL: `https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/pdf/scripts/pdf_inspect.py`
+
+When the skill package is mounted locally, run:
 
 ```bash
 python Skills/pdf/scripts/pdf_inspect.py input.pdf --extract-text --out pdf_profile.json
 ```
 
+When the script is not available locally and the runtime permits network downloads, fetch it from the raw GitHub URL above before running it. Do not use the GitHub `blob` page URL as the executable source.
+
 Use `--prefer pdfplumber` when table/layout analysis matters and `pdfplumber` is installed.
 
 ## Workflow Router
 
-- **Inspect or triage:** run `scripts/pdf_inspect.py`, then read `references/pdf_workflows.md#inspection-and-triage`.
+- **Inspect or triage:** run the helper at `Skills/pdf/scripts/pdf_inspect.py` or fetch it from `https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/pdf/scripts/pdf_inspect.py`, then read `references/pdf_workflows.md#inspection-and-triage`.
 - **Extract text/tables:** read `references/pdf_workflows.md#extraction-workflow`.
 - **Split, merge, rotate, or manipulate pages:** read `references/pdf_workflows.md#page-operations`.
 - **Create a PDF:** read `references/pdf_workflows.md#pdf-creation`.
