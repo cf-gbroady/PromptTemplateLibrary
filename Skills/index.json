@@ -10,10 +10,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-accessibility.md",
     "description": "Use for accessibility checks, inclusive formatting, alt text, document structure, and accessibility review of generated content.",
     "triggers": [],
-    "tags": [
-      "accessibility",
-      "quality"
-    ],
+    "tags": ["accessibility", "quality"],
     "status": "standalone"
   },
   {
@@ -27,10 +24,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-citations-grounding.md",
     "description": "Use when responses require citations, source grounding, quote handling, evidence checks, or clear distinction between sourced facts and analysis.",
     "triggers": [],
-    "tags": [
-      "citations",
-      "research"
-    ],
+    "tags": ["citations", "research"],
     "status": "standalone"
   },
   {
@@ -44,10 +38,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-communications.md",
     "description": "Use for emails, memos, announcements, tone adaptation, concise summaries, and professional communication drafts.",
     "triggers": [],
-    "tags": [
-      "communications",
-      "writing"
-    ],
+    "tags": ["communications", "writing"],
     "status": "standalone"
   },
   {
@@ -61,10 +52,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-compliance-privacy.md",
     "description": "Use for privacy-aware handling, compliance-safe summaries, sensitive data caution, and regulated-content guardrails.",
     "triggers": [],
-    "tags": [
-      "privacy",
-      "compliance"
-    ],
+    "tags": ["privacy", "compliance"],
     "status": "standalone"
   },
   {
@@ -78,10 +66,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-data.md",
     "description": "Use for analyzing data, building charts, explaining trends, producing dashboards, or turning tabular data into insights.",
     "triggers": [],
-    "tags": [
-      "data",
-      "analytics"
-    ],
+    "tags": ["data", "analytics"],
     "status": "standalone"
   },
   {
@@ -95,11 +80,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/docx/SKILL.md",
     "description": "Use when creating, editing, inspecting, extracting, or quality-checking Microsoft Word .docx files, including reports, tables, images, metadata, and accessibility.",
     "triggers": [],
-    "tags": [
-      "docx",
-      "documents",
-      "preferred"
-    ],
+    "tags": ["docx", "documents", "preferred"],
     "status": "preferred"
   },
   {
@@ -113,11 +94,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-docx-v2.md",
     "description": "Legacy DOCX skill retained for compatibility. Prefer Skills/docx/SKILL.md for new Word document creation, editing, inspection, and quality checks.",
     "triggers": [],
-    "tags": [
-      "docx",
-      "legacy",
-      "compatibility"
-    ],
+    "tags": ["docx", "legacy", "compatibility"],
     "status": "legacy"
   },
   {
@@ -131,10 +108,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-feedback-form.md",
     "description": "Use when creating, improving, analyzing, or summarizing feedback forms, surveys, intake forms, or response collection workflows.",
     "triggers": [],
-    "tags": [
-      "forms",
-      "feedback"
-    ],
+    "tags": ["forms", "feedback"],
     "status": "standalone"
   },
   {
@@ -148,10 +122,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-general.md",
     "description": "Use for general response formatting, tables, callouts, math, collapsibles, pills, quizzes, and reusable output conventions.",
     "triggers": [],
-    "tags": [
-      "general",
-      "formatting"
-    ],
+    "tags": ["general", "formatting"],
     "status": "standalone"
   },
   {
@@ -165,10 +136,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-image-generation.md",
     "description": "Use when generating or refining image prompts, visual concepts, alt text, or image handoff guidance for documents and decks.",
     "triggers": [],
-    "tags": [
-      "images",
-      "creative"
-    ],
+    "tags": ["images", "creative"],
     "status": "standalone"
   },
   {
@@ -182,11 +150,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/lucid-mcp-diagrammer/SKILL.md",
     "description": "Use when creating, updating, or troubleshooting Lucid diagrams through MCP-backed diagram workflows.",
     "triggers": [],
-    "tags": [
-      "lucid",
-      "diagrams",
-      "mcp"
-    ],
+    "tags": ["lucid", "diagrams", "mcp"],
     "status": "packaged"
   },
   {
@@ -200,10 +164,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaONE-SkillGen/SKILL.md",
     "description": "Use when creating or updating reusable nebulaONE skill packages, SKILL.md files, helper assets, and skill metadata.",
     "triggers": [],
-    "tags": [
-      "skills",
-      "nebulaone"
-    ],
+    "tags": ["skills", "nebulaone"],
     "status": "packaged"
   },
   {
@@ -217,11 +178,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaONE-SkillGen-Broady/SKILL.md",
     "description": "Use when Broady asks to create, research, package, validate, or commit nebulaONE skills to PromptTemplateLibrary.",
     "triggers": [],
-    "tags": [
-      "skills",
-      "nebulaone",
-      "github"
-    ],
+    "tags": ["skills", "nebulaone", "github"],
     "status": "packaged"
   },
   {
@@ -235,11 +192,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaone-analytics-html-dashboard-builder/SKILL.md",
     "description": "Use when a nebulaONE admin asks for an interactive HTML dashboard from an enriched nebulaONE analytics workbook.",
     "triggers": [],
-    "tags": [
-      "nebulaone",
-      "dashboard",
-      "html"
-    ],
+    "tags": ["nebulaone", "dashboard", "html"],
     "status": "packaged"
   },
   {
@@ -253,11 +206,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/nebulaone-usage-analytics-workbook-builder/SKILL.md",
     "description": "Use when a nebulaONE admin uploads usage exports and asks to clean, analyze, enrich, or produce a comprehensive analytics workbook.",
     "triggers": [],
-    "tags": [
-      "nebulaone",
-      "xlsx",
-      "analytics"
-    ],
+    "tags": ["nebulaone", "xlsx", "analytics"],
     "status": "packaged"
   },
   {
@@ -271,10 +220,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_onedrive_file_intelligence.md",
     "description": "Use for OneDrive file discovery, document intelligence, file summaries, organization, and retrieval-oriented workflows.",
     "triggers": [],
-    "tags": [
-      "onedrive",
-      "files"
-    ],
+    "tags": ["onedrive", "files"],
     "status": "standalone"
   },
   {
@@ -288,10 +234,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_outlook_productivity.md",
     "description": "Use for Outlook email, calendar, inbox triage, meeting prep, follow-ups, and productivity workflows.",
     "triggers": [],
-    "tags": [
-      "outlook",
-      "productivity"
-    ],
+    "tags": ["outlook", "productivity"],
     "status": "standalone"
   },
   {
@@ -305,11 +248,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/pdf/SKILL.md",
     "description": "Use when creating, inspecting, extracting, splitting, merging, summarizing, or quality-checking PDF files, including tables, forms, metadata, and accessibility.",
     "triggers": [],
-    "tags": [
-      "pdf",
-      "documents",
-      "preferred"
-    ],
+    "tags": ["pdf", "documents", "preferred"],
     "status": "preferred"
   },
   {
@@ -323,11 +262,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-pdf-v2.md",
     "description": "Legacy PDF skill retained for compatibility. Prefer Skills/pdf/SKILL.md for new PDF inspection, extraction, operations, and quality checks.",
     "triggers": [],
-    "tags": [
-      "pdf",
-      "legacy",
-      "compatibility"
-    ],
+    "tags": ["pdf", "legacy", "compatibility"],
     "status": "legacy"
   },
   {
@@ -341,10 +276,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-pptx.md",
     "description": "Use when creating, editing, analyzing, or formatting PowerPoint .pptx decks, slides, layouts, speaker notes, and visuals.",
     "triggers": [],
-    "tags": [
-      "pptx",
-      "presentations"
-    ],
+    "tags": ["pptx", "presentations"],
     "status": "standalone"
   },
   {
@@ -358,11 +290,22 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_sharepoint_knowledge_collaboration.md",
     "description": "Use for SharePoint knowledge management, collaboration spaces, page/library guidance, and content organization workflows.",
     "triggers": [],
-    "tags": [
-      "sharepoint",
-      "knowledge"
-    ],
+    "tags": ["sharepoint", "knowledge"],
     "status": "standalone"
+  },
+  {
+    "id": "svg-chat-graphics",
+    "name": "SVG Chat Graphics",
+    "title": "SVG Chat Graphics",
+    "summary": "Create accessible, secure SVG graphics and present them reliably in chat with attachment-based rendering and fallbacks.",
+    "repositoryPrefix": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/",
+    "path": "Skills/svg-chat-graphics/SKILL.md",
+    "fullyQualifiedLink": "https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/svg-chat-graphics/SKILL.md",
+    "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/svg-chat-graphics/SKILL.md",
+    "description": "Use when a user asks to create, improve, validate, attach, or display an SVG graphic inline in chat, including banners, diagrams, cards, infographics, or troubleshooting visuals.",
+    "triggers": ["svg", "inline svg", "svg banner", "svg diagram", "display svg", "render svg in chat"],
+    "tags": ["svg", "graphics", "accessibility", "chat", "visuals"],
+    "status": "packaged"
   },
   {
     "id": "teams-productivity",
@@ -375,10 +318,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skill_teams_productivity.md",
     "description": "Use for Microsoft Teams meetings, chat summaries, channel organization, collaboration follow-ups, and productivity workflows.",
     "triggers": [],
-    "tags": [
-      "teams",
-      "productivity"
-    ],
+    "tags": ["teams", "productivity"],
     "status": "standalone"
   },
   {
@@ -392,10 +332,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-web-research.md",
     "description": "Use for web research, source comparison, citation planning, factual verification, and research synthesis workflows.",
     "triggers": [],
-    "tags": [
-      "research",
-      "web"
-    ],
+    "tags": ["research", "web"],
     "status": "standalone"
   },
   {
@@ -409,11 +346,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/xlsx/SKILL.md",
     "description": "Use when working with spreadsheet files or spreadsheet-like data: read, clean, analyze, transform, chart, validate, or create workbooks.",
     "triggers": [],
-    "tags": [
-      "xlsx",
-      "spreadsheets",
-      "preferred"
-    ],
+    "tags": ["xlsx", "spreadsheets", "preferred"],
     "status": "preferred"
   },
   {
@@ -427,11 +360,7 @@
     "rawSkillUrl": "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/skills-xlsx.md",
     "description": "Legacy spreadsheet skill retained for compatibility. Prefer Skills/xlsx/SKILL.md for new spreadsheet analysis and workbook generation.",
     "triggers": [],
-    "tags": [
-      "xlsx",
-      "legacy",
-      "compatibility"
-    ],
+    "tags": ["xlsx", "legacy", "compatibility"],
     "status": "legacy"
   }
 ]
