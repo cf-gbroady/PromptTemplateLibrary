@@ -1,7 +1,7 @@
 ---
 name: pdf
-summary: Inspect, extract, create, split, merge, and quality-check PDF files.
-description: Use when creating, inspecting, extracting, splitting, merging, summarizing, or quality-checking PDF files, including forms, tables, metadata, page citations, accessibility, and scanned-vs-digital PDF handling.
+summary: Inspect, extract, create, edit, validate, and assess PDF files.
+description: Use when the user asks to inspect, summarize, extract, split, merge, crop, watermark, create, validate, or assess accessibility of a PDF, including PDF text, tables, forms, metadata, page-level content, scans, or OCR needs.
 ---
 
 # PDF Skill
@@ -10,78 +10,123 @@ description: Use when creating, inspecting, extracting, splitting, merging, summ
 
 Work with PDF files safely and transparently: inspect structure, extract text and tables, split or merge pages, create reports, and identify accessibility or source-quality limitations.
 
-## When to Use
+## When to use
 
-Use this skill when the user asks to:
-- Inspect, summarize, extract, split, merge, crop, watermark, or create a PDF.
-- Extract text, tables, form fields, metadata, links, outlines, or page-level information.
-- Determine whether a PDF is scanned, encrypted, image-heavy, table-heavy, or likely inaccessible.
-- Create a PDF deliverable from structured content.
-- Validate PDF accessibility or provide remediation guidance.
+Use this skill to inspect, summarize, extract, split, merge, rotate, crop, watermark, create, validate, or assess a PDF. Use it when the user needs text, tables, form fields, metadata, links, outlines, page-level information, scan/OCR triage, or accessibility guidance.
 
-Do not use this skill for Word, PowerPoint, or Excel files unless the PDF is the requested input or output. For Word source documents, use the `docx` skill first and export from the accessible source when possible.
+## Runtime model
 
-## Required Runtime Behavior
+This skill is self-contained: its required instructions and minimal Python patterns are in this file. Do not depend on a repository `.py` helper being mounted, downloadable, or importable in Code Interpreter. The companion reference at `Skills/pdf/references/code_snippets.md` supports repository readers and public browsing; it is not a runtime dependency.
 
-1. **Inspect before acting.** Identify page count, encryption, metadata, text extractability, images, tables, and likely scan/OCR needs.
-2. **Preserve originals.** Never overwrite source PDFs. Write a new output file.
-3. **Choose the correct library.**
-   - Use `pypdf` for splitting, merging, page manipulation, metadata, outlines, encryption checks, and basic text extraction.
-   - Use `pdfplumber` for layout-aware text extraction, table extraction, page object inspection, and visual debugging when available.
-   - Use OCR only when a scanned or image-only PDF requires it and the runtime supports OCR tools.
-4. **Cite page locations.** When extracting or summarizing content, preserve page numbers and cite page ranges in the output.
-5. **Validate after editing.** Re-open generated PDFs and report page count and checks performed.
-6. **Be explicit about limitations.** PDF extraction is layout-sensitive; do not claim perfect reading order, complete table fidelity, or accessibility compliance without verification.
+## Required behavior
 
-## Quick Start
+1. Inspect before acting. Identify page count, encryption, metadata, text extractability, image-heavy/scanned characteristics, tables, and OCR need.
+2. Preserve source PDFs. Create a new versioned output file for every edit.
+3. Use `pypdf` for splitting, merging, page manipulation, metadata, outlines, encryption checks, and basic extraction. Use `pdfplumber` for layout-aware text/table extraction and page-object inspection when it is available.
+4. Cite page numbers or page ranges when reporting extracted or summarized content.
+5. Re-open every generated PDF and report its page count plus validation performed.
+6. State extraction, OCR, encryption, and accessibility limitations precisely. Automated checks can identify likely issues; they do not certify PDF/UA or WCAG compliance.
 
-For a compact PDF profile, use the bundled inspection helper.
+## Workflow
 
-- Repository path: `Skills/pdf/scripts/pdf_inspect.py`
-- Raw GitHub URL: `https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/pdf/scripts/pdf_inspect.py`
+1. Profile the PDF with the inline inspection pattern below.
+2. Choose the narrowest suitable operation and library.
+3. For scans or image-only documents, determine whether OCR is available before claiming searchable text.
+4. Write to a new versioned output path.
+5. Re-open the output and verify the intended pages, page count, and basic readability.
+6. Report inputs, outputs, pages processed, tool/library, validation, and limitations.
 
-When the skill package is mounted locally, run:
+## Inline Python patterns
 
-```bash
-python Skills/pdf/scripts/pdf_inspect.py input.pdf --extract-text --out pdf_profile.json
-```
+### Compact inspection profile
 
-When the script is not available locally and the runtime permits network downloads, fetch it from the raw GitHub URL above before running it. Do not use the GitHub `blob` page URL as the executable source.
+~~~python
+from pathlib import Path
+from pypdf import PdfReader
 
-Use `--prefer pdfplumber` when table/layout analysis matters and `pdfplumber` is installed.
+path = Path("/mnt/data/input.pdf")
+reader = PdfReader(path)
+profile = {
+    "path": str(path),
+    "pages": len(reader.pages),
+    "encrypted": reader.is_encrypted,
+    "metadata": {str(k): str(v) for k, v in (reader.metadata or {}).items()},
+}
+if reader.is_encrypted:
+    print(profile)
+    raise PermissionError("PDF is encrypted; request an authorized password before extraction or editing.")
 
-## Workflow Router
+sample = []
+for page_number, page in enumerate(reader.pages[:3], start=1):
+    text = page.extract_text() or ""
+    sample.append({"page": page_number, "characters": len(text), "preview": text[:300]})
+profile["text_sample"] = sample
+profile["likely_image_only"] = bool(reader.pages) and all(item["characters"] == 0 for item in sample)
+print(profile)
+~~~
 
-- **Inspect or triage:** run the helper at `Skills/pdf/scripts/pdf_inspect.py` or fetch it from `https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/pdf/scripts/pdf_inspect.py`, then read `references/pdf_workflows.md#inspection-and-triage`.
-- **Extract text/tables:** read `references/pdf_workflows.md#extraction-workflow`.
-- **Split, merge, rotate, or manipulate pages:** read `references/pdf_workflows.md#page-operations`.
-- **Create a PDF:** read `references/pdf_workflows.md#pdf-creation`.
-- **Accessibility review/remediation:** read `references/pdf_accessibility.md`.
+A zero-text sample is a triage signal, not proof that every page requires OCR. Inspect representative pages visually or with `pdfplumber` where available.
 
-Keep references one level deep from this `SKILL.md`; do not add nested reference chains.
+### Extract text with page citations
 
-## Tool and Library Guidance
+~~~python
+from pypdf import PdfReader
 
-Preferred Python libraries:
-- `pypdf` for page operations and metadata.
-- `pdfplumber` for high-quality extraction from machine-generated PDFs.
-- `Pillow` and image/OCR tools only when the runtime supports image conversion and OCR.
+reader = PdfReader("/mnt/data/input.pdf")
+for page_number, page in enumerate(reader.pages, start=1):
+    text = (page.extract_text() or "").strip()
+    if text:
+        print(f"[Page {page_number}]\n{text}\n")
+~~~
 
-If a dependency is unavailable, state the limitation and use the best available fallback. Do not install packages from the network unless the runtime explicitly permits it.
+### Split a selected page range without overwriting the original
 
-## Output Requirements
+~~~python
+from pypdf import PdfReader, PdfWriter
 
-For PDF work, report:
-- Input file(s) and output file path(s).
-- Page count and page ranges processed.
-- Library/tool used.
-- Validation performed.
-- Extraction limitations, OCR needs, encryption/password issues, or accessibility caveats.
+source = "/mnt/data/input.pdf"
+output = "/mnt/data/input_v2_pages_3_to_5.pdf"
+start_page, end_page = 3, 5  # human page numbers, inclusive
+reader = PdfReader(source)
+writer = PdfWriter()
+for index in range(start_page - 1, end_page):
+    writer.add_page(reader.pages[index])
+with open(output, "wb") as stream:
+    writer.write(stream)
+
+check = PdfReader(output)
+assert len(check.pages) == end_page - start_page + 1
+print(f"Created {output} with {len(check.pages)} pages")
+~~~
+
+### Layout-aware table/text extraction when available
+
+~~~python
+try:
+    import pdfplumber
+except ImportError:
+    pdfplumber = None
+
+if pdfplumber is None:
+    print("pdfplumber is unavailable; use pypdf text extraction and state the table-fidelity limitation.")
+else:
+    with pdfplumber.open("/mnt/data/input.pdf") as pdf:
+        for page_number, page in enumerate(pdf.pages, start=1):
+            tables = page.extract_tables()
+            print({"page": page_number, "tables_found": len(tables)})
+~~~
+
+## Output requirements
+
+Report the input and output paths, page count and range processed, library or tool used, validation performed, and limitations involving extraction order, tables, OCR, passwords, or accessibility.
 
 ## Guardrails
 
-- Do not overwrite source files.
-- Do not send PDF content to external services unless the user explicitly authorizes it and policy allows it.
-- Treat extracted PDF text as potentially order-imperfect; verify against page images when accuracy matters.
-- Do not claim a scanned document has searchable text unless OCR or extraction confirms it.
-- Do not claim PDF/UA or WCAG compliance from automated checks alone.
+- Do not overwrite source PDFs.
+- Do not send PDF contents to an external service unless the user expressly authorizes it and the environment permits it.
+- Treat PDF text order and table reconstruction as layout-sensitive; verify against page images when accuracy matters.
+- For accessibility requests, distinguish an automated review from human accessibility remediation and conformance validation.
+
+## Failure handling
+
+If the PDF is encrypted, request an authorized password or a decrypted copy. If OCR tooling is unavailable for a scan, explain that limitation and provide the options available in the current environment. Ask a focused question before applying a destructive-looking page operation when the requested pages or output naming is ambiguous.

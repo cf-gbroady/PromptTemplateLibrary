@@ -1,229 +1,136 @@
 ---
 name: xlsx
 summary: Create, inspect, clean, edit, validate, and deliver spreadsheet files.
-description: Use this skill when the user's primary input or output is a spreadsheet file or spreadsheet-like tabular file, including .xlsx, .xlsm, .csv, or .tsv. Trigger for requests to open, read, analyze, clean, normalize, transform, create, edit, format, chart, repair, validate, or convert spreadsheet files. The final deliverable must be a spreadsheet file unless the user explicitly asks only for explanation or planning.
+description: Use when the user's primary input or output is a spreadsheet file or spreadsheet-like tabular file, including .xlsx, .xlsm, .csv, or .tsv. Trigger for requests to open, read, analyze, clean, normalize, transform, create, edit, format, chart, repair, validate, or convert spreadsheet files.
 ---
 
 # xlsx Skill
 
-## Runtime Companion Files
-
-This skill is self-contained for nebulaONE trigger-loading. Admins may manually copy the full contents of this `SKILL.md` into a nebulaONE skill named `xlsx`.
-
-Companion files are maintained in the PromptTemplateLibrary:
-
-- Executable helper source (raw, preferred for Code Interpreter fetch): https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/xlsx/scripts/xlsx_tools.py
-- Executable helper source (GitHub view): https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/xlsx/scripts/xlsx_tools.py
-- Hardcoded source documentation: https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/xlsx/docs/hardcoded_source_documentation.md
-- Canonical skill source: https://github.com/cf-gbroady/PromptTemplateLibrary/tree/main/Skills/xlsx/SKILL.md
-
-When Code Interpreter is used, do not assume this GitHub link automatically exists as a local file in the sandbox. If the sandbox has internet access and policy permits retrieving public GitHub raw files, download the helper from the raw URL above before importing it. If internet access is unavailable, either ask the user/admin to upload `xlsx_tools.py` into the chat or regenerate only the minimal helper logic required for the task.
-
-Recommended Code Interpreter bootstrap when network access is available:
-
-```python
-from pathlib import Path
-import urllib.request
-
-helper_url = "https://raw.githubusercontent.com/cf-gbroady/PromptTemplateLibrary/main/Skills/xlsx/scripts/xlsx_tools.py"
-helper_path = Path("/mnt/data/xlsx_tools.py")
-urllib.request.urlretrieve(helper_url, helper_path)
-```
-
 ## Purpose
 
-Use this skill to produce reliable spreadsheet workbooks, especially Excel `.xlsx` files, that are useful, editable, auditable, and free of formula errors.
+Use this skill to produce reliable, editable, and auditable spreadsheet deliverables. Apply it when a spreadsheet is the primary input, primary output, or required artifact.
 
-This skill applies when a spreadsheet file is the main input, main output, or required artifact.
+## Runtime model
 
-## Do Not Use This Skill For
+This skill is self-contained: its required operating instructions and minimal Python patterns are in this file. Do not depend on downloading, importing, or locating a companion `.py` file. A runtime may have no network access and may not mount repository files into Code Interpreter.
 
-Do not trigger this skill when the primary deliverable is:
+The companion reference at `Skills/xlsx/docs/code_snippets.md` is for repository readers and public browsing only. It is not a required runtime dependency.
 
-- A Word document
-- A PDF report
-- An HTML report or dashboard
-- A standalone Python script with no spreadsheet deliverable
-- A database pipeline
-- A Google Sheets API integration
-- A general data-analysis conversation where no spreadsheet file is requested or needed
+## When to use
 
-If the user wants a narrative report plus a workbook, use this skill for the workbook portion.
+Use for `.xlsx`, `.xlsm`, `.csv`, and `.tsv` work such as inspection, cleaning, normalization, transformation, formatting, formula repair, validation, charting, or workbook creation.
 
-## Required Output Standard
+## Do not use when
 
-When delivering a spreadsheet:
+Use another workflow when the primary deliverable is a Word document, standalone web dashboard, database pipeline, Google Sheets API integration, or general analysis with no spreadsheet artifact.
 
-1. Deliver an actual spreadsheet file when possible.
-2. Use a clean, professional, consistent font and layout.
-3. Preserve existing workbook styles, formulas, worksheet names, tables, charts, validations, named ranges, and template conventions unless the user asks to change them.
-4. Existing workbook or customer template conventions override generic formatting preferences.
-5. All formulas must recalculate successfully before delivery.
-6. Deliver only when formula error count is zero, unless the user explicitly asks to inspect a broken workbook and the errors are the subject of the deliverable.
-7. If hardcoded values are introduced, document the source of those values in nearby cells, comments, or a dedicated `Sources` worksheet.
+## Required output standard
 
-## Tool Selection
+1. Deliver an actual spreadsheet when a file is requested.
+2. Preserve existing worksheet names, styles, formulas, tables, charts, validations, named ranges, hidden sheets, and template conventions unless the requested change requires otherwise.
+3. Save edits as a new version rather than overwriting the source file.
+4. Keep raw data, assumptions, calculations, and final outputs separate when the workbook is complex enough to need them.
+5. Use formulas for workbook calculations users would expect to update dynamically. Use Python for data preparation, workbook construction, and validation.
+6. Document every introduced hardcoded value in a nearby source note, comment, or `Sources` worksheet so the workbook remains auditable.
 
-Use the right tool for the job:
+## Tool selection
 
-| Tool | Use for |
-|---|---|
-| `pandas` | Data cleaning, normalization, reshaping, aggregation, analysis, joining, deduplication, CSV/TSV loading, and bulk transforms |
-| `openpyxl` | Excel formulas, formatting, existing workbook edits, comments, sheets, styles, tables, freeze panes, workbook structure, and formula inspection |
-| LibreOffice / headless recalculation | Recalculating formulas and verifying workbook health before final delivery |
+- Use `pandas` for ingestion, cleaning, reshaping, joining, deduplication, and aggregation.
+- Use `openpyxl` for formulas, styles, comments, sheets, tables, validations, and edits to an existing `.xlsx` workbook.
+- Use LibreOffice headless recalculation when it is available, then inspect cached results for formula errors.
 
-Important: do not save a workbook opened with `openpyxl.load_workbook(..., data_only=True)`. That can replace formulas with cached values and permanently lose formula logic. Use `data_only=False` when editing formulas or structure.
+Open editable workbooks with `data_only=False`. Do not save a workbook opened with `data_only=True`, because that mode reads cached values rather than preserving formula logic.
 
-## Formula-First Rule
+## Workflow
 
-When a calculated result belongs in the workbook, use Excel formulas rather than hardcoded Python-calculated values.
+1. Inspect the input workbook before editing: sheet names, dimensions, formulas, tables, named ranges, validations, hidden sheets, and relevant existing conventions.
+2. Confirm column mappings and test representative rows before applying formulas or transformations across a full range.
+3. Make only changes directly requested or clearly necessary to deliver the requested result.
+4. Use explicit source notes for hardcoded values. Preferred format: `Source: [system or document], [date], [specific reference], [URL or uploaded-file location]`.
+5. Save to a new versioned output path.
+6. For workbooks containing formulas, recalculate when possible and scan every worksheet for blocking Excel error values before delivery.
+7. Report the output path, sheets changed, validation performed, and any limitation.
 
-Correct examples:
+## Inline Python patterns
 
-- Use `=SUM(B2:B9)`, not a Python-computed total.
-- Use `=(C4-C2)/C2`, not a hardcoded growth rate.
-- Use `=AVERAGE(D2:D19)`, not a Python-computed average.
-- Use `=IFERROR(numerator/denominator,0)` or an equivalent guard when division by zero is plausible.
+### Inspect a workbook safely
 
-Python may be used to generate formulas, populate raw data, clean source tables, validate outputs, or build the workbook, but formulas should remain formulas where the user would reasonably expect the workbook to update dynamically.
+~~~python
+from pathlib import Path
+from openpyxl import load_workbook
 
-## Formula Recalculation and Validation Workflow
+input_path = Path("/mnt/data/input.xlsx")
+wb = load_workbook(input_path, data_only=False, read_only=False)
+for ws in wb.worksheets:
+    print({"sheet": ws.title, "rows": ws.max_row, "columns": ws.max_column, "state": ws.sheet_state})
+~~~
 
-For any workbook containing formulas:
+### Recalculate with LibreOffice when available
 
-1. Save the workbook.
-2. Recalculate formulas with LibreOffice/headless spreadsheet recalculation when available.
-3. Reopen the workbook and scan all worksheets for formula errors.
-4. Fix any errors.
-5. Recalculate again.
-6. Deliver only after the scan finds zero blocking formula errors.
+~~~python
+from pathlib import Path
+import shutil
+import subprocess
 
-Blocking formula errors:
+workbook = Path("/mnt/data/output.xlsx")
+soffice = shutil.which("soffice") or shutil.which("libreoffice")
+if soffice:
+    subprocess.run(
+        [soffice, "--headless", "--convert-to", "xlsx", "--outdir", str(workbook.parent), str(workbook)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+else:
+    print("LibreOffice is unavailable; set calculation mode to automatic and disclose that Excel should recalculate on open.")
+~~~
 
-- `#REF!`
-- `#DIV/0!`
-- `#VALUE!`
-- `#N/A`
-- `#NAME?`
-- `#NUM!`
-- `#NULL!`
+If the conversion command cannot replace the desired workbook cleanly in the current environment, use a separate temporary output directory, then move the recalculated file into the intended versioned output path after confirming it exists.
 
-If the helper script is available, run one of the following patterns:
+### Scan cached values for blocking formula errors
 
-```bash
-python /mnt/data/xlsx_tools.py recalc output.xlsx
-python /mnt/data/xlsx_tools.py validate output.xlsx
-python /mnt/data/xlsx_tools.py recalc-and-validate output.xlsx
-```
+~~~python
+from openpyxl import load_workbook
 
-If the helper script is not available, generate a minimal validation script in Code Interpreter using `openpyxl` and, when available, call LibreOffice directly.
+ERRORS = {"#REF!", "#DIV/0!", "#VALUE!", "#N/A", "#NAME?", "#NUM!", "#NULL!"}
 
-## Verification Checklist
+def find_formula_errors(path):
+    wb = load_workbook(path, data_only=True, read_only=True)
+    hits = []
+    for ws in wb.worksheets:
+        for row in ws.iter_rows():
+            for cell in row:
+                if cell.value in ERRORS:
+                    hits.append(f"{ws.title}!{cell.coordinate}: {cell.value}")
+    return hits
 
-Before delivering a workbook:
+errors = find_formula_errors("/mnt/data/output.xlsx")
+if errors:
+    raise ValueError("Blocking formula errors found:\n" + "\n".join(errors))
+print("Validation passed: no blocking cached formula errors found.")
+~~~
 
-- Confirm sheet names and expected workbook structure.
-- Confirm column mappings before writing formulas broadly.
-- Remember Excel rows and columns are 1-indexed.
-- Test 2-3 sample formulas manually before filling large ranges.
-- Check formulas in far-right columns and lower rows, not just top-left cells.
-- Search for all relevant matches, not only the first match.
-- Handle blank, null, `NaN`, zero, negative, text, and large-value edge cases.
-- Prevent division by zero.
-- Verify cross-sheet references.
-- Verify formulas still point to intended sheets after renames or copies.
-- Scan for formula errors after recalculation.
-- Preserve user-entered values unless the task requires changing them.
-- Keep raw data separate from calculations and outputs when possible.
+If recalculation is unavailable, scan formulas for obvious broken references, set calculation mode to automatic, and clearly tell the user that cached formula results may refresh when opened in Excel. Do not claim a full calculation validation in that case.
 
-## Hardcoded Value Documentation
+## Formula and formatting rules
 
-When adding hardcoded values, document the source in one of these ways:
+- Use Excel formulas such as `=SUM(B2:B9)`, `=AVERAGE(D2:D19)`, and `=IFERROR(numerator/denominator,0)` rather than static Python-calculated values where a workbook needs dynamic behavior.
+- Handle blanks, nulls, `NaN`, zero, negative, text, and large-value edge cases deliberately.
+- Preserve the template's formatting conventions. If none exist for a financial or operating model, use blue font for user-changeable hardcodes, black for formulas, green for same-workbook links, red for external links, and yellow fill for assumptions needing attention.
+- Preserve leading zero identifiers, account codes, ZIP codes, and course codes as text during CSV or TSV imports.
+- Do not silently drop rows or columns; describe removals, exclusions, or transformations.
 
-1. Adjacent source note cell
-2. Cell comment/note
-3. Dedicated `Sources` worksheet
-4. Dedicated source table near the relevant assumptions
+## Quality checklist
 
-Preferred format:
+Before delivery, confirm that:
 
-```text
-Source: [System/Document], [Date], [Specific Reference], [URL or file path if applicable]
-```
+- The source file was preserved and the output path is versioned.
+- Expected sheets and workbook structure are present.
+- Formula ranges and cross-sheet references were checked beyond only the first few rows.
+- Blocking formula errors are absent after recalculation, or the recalculation limitation is stated.
+- Source documentation exists for introduced hardcodes.
+- The workbook opens successfully and retains the requested edits.
 
-Examples:
+## Failure handling and privacy
 
-```text
-Source: Finance Export, 2026-06-24, Revenue by Month tab, uploaded workbook
-Source: User-provided assumption, 2026-06-24, Growth rate supplied in prompt
-Source: FY26 Budget Workbook, 2026-06-24, Sheet: Assumptions, Cell: C12
-Source: Unknown — user confirmation required
-```
-
-If the hardcoded source documentation companion file is available, follow it for expanded standards. If it is not available, the rules in this section are authoritative.
-
-## Financial and Operating Model Conventions
-
-Use these conventions for financial, budget, forecast, operating model, or executive analytics workbooks unless the user's template says otherwise.
-
-### Cell Color Conventions
-
-| Meaning | Style |
-|---|---|
-| Hardcoded inputs and user-changeable assumptions | Blue font |
-| Formulas and calculations | Black font |
-| Same-workbook links to other worksheets | Green font |
-| External workbook or external data links | Red font |
-| Key assumptions requiring attention or review | Yellow fill |
-
-### Number Formats
-
-| Value type | Format |
-|---|---|
-| Years | Text strings such as `"2024"`, not numeric values intended for calculation |
-| Currency | Units in headers, e.g. `Revenue ($mm)` |
-| Zero values | Display as `-` where appropriate |
-| Percentages | `0.0%` |
-| Multiples | `0.0x` |
-| Negative values | Parentheses, e.g. `(1.2)` |
-
-## Workbook Design Patterns
-
-Prefer a clear workbook structure:
-
-1. `README` or `Instructions` sheet when the workbook is complex.
-2. `Sources` sheet for hardcoded source documentation.
-3. `Raw Data` or source-specific raw data sheets.
-4. `Assumptions` sheet for user-changeable inputs.
-5. `Calculations` sheet for intermediate logic.
-6. `Summary` or `Dashboard` sheet for final outputs.
-
-Do not overcomplicate small workbooks. Use only the sheets needed for the task.
-
-## Editing Existing Workbooks
-
-When editing an existing workbook:
-
-1. Inspect workbook structure first.
-2. Preserve hidden sheets unless there is a clear reason to change them.
-3. Preserve formulas unless changing them is required.
-4. Preserve workbook formatting and conventions.
-5. Avoid deleting sheets, named ranges, tables, charts, validations, or comments unless explicitly requested.
-6. If a workbook appears to be a template, follow the template style instead of applying generic formatting.
-7. Save as a new version rather than overwriting the original when the environment supports file versioning.
-
-## CSV and TSV Handling
-
-When the input is CSV or TSV:
-
-1. Detect delimiter and encoding where possible.
-2. Preserve leading zeros in IDs, ZIP codes, account codes, and course codes by treating them as text.
-3. Normalize dates cautiously and document any assumptions.
-4. When delivering Excel, keep imported raw data separate from cleaned or calculated outputs.
-5. Do not silently drop rows or columns. Document removals or transformations.
-
-## Failure Handling
-
-If formula recalculation is not possible because LibreOffice is unavailable, set workbook calculation mode to automatic, scan formulas for obvious reference problems, and state the limitation. If formulas may be stale, tell the user that Excel should recalculate on open.
-
-If a user asks for a workbook using regulated, private, or sensitive data, default to synthetic or de-identified examples unless the user confirms their governance configuration permits the use of real data.
+Ask a focused clarifying question when an ambiguous request could change formulas, source data, or the intended output layout. If a dependency is unavailable, use the best available fallback and name the limitation. For private, regulated, or sensitive data, use only data the user is authorized to provide and avoid external uploads or services unless explicitly approved.
